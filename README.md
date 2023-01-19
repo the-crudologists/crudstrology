@@ -1,4 +1,4 @@
-# CRUDSTOLOGY
+# CRUDSTROLOGY
 
 ## How to Start
 
