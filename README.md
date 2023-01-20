@@ -10,5 +10,5 @@
 - Server: Express
 - Database: mySQL / Sequelize / Amazon RDS (deploy DB)
 - Auth: Passport
-- APIs: https://aztro.readthedocs.io/en/latest/# && https://zenquotes.io/ && https://robohash.org/
+- APIs: https://aztro.readthedocs.io/en/latest/# && https://zenquotes.io/ && https://robohash.org/ && https://tarot-api.onrender.com/api/v1/cards/random?n=1
 - Linting: ESLint / AirBnB
