@@ -1,8 +1,11 @@
-const sequelize = require('sequelize');
+const { Sequelize } = require('sequelize');
+const { database } = require ('./index.js')
 
-const Quote = sequelize.define('Quote', {
-  id: sequelize.NUMBER,
-  text: sequelize.STRING
-});
+// const Quote = database.define('Quote', {
+//   text: Sequelize.STRING
+// });
+// const Quote = database.define('Quote', {
+//   text: { type: DataTypes.STRING}
+// });
 
-module.exports = {Quote};
+module.exports = { Quote };
