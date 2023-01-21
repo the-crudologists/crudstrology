@@ -11,7 +11,13 @@ app.use(express.static(DIST_DIR));
 
 const PORT = 8080;
 
+(async () => {
 
-app.listen(PORT, () => {
-  console.log(`listening on port: ${PORT}`)
-});
+  await seeder();
+
+  app.listen(PORT, () => {
+    console.log(`listening on port: ${PORT}`)
+  });
+
+})();
+
