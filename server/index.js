@@ -4,6 +4,7 @@ const { seeder } = require('../database/index.js');
 //const db = require('../database/index.js');
 
 const DIST_DIR = path.resolve(__dirname, '..', 'dist');
+//console.log('DIST_DIR in server/index.js', DIST_DIR);
 const app = express();
 
 //middleware
