@@ -19,9 +19,6 @@ import App from './App.jsx';
 ReactDOM.createRoot(document.getElementById('app')).render(
   // <React.StrictMode>
   //     <RouterProvider router={router} />
-  // <div>
     <App />
-  // </div>
-
   // </React.StrictMode>
 );
