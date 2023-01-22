@@ -2,7 +2,9 @@
 
 ## How to Start
 
-- type `npm run build` && `npm run start` in terminal to start server
+- enter `sudo service mysql start` to start database in bash terminal
+- enter mysql shell: `mysql -u root` && `CREATE DATABASE dbstrology` (until we automate this)
+- `npm run build` && `npm run start` in terminal to start server
 - visit http://localhost:8080/ to see served page
 
 ## Tech Stack
