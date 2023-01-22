@@ -2,7 +2,7 @@
 const fakeTarot = require('./fakeData/tarot.json');
 const fakeHoro = require('./fakeData/horoscope.json');
 
-//console.log('fake Tarot', fakeTarot.cards[0]); to use for accessing fake data
+console.log('fake Tarot', fakeTarot.cards[0]);
 
 const Sequelize = require('sequelize');
 const sequelize = new Sequelize(
