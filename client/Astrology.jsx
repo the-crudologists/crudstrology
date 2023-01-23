@@ -8,7 +8,13 @@ const Horoscope = () => {
   return (
     <div className='horoscope'>
       <h1 className='horo-title'>Your Daily Horoscope</h1>
-      <div id='horo-item' className='container'>{ reading.description }</div>
+      <div id='horo-item' className='container'>
+        {
+          Object.entries(reading).map((el, i) => {
+            return <div key={i}><b>{el[0]}</b>: <em>{el[1]}</em></div>
+          })
+        }
+      </div>
     </div>
   )
 }
