@@ -1,9 +1,11 @@
 /* add style stuff */
+
+/* changes ALL fonts, may need to be changed later */
 * {
   font-family: 'Courier New', Courier, monospace;
   color: azure;
 }
-
+/* dark background */
 body {
   background-color: rgb(37, 37, 37);
 }
