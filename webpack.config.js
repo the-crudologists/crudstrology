@@ -4,7 +4,9 @@ const SRC_DIR = path.resolve(__dirname, 'client');
 const DIST_DIR = path.resolve(__dirname, 'dist');
 
 module.exports = {
+  // Default mode for Webpack is production current mode set to development.
   mode: 'development',
+  watch: true,
   devtool: 'eval-source-map',
   stats: {
     excludeModules: /node_modules/
@@ -13,7 +15,7 @@ module.exports = {
   entry: {
     app: path.resolve(SRC_DIR, 'Index.jsx')
   },
- // Path and filename of result bundle.
+  // Path and filename of result bundle.
   // Webpack bundles all JavaScript into bundle.js
   output: {
     path: DIST_DIR,
@@ -25,7 +27,7 @@ module.exports = {
         test: /\.(jsx|js)$/,
         exclude: /node_modules/,
         use: {
-          loader: "babel-loader",
+          loader: 'babel-loader',
           options: {
             presets: ['@babel/preset-env', '@babel/preset-react']
           }
@@ -37,5 +39,5 @@ module.exports = {
       }
     ]
   },
-  // Default mode for Webpack is production current mode set to development.
+  
 };
