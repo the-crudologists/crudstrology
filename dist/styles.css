@@ -1,1 +1,9 @@
 /* add style stuff */
+* {
+  font-family: 'Courier New', Courier, monospace;
+  color: azure;
+}
+
+body {
+  background-color: rgb(37, 37, 37);
+}

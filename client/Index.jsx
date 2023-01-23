@@ -1,7 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import '../dist/styles.css'
+
 import App from './App.jsx';
 import Horoscope from './Astrology.jsx';
+import CreateProfile from './ProfileCreation.jsx';
 // import './styles.css';
 // import {
 //   createBrowserRouter,
@@ -21,7 +24,7 @@ ReactDOM.createRoot(document.getElementById('app')).render(
   // <React.StrictMode>
   //     <RouterProvider router={router} />
   // <div>
-    <Horoscope />
+    <CreateProfile />
   // </div>
 
   // </React.StrictMode>
