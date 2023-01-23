@@ -1,5 +1,5 @@
-const { Sequelize } = require('sequelize');
-const { database } = require ('./index.js')
+// const { Sequelize } = require('sequelize');
+// const { database } = require ('./index.js')
 
 // const Quote = database.define('Quote', {
 //   text: Sequelize.STRING
@@ -8,4 +8,4 @@ const { database } = require ('./index.js')
 //   text: { type: DataTypes.STRING}
 // });
 
-module.exports = { Quote };
+// module.exports = { Quote };
