@@ -1,13 +1,13 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 
 const CreateProfile = () => {
 
-  const [name, setName] = useState('Jean Valgene');
+  const [name, setName] = useState('Jean Valjean');
 
   const changeName = (e) => {
     setName(prevName => (prevName = e.target.value));
     console.log(name);
-  }
+  };
 
   return (
     <div className='create-profile'>
@@ -37,7 +37,7 @@ const CreateProfile = () => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
 export default CreateProfile;
