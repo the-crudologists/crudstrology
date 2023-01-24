@@ -5,7 +5,7 @@ import { BrowserRouter } from 'react-router-dom';
 
 import App from './App.jsx';
 //import Astrology from './Astrology.jsx';
-//import CreateProfile from './ProfileCreation.jsx';
+//import ProfileCreation from './ProfileCreation.jsx';
 // import './styles.css';
 // import {
 //   createBrowserRouter,

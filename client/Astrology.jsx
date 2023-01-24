@@ -19,5 +19,5 @@ const Astrology = () => {
   );
 };
 
-export default Horoscope;
+export default Astrology;
 

@@ -7,3 +7,6 @@ const Tarot = () => {
     </div>
   );
 };
+
+
+export default Tarot;

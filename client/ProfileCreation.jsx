@@ -40,4 +40,4 @@ const ProfileCreation = () => {
   );
 };
 
-export default CreateProfile;
+export default ProfileCreation;
