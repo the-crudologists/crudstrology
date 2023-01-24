@@ -1,11 +1,12 @@
 import React from 'react';
 
-const App = () => {
-  return (
+const App = () => (
     <div>
-      <h2>Hello World!</h2>
+      <nav ></nav>
+      <a href="/auth/google">Authenticate with Google</a>
     </div>
-  )
-};
+  );
 
-export default App; 
+export default App;
+
+

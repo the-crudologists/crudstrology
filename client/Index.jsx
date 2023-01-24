@@ -24,7 +24,7 @@ ReactDOM.createRoot(document.getElementById('app')).render(
   // <React.StrictMode>
   //     <RouterProvider router={router} />
   // <div>
-  <CreateProfile />
+  <App />
   // </div>
 
   // </React.StrictMode>
