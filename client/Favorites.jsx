@@ -3,7 +3,7 @@ import React from 'react';
 const Favorites = () => {
   return (
     <div>
-      FEED GOES HERE 
+      FAVORITES GOES HERE 
     </div>
   );
 };
