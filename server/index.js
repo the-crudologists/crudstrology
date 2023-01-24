@@ -8,7 +8,7 @@ const { SERVER_SESSION_SECRET } = process.env;
 // try requiring files for database like this...
 require('./auth.js');
 const { seeder } = require('../database/index.js');
-//const db = require('../database/index.js');
+const db = require('../database/index.js');
 
 const DIST_DIR = path.resolve(__dirname, '..', 'dist');
 
@@ -17,9 +17,9 @@ const PORT = 8080;
 
 //middleware
 app.use(express.json());
-app.use(express.urlencoded({extended: true}));
+app.use(express.urlencoded({ extended: true }));
 app.use(express.static(DIST_DIR));
-app.use(session({secret: SERVER_SESSION_SECRET}));
+app.use(session({ secret: SERVER_SESSION_SECRET }));
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -40,9 +40,11 @@ app.get('/login', (req, res) => {
 
 // <-- PASSPORT DOCS
 app.get('/auth/google',
-  passport.authenticate('google', { scope:
-      [ 'email', 'profile' ] }
-));
+  passport.authenticate('google', {
+    scope:
+      ['email', 'profile']
+  }
+  ));
 
 // <-- working -->
 // app.get('/auth/google/callback',
@@ -53,22 +55,23 @@ app.get('/auth/google',
 
 app.get('/auth/google/callback',
   passport.authenticate('google', {
-      successRedirect: '/', // ex: '/auth/google/success'
-      failureRedirect: '/login' // ex: '/auth/google/failure'
-}));
+    //add path to '/protected' below to handle successful login
+    successRedirect: '/', // ex: '/auth/google/success'
+    failureRedirect: '/login' // ex: '/auth/google/failure'
+  }));
 // <-- END PASSPORT DOCS
 
 // once user is logged in, route to 'logged-in' view*
 app.get('/protected', isLoggedIn, (req, res) => {
-  res.send('Log in success');
+  res.send('Login Successful');
 });
 
 (async () => {
   // <-- build seed script and call seeder() in that file...
-   await seeder();
+  await seeder();
 
   app.listen(PORT, () => {
-    console.log(`listening on port: http://localhost:${PORT}`)
+    console.log(`listening on port: http://localhost:${PORT}`);
   });
 
 })();

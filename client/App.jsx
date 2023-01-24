@@ -1,12 +1,11 @@
 import React from 'react';
+import NavBar from './NavBar.jsx';
 
 const App = () => (
-    <div>
-      <nav ></nav>
-      <a href="/auth/google">Authenticate with Google</a>
-    </div>
-  );
+  <div>
+    <NavBar />
+    <a href="/auth/google">Authenticate with Google</a>
+  </div>
+);
 
-export default App;
-
-
+export default App; 

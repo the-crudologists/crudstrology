@@ -19,12 +19,12 @@ const User = sequelize.define('user', {
     type: Sequelize.STRING,
   },
   user_id: {
-      type: Sequelize.INTEGER,
-      autoIncrement: true,
-      allowNull: false,
-      primaryKey: true
+    type: Sequelize.INTEGER,
+    autoIncrement: true,
+    allowNull: false,
+    primaryKey: true
   },
-  name: { 
+  name: {
     type: Sequelize.STRING
   },
 });
@@ -57,13 +57,13 @@ const seeder = async () => {
   console.log('the seeder function was invoked');
   await sequelize.sync({ force: true });
   await User.create({ name: 'PtBarnum' })
-    .then(() => {console.log('User Model Create Success')})
-    .catch((err) => {console.error('User Model Create Failure', err)});
+    .then(() => { console.log('User Model Create Success'); })
+    .catch((err) => { console.error('User Model Create Failure', err); });
   await Tarot.create(fakeTarot.cards[0])
-    .then(() => {console.log('Tarot Model Create Success')})
-    .catch((err) => {console.error('Tarot Model Create Failure', err)});
+    .then(() => { console.log('Tarot Model Create Success'); })
+    .catch((err) => { console.error('Tarot Model Create Failure', err); });
   console.log('Database seeded with a test quote table and data');
-}
+};
 
 module.exports.User = User;
 module.exports.sequelize = sequelize;

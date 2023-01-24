@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import fakeHoro from '../database/fakeData/horoscope.json'
+import React, { useState } from 'react';
+import fakeHoro from '../database/fakeData/horoscope.json';
 
 const Horoscope = () => {
 
@@ -11,12 +11,13 @@ const Horoscope = () => {
       <div id='horo-item' className='container'>
         {
           Object.entries(reading).map((el, i) => {
-            return <div key={i}><b>{el[0]}</b>: <em>{el[1]}</em></div>
+            return <div key={i}><b>{el[0]}</b>: <em>{el[1]}</em></div>;
           })
         }
       </div>
     </div>
-  )
-}
+  );
+};
 
 export default Horoscope;
+
