@@ -17,9 +17,9 @@ const PORT = 8080;
 
 //middleware
 app.use(express.json());
-app.use(express.urlencoded({extended: true}));
+app.use(express.urlencoded({ extended: true }));
 app.use(express.static(DIST_DIR));
-app.use(session({secret: SERVER_SESSION_SECRET}));
+app.use(session({ secret: SERVER_SESSION_SECRET }));
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -40,9 +40,11 @@ app.get('/login', (req, res) => {
 
 // <-- PASSPORT DOCS
 app.get('/auth/google',
-  passport.authenticate('google', { scope:
-      [ 'email', 'profile' ] }
-));
+  passport.authenticate('google', {
+    scope:
+      ['email', 'profile']
+  }
+  ));
 
 // <-- working -->
 // app.get('/auth/google/callback',
@@ -53,9 +55,9 @@ app.get('/auth/google',
 
 app.get('/auth/google/callback',
   passport.authenticate('google', {
-      successRedirect: '/protected', // ex: '/auth/google/success'
-      failureRedirect: '/login' // ex: '/auth/google/failure'
-}));
+    successRedirect: '/protected', // ex: '/auth/google/success'
+    failureRedirect: '/login' // ex: '/auth/google/failure'
+  }));
 // <-- END PASSPORT DOCS
 
 // once user is logged in, route to 'logged-in' view*
@@ -68,7 +70,7 @@ app.get('/protected', isLoggedIn, (req, res) => {
   // await seeder();
 
   app.listen(PORT, () => {
-    console.log(`listening on port: http://localhost:${PORT}`)
+    console.log(`listening on port: http://localhost:${PORT}`);
   });
 
 })();
