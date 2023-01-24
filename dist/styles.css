@@ -18,7 +18,8 @@ body {
   background-color: darkslategrey;
   display: flex;
   justify-content: space-between;
-  width:45%;
+  width: fit-content;
+  flex-basis: auto;
   padding: 0 1rem;
 }
 
