@@ -55,9 +55,9 @@ app.get('/auth/google',
 
 app.get('/auth/google/callback',
   passport.authenticate('google', {
-    successRedirect: '/protected', // ex: '/auth/google/success'
-    failureRedirect: '/login' // ex: '/auth/google/failure'
-  }));
+      successRedirect: '/', // ex: '/auth/google/success'
+      failureRedirect: '/login' // ex: '/auth/google/failure'
+}));
 // <-- END PASSPORT DOCS
 
 // once user is logged in, route to 'logged-in' view*
@@ -67,7 +67,7 @@ app.get('/protected', isLoggedIn, (req, res) => {
 
 (async () => {
   // <-- build seed script and call seeder() in that file...
-  // await seeder();
+   await seeder();
 
   app.listen(PORT, () => {
     console.log(`listening on port: http://localhost:${PORT}`);
