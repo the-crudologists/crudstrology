@@ -5,6 +5,13 @@ const App = () => (
   <div>
     <NavBar />
     <a href="/auth/google">Authenticate with Google</a>
+    <Routes>
+      <Route path="/"></Route>
+      <Route path="/faves"></Route>
+      <Route path="/scopes"></Route>
+      <Route path="/reading"></Route>
+      <Route path="/dialog"></Route>
+    </Routes>
   </div>
 );
 
