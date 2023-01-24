@@ -14,6 +14,25 @@ body {
   color: black;
 }
 
+.navBar {
+  background-color: darkslategrey;
+  display: flex;
+  justify-content: space-between;
+  width:45%;
+  padding: 0 1rem;
+}
+
+.navBar ul {
+  font-size: 24px;
+  padding: 10px;
+  margin: 6px;
+  list-style: none;
+  display: flex;
+  gap: 75px;
+  text-shadow: 1px 1px 2px black, 0 0 1em black, 0 0 0.2em black;
+}
+
+
 #profile-card-container {
   position: absolute;
   top: 300px;
