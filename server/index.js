@@ -66,6 +66,9 @@ app.get('/protected', isLoggedIn, (req, res) => {
   res.send('Login Successful');
 });
 
+// <-- SERVER WILDCARD -->
+
+
 (async () => {
   // <-- build seed script and call seeder() in that file...
   await seeder();
