@@ -23,7 +23,7 @@ import App from './App.jsx';
 
 ReactDOM.createRoot(document.getElementById('app')).render(
   <React.StrictMode>
-    <BrowserRouter router={router} >
+    <BrowserRouter>
       <App />
     </BrowserRouter>
   </React.StrictMode>

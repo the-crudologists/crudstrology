@@ -1,8 +1,9 @@
 import React from 'react';
 import NavBar from './NavBar.jsx';
 import Astrology from './Astrology.jsx';
-import Feed from './Feed';
-import Tarot from './Tarot';
+import Feed from './Feed.jsx';
+import Tarot from './Tarot.jsx';
+import Favorites from './Favorites.jsx';
 import { Route, Routes } from 'react-router-dom';
 const App = () => (
   <>
