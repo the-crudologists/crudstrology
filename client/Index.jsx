@@ -4,8 +4,8 @@ import '../dist/styles.css';
 import { BrowserRouter } from 'react-router-dom';
 
 import App from './App.jsx';
-import Horoscope from './Astrology.jsx';
-import CreateProfile from './ProfileCreation.jsx';
+//import Astrology from './Astrology.jsx';
+//import CreateProfile from './ProfileCreation.jsx';
 // import './styles.css';
 // import {
 //   createBrowserRouter,
