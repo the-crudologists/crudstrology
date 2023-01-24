@@ -15,6 +15,9 @@ const sequelize = new Sequelize(
 );
 
 const User = sequelize.define('user', {
+  googleId: {
+    type: Sequelize.STRING,
+  },
   user_id: {
       type: Sequelize.INTEGER,
       autoIncrement: true,
@@ -22,8 +25,7 @@ const User = sequelize.define('user', {
       primaryKey: true
   },
   name: { 
-    type: Sequelize.STRING, 
-    allowNull: false 
+    type: Sequelize.STRING
   },
 });
 
@@ -63,6 +65,6 @@ const seeder = async () => {
   console.log('Database seeded with a test quote table and data');
 }
 
-// module.exports.User = User;
+module.exports.User = User;
 module.exports.sequelize = sequelize;
 module.exports.seeder = seeder;
