@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import fakeHoro from '../database/fakeData/horoscope.json';
 
-const Horoscope = () => {
+const Astrology = () => {
 
   const [reading, setReading] = useState(fakeHoro);
 
@@ -19,5 +19,5 @@ const Horoscope = () => {
   );
 };
 
-export default Horoscope;
+export default Astrology;
 

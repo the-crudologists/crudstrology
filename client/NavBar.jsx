@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 const NavBar = () => {
 
@@ -8,15 +9,16 @@ const NavBar = () => {
   };
 
   return (
-    <div>
-      <span onClick={(e) => handleClick(e, 'Tarot')}>Get A Tareaux</span>
-      <span onClick={(e) => handleClick(e, 'Reading')}>Today's Horror-scope</span>
-      <span>Favorites</span>
-      <span>Home</span>
-
+    <div className="navBar">
+      <ul>
+        <Link to="/" onClick={(e) => handleClick(e, 'Feed')}> Your Home </Link>
+        <Link to="/astrology" onClick={(e) => handleClick(e, 'Scopes')}> Today's Horoscopes </Link>
+        <Link to="/tarot" onClick={(e) => handleClick(e, 'Tarot')}> Get A reading </Link>
+        <Link to="/favorites" onClick={(e) => handleClick(e, 'Favorites')}> Your Faves </Link>
+        {/* <Link to="/" onClick={(e) => handleClick(e, 'Dialog')}> Fortune Teller </Link>*/}
+      </ul>
     </div>
   );
-
 };
 
 export default NavBar;
