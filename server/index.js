@@ -33,6 +33,7 @@ app.get('/', (req, res) => {
 });
 
 // routes to google login page
+// set up to redirect to re-log if time permits...
 app.get('/login', (req, res) => {
   // href needs to be '/auth/google'
   res.send('<a href="/auth/google">Authenticate with Google</a>');
@@ -65,6 +66,9 @@ app.get('/auth/google/callback',
 app.get('/protected', isLoggedIn, (req, res) => {
   res.send('Login Successful');
 });
+
+// <-- SERVER WILDCARD -->
+
 
 (async () => {
   // <-- build seed script and call seeder() in that file...
