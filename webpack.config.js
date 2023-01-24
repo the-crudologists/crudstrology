@@ -6,7 +6,6 @@ const DIST_DIR = path.resolve(__dirname, 'dist');
 module.exports = {
   // Default mode for Webpack is production current mode set to development.
   mode: 'development',
-  watch: true,
   devtool: 'eval-source-map',
   stats: {
     excludeModules: /node_modules/
