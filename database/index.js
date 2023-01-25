@@ -10,9 +10,7 @@ const sequelize = new Sequelize(
   'root',
   '',
   {
-    dialect: 'mysql'
-  },
-  {
+    dialect: 'mysql',
     logging: false
   }
 );
