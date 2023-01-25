@@ -1,7 +1,8 @@
 // const User = require('./user.js');
 const fakeTarot = require('./fakeData/tarot.json');
 const fakeHoro = require('./fakeData/horoscope.json');
-const fakeQuote = require('./fakeData/quote');
+const fakeQuote = require('./fakeData/quotes.json');
+const axios = require('axios');
 
 // console.log('fake Tarot', fakeTarot.cards[0]);
 
@@ -29,6 +30,12 @@ const User = sequelize.define('user', {
   name: {
     type: Sequelize.STRING
   },
+  birthday: {
+    type: Sequelize.STRING
+  },
+  sign: {
+    type: Sequelize.STRING
+  }
 });
 
 // <-- May need to include Foreign Key for realtionship with User...
@@ -70,7 +77,7 @@ const seeder = async () => {
   await Tarot.create(fakeTarot.cards[0])
     .then(() => { console.log('Tarot Model Create Success'); })
     .catch((err) => { console.error('Tarot Model Create Failure', err); });
-  await Quote.create(fakeQuote)
+  await Quote.create(fakeQuote.results[0])
     .then(() => { console.log('Quote Model Create Success'); })
     .catch((err) => { console.error('Quote Model Create Failure', err); });
 
