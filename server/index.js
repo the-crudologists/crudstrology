@@ -68,7 +68,9 @@ app.get('/auth/google/callback',
     if (!loggedInSessions[loggedInUser.googleId]) {
       loggedInSessions[loggedInUser.googleId] = {
         name: loggedInUser.name,
-        sessionID: req.sessionID
+        sessionID: req.sessionID,
+        dob: loggedInUser.dob,
+        sign: loggedInUser.sign
       };
     }
     console.log('Logged-In-Sessions OBJECT', loggedInSessions);
