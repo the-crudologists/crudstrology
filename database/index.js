@@ -1,6 +1,7 @@
 // const User = require('./user.js');
 const fakeTarot = require('./fakeData/tarot.json');
 const fakeHoro = require('./fakeData/horoscope.json');
+const fakeQuote = require('./fakeData/quote');
 
 // console.log('fake Tarot', fakeTarot.cards[0]);
 
@@ -53,6 +54,12 @@ const Horoscope = sequelize.define('horoscope', {
   lucky_time: { type: Sequelize.STRING }
 });
 
+const Quote = sequelize.define('quote', {
+  _id: { type: Sequelize.STRING },
+  content: { type: Sequelize.STRING },
+  author: { type: Sequelize.STRING },
+});
+
 // <-- might not need to be async -->
 const seeder = async () => {
   console.log('the seeder function was invoked');
@@ -63,6 +70,10 @@ const seeder = async () => {
   await Tarot.create(fakeTarot.cards[0])
     .then(() => { console.log('Tarot Model Create Success'); })
     .catch((err) => { console.error('Tarot Model Create Failure', err); });
+  await Quote.create(fakeQuote)
+    .then(() => { console.log('Quote Model Create Success'); })
+    .catch((err) => { console.error('Quote Model Create Failure', err); });
+
   console.log('Database seeded with a test quote table and data');
 };
 
