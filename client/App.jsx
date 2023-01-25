@@ -12,6 +12,7 @@ const App = () => {
 
   const [user, setUser] = useState();
 
+  // this will append all USER state information (name, DOB, sign)
   useEffect(() => {
     axios.get('/auth/user')
       .then(user => {
