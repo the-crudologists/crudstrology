@@ -1,10 +1,14 @@
 import React from 'react';
-import fakeQuote from '../database/fakeData/quotes.json';
+import fakeQuotes from '../database/fakeData/quotes.json';
+
 
 const ZenQuotes = () => {
+//https://api.quotable.io/quotes?page=1
   return (
     <div>
-      Quote Goes Here
+      <span>{fakeQuotes.results[0].content}</span>
+      <span>{fakeQuotes.results[0].author}</span>
+
     </div>
   );
 };
