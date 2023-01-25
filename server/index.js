@@ -59,13 +59,15 @@ app.get('/auth/google',
 // req.rawHeaders[req.rawHeaders.length - 1] === logged in cookie (connect.sid) encrypted
 // ****
 // <-- working -->
+let loggedInUser;
 const loggedInSessions = {};
 app.get('/auth/google/callback',
   passport.authenticate('google', { failureRedirect: '/login' }), (req, res) => {
-    // console.log('REQ', req);
-    if (!loggedInSessions[req.user[0].dataValues.googleId]) {
-      loggedInSessions[req.user[0].dataValues.googleId] = {
-        name: req.user[0].dataValues.name,
+    console.log('REQ', req.user);
+    loggedInUser = req.user[0].dataValues;
+    if (!loggedInSessions[loggedInUser.googleId]) {
+      loggedInSessions[loggedInUser.googleId] = {
+        name: loggedInUser.name,
         sessionID: req.sessionID
       };
     }
@@ -73,9 +75,12 @@ app.get('/auth/google/callback',
     res.redirect('/');
   }
 );
-// How will we look up the user on the loggedInSessions object coming from the front-end??
-// Build out endpoint to handle AXIOS request from front end for DB information...
 
+// passing res.send(req.user) inside this endpoint becomes undefined.. 'fixed' w/ loggedInUser
+app.get('/auth/user', (req, res) => {
+  console.log('/auth/user endpoint hit', loggedInUser);
+  res.send(loggedInUser);
+});
 
 // <-- OLD -->
 // working, but couldn't get callback to authenticate to fire...
