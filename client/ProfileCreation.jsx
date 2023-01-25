@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const ProfileCreation = () => {
+const CreateProfile = () => {
 
   const [name, setName] = useState('Jean Valjean');
 
@@ -40,4 +40,4 @@ const ProfileCreation = () => {
   );
 };
 
-export default ProfileCreation;
+export default CreateProfile;

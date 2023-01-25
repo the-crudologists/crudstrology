@@ -8,8 +8,13 @@ const NavBar = () => {
     viewObj[option] = e.target.value;
   };
 
+  const getAvatar = (googleName) => (
+    <img src={`https://robohash.org/${googleName}?set=set5`} />
+  )
+
   return (
     <div className="navBar">
+      <div>{getAvatar('Matt')}</div>
       <ul>
         <Link to="/" onClick={(e) => handleClick(e, 'Feed')}> Your Home </Link>
         <Link to="/astrology" onClick={(e) => handleClick(e, 'Scopes')}> Today's Horoscopes </Link>
