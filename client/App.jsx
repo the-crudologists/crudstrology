@@ -8,6 +8,8 @@ import { Route, Routes } from 'react-router-dom';
 
 import axios from 'axios';
 
+export const UserContext = React.createContext();
+
 const App = () => {
 
   const [user, setUser] = useState();
@@ -27,20 +29,22 @@ const App = () => {
 
   return (
   <>
-    <div>
-      <NavBar />
-      <a href="/auth/google">Authenticate with Google</a>
-    </div>
-    {/* <div onClick={fetchUser}>setUse State Call</div> */}
-    <div>
-      <Routes>
-        <Route path="/" element={<Feed />}/>
-        <Route path="/astrology" element={<Astrology />}/>
-        <Route path="/tarot" element={<Tarot />}/>
-        <Route path="/favorites" element={<Favorites />}/>
-        {/* <Route path="/dialog" element={<Feed />}/> */}
-      </Routes>
-    </div>
+    <UserContext.Provider value={user}>
+      <div>
+        <NavBar />
+        <a href="/auth/google">Authenticate with Google</a>
+      </div>
+      {/* <div onClick={fetchUser}>setUse State Call</div> */}
+      <div>
+        <Routes>
+          <Route path="/" element={<Feed />}/>
+          <Route path="/astrology" element={<Astrology />}/>
+          <Route path="/tarot" element={<Tarot />}/>
+          <Route path="/favorites" element={<Favorites />}/>
+          {/* <Route path="/dialog" element={<Feed />}/> */}
+        </Routes>
+      </div>
+    </UserContext.Provider>
   </>
   )
 };
