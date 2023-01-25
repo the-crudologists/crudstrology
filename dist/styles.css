@@ -31,6 +31,17 @@ body {
   text-shadow: 1px 1px 2px black, 0 0 1em black, 0 0 0.2em black;
 }
 
+.navBar #userInfo {
+  font-size: 20px;
+  padding-top: 60px;
+  padding-left: 10px;
+  padding-right: 10px;
+  text-shadow: 1px 1px 2px black, 0 0 1em black, 0 0 0.2em black;
+  border: 1px solid azure;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
 .navBar img {
   /* filter:grayscale(100%); */
   /* width: 50px;
