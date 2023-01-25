@@ -15,6 +15,13 @@ const NavBar = () => {
   return (
     <div className="navBar">
       <div>{getAvatar('FatTubBetty')}</div>
+      <div id="userInfo">
+        <hr />
+        <p>Name: REDACTED</p>
+        <p>DOB:  REDACTED</p>
+        <p>Sign: REDACTED</p>
+        <hr />
+      </div>
       <ul>
         <Link to="/" onClick={(e) => handleClick(e, 'Feed')}> Your Home </Link>
         <Link to="/astrology" onClick={(e) => handleClick(e, 'Scopes')}> Today's Horoscopes </Link>
