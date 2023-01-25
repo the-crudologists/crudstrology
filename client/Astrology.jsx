@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import fakeHoro from '../database/fakeData/horoscope.json';
 
 const Astrology = () => {

@@ -62,7 +62,7 @@ app.get('/auth/google',
 const loggedInSessions = {};
 app.get('/auth/google/callback',
   passport.authenticate('google', { failureRedirect: '/login' }), (req, res) => {
-    // console.log('REQ', req);
+    console.log('REQ', req.sessionID);
     if (!loggedInSessions[req.user[0].dataValues.googleId]) {
       loggedInSessions[req.user[0].dataValues.googleId] = {
         name: req.user[0].dataValues.name,
@@ -70,12 +70,16 @@ app.get('/auth/google/callback',
       };
     }
     console.log('Logged-In-Sessions OBJECT', loggedInSessions);
-    res.redirect('/');
+    res.redirect('/'); // change to /redirect
   }
 );
 // How will we look up the user on the loggedInSessions object coming from the front-end??
 // Build out endpoint to handle AXIOS request from front end for DB information...
 
+// need to axios from front-end
+app.get('/user', (req, res) => {
+  res.send(req.user);
+});
 
 // <-- OLD -->
 // working, but couldn't get callback to authenticate to fire...

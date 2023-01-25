@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import NavBar from './NavBar.jsx';
 import Astrology from './Astrology.jsx';
 import Feed from './Feed.jsx';

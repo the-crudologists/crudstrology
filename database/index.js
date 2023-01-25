@@ -29,6 +29,12 @@ const User = sequelize.define('user', {
   name: {
     type: Sequelize.STRING
   },
+  birthday: {
+    type: Sequelize.STRING
+  },
+  sign: {
+    type: Sequelize.STRING
+  }
 });
 
 // <-- May need to include Foreign Key for realtionship with User...
