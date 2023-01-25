@@ -47,9 +47,6 @@ app.get('/auth/google',
   ), (req, res) => {
     console.log('app.get(/auth/google) passport.authenticate server/index.js req :', req);
   });
-//create endpoints to receive request for a quote on the client side
-//get request to quotes api to grab a quote that get 10 quotes 
-//https://api.quotable.io/quotes?page=1
 
 // <-- working -->
 // app.get('/auth/google/callback',
