@@ -48,21 +48,50 @@ app.get('/auth/google',
     console.log('app.get(/auth/google) passport.authenticate server/index.js req :', req);
   });
 
+// ****
+// <-- BELOW -->
+// assign information to above object from authenticated req object from google API
+// ex: 
+// req.sessionID, 
+// req.user === user entered into DB from auth.js profile
+// req.user[0].dataValues.name === name from above
+// req.user[0].dataValues.googleId === googleId from database
+// req.rawHeaders[req.rawHeaders.length - 1] === logged in cookie (connect.sid) encrypted
+// ****
 // <-- working -->
-// app.get('/auth/google/callback',
-//   passport.authenticate('google', { failureRedirect: '/login' }), (req, res) => {
-//     res.redirect('/protected');
-//   }
-// );
-
+let loggedInUser;
+const loggedInSessions = {};
 app.get('/auth/google/callback',
-  passport.authenticate('google', {
-    //add path to '/protected' below to handle successful login
-    successRedirect: '/', // ex: '/auth/google/success'
-    failureRedirect: '/login' // ex: '/auth/google/failure'
-  }), (req, res) => {
-    console.log('app.get(/auth/google/callback) passport.authenticate server/index.js req :', req);
-  });
+  passport.authenticate('google', { failureRedirect: '/login' }), (req, res) => {
+    console.log('REQ', req.user);
+    loggedInUser = req.user[0].dataValues;
+    if (!loggedInSessions[loggedInUser.googleId]) {
+      loggedInSessions[loggedInUser.googleId] = {
+        name: loggedInUser.name,
+        sessionID: req.sessionID
+      };
+    }
+    console.log('Logged-In-Sessions OBJECT', loggedInSessions);
+    res.redirect('/');
+  }
+);
+
+// passing res.send(req.user) inside this endpoint becomes undefined.. 'fixed' w/ loggedInUser
+app.get('/auth/user', (req, res) => {
+  console.log('/auth/user endpoint hit', loggedInUser);
+  res.send(loggedInUser);
+});
+
+// <-- OLD -->
+// working, but couldn't get callback to authenticate to fire...
+// app.get('/auth/google/callback',
+//   passport.authenticate('google', {
+//     //add path to '/protected' below to handle successful login
+//     successRedirect: '/', // ex: '/auth/google/success'
+//     failureRedirect: '/login' // ex: '/auth/google/failure'
+//   }), (req, res) => {
+//     console.log('app.get(/auth/google/callback) passport.authenticate server/index.js req :', req)
+//   })
 // <-- END PASSPORT DOCS
 
 // once user is logged in, route to 'logged-in' view*

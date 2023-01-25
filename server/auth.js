@@ -14,7 +14,7 @@ passport.use(new GoogleStrategy({
   passReqToCallback: true
 },
 (request, accessToken, refreshToken, profile, done) => {
-  console.log('GOOGLE PROFILE', profile); // pull profile.given_name
+  console.log('GOOGLE PROFILE', profile); // pull profile.given_name MISSING birthday and sign
   User.findOrCreate({
     where: {
       googleId: profile.id,
