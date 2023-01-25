@@ -45,7 +45,7 @@ app.get('/auth/google',
       ['email', 'profile']
   }
   ), (req, res) => {
-    console.log('app.get(/auth/google) passport.authenticate server/index.js req :', req)
+    console.log('app.get(/auth/google) passport.authenticate server/index.js req :', req);
   });
 
 // ****

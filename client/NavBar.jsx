@@ -10,7 +10,7 @@ const NavBar = () => {
 
   const getAvatar = (googleName) => (
     <img src={`https://robohash.org/${googleName}?set=set5`} />
-  )
+  );
 
   return (
     <div className="navBar">
