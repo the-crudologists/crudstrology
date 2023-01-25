@@ -45,7 +45,7 @@ app.get('/auth/google',
       ['email', 'profile']
   }
   ), (req, res) => {
-    console.log('app.get(/auth/google) passport.authenticate server/index.js req :', req)
+    console.log('app.get(/auth/google) passport.authenticate server/index.js req :', req);
   });
 
 // <-- working -->
@@ -61,8 +61,8 @@ app.get('/auth/google/callback',
     successRedirect: '/', // ex: '/auth/google/success'
     failureRedirect: '/login' // ex: '/auth/google/failure'
   }), (req, res) => {
-    console.log('app.get(/auth/google/callback) passport.authenticate server/index.js req :', req)
-  })
+    console.log('app.get(/auth/google/callback) passport.authenticate server/index.js req :', req);
+  });
 // <-- END PASSPORT DOCS
 
 // once user is logged in, route to 'logged-in' view*
