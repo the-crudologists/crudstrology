@@ -33,7 +33,6 @@ app.get('/', (req, res) => {
 });
 
 // routes to google login page
-// set up to redirect to re-log if time permits...
 app.get('/login', (req, res) => {
   // href needs to be '/auth/google'
   res.send('<a href="/auth/google">Authenticate with Google</a>');
@@ -45,7 +44,9 @@ app.get('/auth/google',
     scope:
       ['email', 'profile']
   }
-  ));
+  ), (req, res) => {
+    console.log('app.get(/auth/google) passport.authenticate server/index.js req :', req)
+  });
 
 // <-- working -->
 // app.get('/auth/google/callback',
@@ -59,13 +60,16 @@ app.get('/auth/google/callback',
     //add path to '/protected' below to handle successful login
     successRedirect: '/', // ex: '/auth/google/success'
     failureRedirect: '/login' // ex: '/auth/google/failure'
-  }));
+  }), (req, res) => {
+    console.log('app.get(/auth/google/callback) passport.authenticate server/index.js req :', req)
+  })
 // <-- END PASSPORT DOCS
 
 // once user is logged in, route to 'logged-in' view*
 app.get('/protected', isLoggedIn, (req, res) => {
   res.send('Login Successful');
 });
+
 
 // <-- SERVER WILDCARD -->
 
