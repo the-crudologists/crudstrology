@@ -14,11 +14,11 @@ passport.use(new GoogleStrategy({
   passReqToCallback: true
 },
 (request, accessToken, refreshToken, profile, done) => {
-  console.log('GOOGLE PROFILE', profile); // pull profile.given_name MISSING birthday and sign
+  // console.log('GOOGLE PROFILE', profile); // pull profile.given_name MISSING birthday and sign
   User.findOrCreate({
     defaults: {
-      dob: '01/19',
-      sign: 'Banana'
+      dob: '03/28',
+      sign: 'Aries'
     },
     where: {
       googleId: profile.id,
@@ -26,7 +26,7 @@ passport.use(new GoogleStrategy({
     }
   })
     .then((user, created) => {
-      console.log('Find Or Create Google Acct --> DB: Success', created, user);
+      // console.log('Find Or Create Google Acct --> DB: Success', created, user);
       done(null, user);
     })
     .catch(err => {
