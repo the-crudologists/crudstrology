@@ -1,27 +1,29 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { Nav, NavUl, NavUserInfo, NavImg } from './Styled.jsx'
-const NavBar = () => {
+import { UserContext } from './App.jsx';
 
+const NavBar = () => {
+  const { dob, sign, user } = useContext(UserContext);
   const viewObj = {};
   const handleClick = (e, option) => {
-    viewObj[option] = e.target.value;
+    viewObj[option] = e.target.value
   };
 
-  const getAvatar = (googleName) => (
-    <img src={`https://robohash.org/${googleName}?set=set5`} />
-  );
-
+  const getAvatar = (googleName) =>  (
+      <NavImg src={`https://robohash.org/${googleName}?set=set5`} />
+    );
+  // 'FatTubBetty'  name 
   return (
     <Nav>
-      <NavImg>{getAvatar('FatTubBetty')}</NavImg>
-    <NavUserInfo>
+      <div>{getAvatar(user || 'FatTubBetty')}</div>
+      <NavUserInfo>
         <hr />
-        <p>Name: REDACTED</p>
-        <p>DOB:  REDACTED</p>
-        <p>Sign: REDACTED</p>
+        <p>Name: {user || 'sign in'}</p>
+        <p>DOB: {dob}</p>
+        <p>Sign: {sign || 'Enter DOB'}</p>
         <hr />
-        </NavUserInfo>
+      </NavUserInfo>
 
       <ul>
         <NavUl> <Link to="/" onClick={(e) => handleClick(e, 'Feed')}> Your Home </Link>
@@ -32,7 +34,7 @@ const NavBar = () => {
         {/* <Link to="/" onClick={(e) => handleClick(e, 'Dialog')}> Fortune Teller </Link>*/}
       </ul>
 
-   </Nav >
+    </Nav >
   );
 };
 

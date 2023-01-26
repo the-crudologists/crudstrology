@@ -30,7 +30,7 @@ const NavUserInfo = styled.div`
   margin-top: 5px;
   margin-bottom: 5px;`;
 
-const NavImg = styled.div`
+const NavImg = styled.img`
   object-fit: cover;
   border: 1px solid azure;
   background-color: black;
