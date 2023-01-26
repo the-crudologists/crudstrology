@@ -19,7 +19,7 @@ const ZenQuotes = () => {
   useEffect(() => {
     setInterval(() => {
       getQuote();
-    }, 5000);
+    }, 100000000);
   }, []);
 
   return (
