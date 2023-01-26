@@ -2,7 +2,7 @@
 const fakeTarot = require('./fakeData/tarot.json');
 const fakeHoro = require('./fakeData/horoscope.json');
 const fakeQuote = require('./fakeData/quotes.json');
-const axios = require('axios');
+
 
 // console.log('fake Tarot', fakeTarot.cards[0]);
 
