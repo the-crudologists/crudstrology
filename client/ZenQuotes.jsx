@@ -15,7 +15,7 @@ const ZenQuotes = () => {
     //set interval function to fire an axios 
     axios.get('/api/quotes')
       .then((quote ) => {
-        console.log(quote.data);
+        // console.log(quote.data);
         quote = quote;
       })
       .catch((err) => {

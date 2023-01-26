@@ -102,6 +102,10 @@ app.get('/protected', isLoggedIn, (req, res) => {
   res.send('Login Successful');
 });
 
+// *****************************
+// ***** EXTERNAL API HITS *****
+// *****************************
+
 // GET request from server to quote api
 // result.data is the quote object
 app.get('/api/quotes', (req, res) => {
@@ -110,8 +114,18 @@ app.get('/api/quotes', (req, res) => {
     .catch(err => res.status(500).send(err));
 });
 
-
-
+app.post('/api/horo', (req, res) => {
+  console.log('____SERVER____');
+  console.log('REQ BODY', req.body)
+  const { user } = req.body;
+  console.log('USER DESTRUCTURED', user);
+  axios.post(`https://aztro.sameerkumar.website?sign=${user.sign}&day=today`)
+    .then(result => {
+      console.log('RESULT from Aztro API', result.data);
+      res.status(200).send(result.data);
+    })
+    .catch(err => console.log('Error from Aztro api post request SERVER'));
+});
 
 
 // <-- SERVER WILDCARD -->
