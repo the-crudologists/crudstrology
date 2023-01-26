@@ -119,7 +119,7 @@ app.get('/api/quotes', (req, res) => {
 
 (async () => {
   // <-- build seed script and call seeder() in that file...
-  // await seeder();
+  await seeder();
 
   app.listen(PORT, () => {
     console.log(`listening on port: http://localhost:${PORT}`);
