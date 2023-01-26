@@ -11,45 +11,52 @@ const NavBar = () => {
   };
 
   const handleSubmit = () => {
-    const userDob = ''; 
+    const userDob = '';
     console.log('robits');
   };
   const getAvatar = (googleName) => (
-    <img src={`https://robohash.org/${googleName}?set=set5`} />
+    <NavImg src={`https://robohash.org/${googleName}?set=set5`} />
   );
   // 'FatTubBetty'  name 
   return (
+    <>
 
-    <div className="navBar">
-      <div>{getAvatar(user || 'FatTubBetty')}</div>
-      <hr />
-      <p>Name: {user || 'sign in'}</p>
-      <p>DOB:<input
-        className='dobInput'
-        style={{ color: 'black' }}
-        placeholder={dob || 'Enter DOB'}
-        onKeyDown={
-          (e) => {
-            if (e.key === 'Enter') {
-              handleSubmit();
+      <NavStyle>
+        <div>{getAvatar(user || 'FatTubBetty')}</div>
+        <NavUserInfo>
+          <hr />
+          <p>Name: {user || 'sign in'}</p>
+          <p>DOB:<input
+            className='dobInput'
+            style={{ color: 'black' }}
+            placeholder={dob || 'Enter DOB as mm/dd'}
+            onKeyDown={
+              (e) => {
+                if (e.key === 'Enter') {
+                  handleSubmit();
+                }
+              }
             }
-          }
-        }
-      />
-      <button className='text' onClick={handleSubmit}>Submit</button></p>
-      <p>Sign: {sign || 'Enter DOB as mm/dd'}</p>
-      <hr />
+          />
+          <button className='text' onClick={handleSubmit}>Submit</button></p>
+          <p>Sign: {sign || 'Based on DOB'}</p>
+          <hr />
+        </NavUserInfo>
 
-      <ul>
-        <Link to="/" onClick={(e) => handleClick(e, 'Feed')}> Your Home </Link>
-        <Link to="/astrology" onClick={(e) => handleClick(e, 'Scopes')}> Today's Horoscopes </Link>
-        <Link to="/tarot" onClick={(e) => handleClick(e, 'Tarot')}> Get A reading </Link>
-        <Link to="/favorites" onClick={(e) => handleClick(e, 'Favorites')}> Your Faves </Link>
+        <ul>
+          <NavUl>
+            <Link to="/" onClick={(e) => handleClick(e, 'Feed')}> Your Home </Link>
+            <Link to="/astrology" onClick={(e) => handleClick(e, 'Scopes')}> Today's Horoscopes </Link>
+            <Link to="/tarot" onClick={(e) => handleClick(e, 'Tarot')}> Get A reading </Link>
+            <Link to="/favorites" onClick={(e) => handleClick(e, 'Favorites')}> Your Faves </Link>
 
-        {/* <Link to="/" onClick={(e) => handleClick(e, 'Dialog')}> Fortune Teller </Link>*/}
-      </ul>
+            {/* <Link to="/" onClick={(e) => handleClick(e, 'Dialog')}> Fortune Teller </Link>*/}
+          </NavUl>
+        </ul>
 
-    </div>
+
+      </NavStyle >
+    </>
   );
 };
 
