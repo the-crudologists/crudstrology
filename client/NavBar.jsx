@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { NavStyle, NavUl, NavUserInfo, NavImg } from './Styled.jsx';
 import { UserContext } from './App.jsx';
@@ -6,13 +6,18 @@ import { UserContext } from './App.jsx';
 const NavBar = () => {
   const { dob, setDob, sign, setSign, user } = useContext(UserContext);
   const viewObj = {};
+  const dobRef = useRef('');
   const handleClick = (e, option) => {
     viewObj[option] = e.target.value;
   };
 
-  const handleSubmit = () => {
-    const userDob = '';
-    console.log('robits');
+  const handleChange = (input) => {
+    dobRef.current = input;
+  };
+
+  const handleSubmit = (input) => { //THIS FUNCTION GOOD TO FLESH OUT WITH AXIOS REQUEST TO SERVER TO SAVE DOB AND SIGN
+    
+    console.log('dobRef: ', dobRef.current);
   };
   const getAvatar = (googleName) => (
     <NavImg src={`https://robohash.org/${googleName}?set=set5`} />
@@ -30,10 +35,14 @@ const NavBar = () => {
             className='dobInput'
             style={{ color: 'black' }}
             placeholder={dob || 'Enter DOB as mm/dd'}
+            onChange={
+              (e) => {
+                handleChange(e.target.value);
+              }}
             onKeyDown={
               (e) => {
                 if (e.key === 'Enter') {
-                  handleSubmit();
+                  handleSubmit(e);
                 }
               }
             }
