@@ -7,7 +7,7 @@ const Astrology = () => {
   const [reading, setReading] = useState(fakeHoro);
 
   return (
-    <UserContext.Consumer>
+    // <UserContext.Consumer>
       <div className='horoscope'>
         <h1 className='horo-title'>Your Daily Horoscope</h1>
         <div id='horo-item' className='container'>
@@ -18,7 +18,7 @@ const Astrology = () => {
           }
         </div>
       </div>
-    </UserContext.Consumer>
+    // </UserContext.Consumer>
   );
 };
 

@@ -5,7 +5,7 @@ import Feed from './Feed.jsx';
 import Tarot from './Tarot.jsx';
 import Favorites from './Favorites.jsx';
 import { Route, Routes } from 'react-router-dom';
-
+import { Title } from './Styled.jsx';
 import axios from 'axios';
 
 export const UserContext = React.createContext();
@@ -28,28 +28,29 @@ const App = () => {
   console.log('STATE UPDATE', user);
 
   return (
-  <>
-    <UserContext.Provider value={user}>
-      <div>
-        <NavBar />
-        <a href="/auth/google">Authenticate with Google</a>
-      </div>
-      {/* <div onClick={fetchUser}>setUse State Call</div> */}
-      <div>
-        <Routes>
-          <Route path="/" element={<Feed />}/>
-          <Route path="/astrology" element={<Astrology />}/>
-          <Route path="/tarot" element={<Tarot />}/>
-          <Route path="/favorites" element={<Favorites />}/>
-          {/* <Route path="/dialog" element={<Feed />}/> */}
-        </Routes>
-      </div>
-    </UserContext.Provider>
-  </>
+    <>
+      <Title>Crudstrology</Title>
+      <UserContext.Provider value={user}>
+        <div>
+          <NavBar />
+          <a href="/auth/google">Authenticate with Google</a>
+        </div>
+        {/* <div onClick={fetchUser}>setUse State Call</div> */}
+        <div>
+          <Routes>
+            <Route path="/" element={<Feed />} />
+            <Route path="/astrology" element={<Astrology />} />
+            <Route path="/tarot" element={<Tarot />} />
+            <Route path="/favorites" element={<Favorites />} />
+            {/* <Route path="/dialog" element={<Feed />}/> */}
+          </Routes>
+        </div>
+      </UserContext.Provider>
+    </>
   )
 };
 
-export default App; 
+export default App;
 
 
 
