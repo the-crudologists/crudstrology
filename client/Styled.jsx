@@ -16,12 +16,13 @@ const NavUl = styled.div`
   padding: 10px;
   margin: 20px;
   display: flex;
+  flex-basis: auto;
   gap: 75px;
   text-shadow: 1px 1px 2px black, 0 0 1em black, 0 0 0.2em black;`;
 
 const NavUserInfo = styled.div`
   font-size: 20px;
-  padding-top: 64px;
+  padding-top: 66px;
   padding-left: 10px;
   padding-right: 10px;
   text-shadow: 1px 1px 2px black, 0 0 1em black, 0 0 0.2em black;
