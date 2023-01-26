@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
-import { Nav, NavUl, NavUserInfo, NavImg } from './Styled.jsx'
+import { NavStyle, NavUl, NavUserInfo, NavImg } from './Styled.jsx'
 import { UserContext } from './App.jsx';
 
 const NavBar = () => {
@@ -15,7 +15,8 @@ const NavBar = () => {
     );
   // 'FatTubBetty'  name 
   return (
-    <Nav>
+    <>
+    <NavStyle>
       <div>{getAvatar(user || 'FatTubBetty')}</div>
       <NavUserInfo>
         <hr />
@@ -34,9 +35,9 @@ const NavBar = () => {
         {/* <Link to="/" onClick={(e) => handleClick(e, 'Dialog')}> Fortune Teller </Link>*/}
       </ul>
 
-    </Nav >
+    </NavStyle >
+    </>
   );
 };
 
 export default NavBar;
-

@@ -5,7 +5,7 @@ import Feed from './Feed.jsx';
 import Tarot from './Tarot.jsx';
 import Favorites from './Favorites.jsx';
 import { Route, Routes } from 'react-router-dom';
-import { Title } from './Styled.jsx';
+// import { Title, Container } from './Styled.jsx';
 import axios from 'axios';
 
 export const UserContext = React.createContext();
@@ -33,7 +33,6 @@ const App = () => {
 
   return (
     <>
-      <Title>Crudstrology</Title>
       <UserContext.Provider value={ {user, dob, setDob, sign, setSign} }>
         <div>
           <NavBar />
