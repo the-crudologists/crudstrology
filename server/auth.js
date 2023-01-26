@@ -16,6 +16,10 @@ passport.use(new GoogleStrategy({
 (request, accessToken, refreshToken, profile, done) => {
   console.log('GOOGLE PROFILE', profile); // pull profile.given_name MISSING birthday and sign
   User.findOrCreate({
+    defaults: {
+      dob: '01/19',
+      sign: 'Banana'
+    },
     where: {
       googleId: profile.id,
       name: profile.given_name

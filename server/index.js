@@ -69,7 +69,9 @@ app.get('/auth/google/callback',
     if (!loggedInSessions[loggedInUser.googleId]) {
       loggedInSessions[loggedInUser.googleId] = {
         name: loggedInUser.name,
-        sessionID: req.sessionID
+        sessionID: req.sessionID,
+        dob: loggedInUser.dob,
+        sign: loggedInUser.sign
       };
     }
     console.log('Logged-In-Sessions OBJECT', loggedInSessions);
@@ -117,7 +119,7 @@ app.get('/api/quotes', (req, res) => {
 
 (async () => {
   // <-- build seed script and call seeder() in that file...
-  // await seeder();
+  await seeder();
 
   app.listen(PORT, () => {
     console.log(`listening on port: http://localhost:${PORT}`);

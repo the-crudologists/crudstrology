@@ -13,24 +13,28 @@ export const UserContext = React.createContext();
 const App = () => {
 
   const [user, setUser] = useState();
+  const [dob, setDob] = useState();
+  const [sign, setSign] = useState();
 
   // this will append all USER state information (name, DOB, sign)
   useEffect(() => {
     axios.get('/auth/user')
       .then(user => {
         setUser(user.data.name);
+        setDob(user.data.dob); // May be null on initialization need logic in sub components accordingly
+        setSign(user.data.sign); //see above comment^
       })
       .catch(err => {
         console.log('Error fetching Authenticated Google User from req.user (server/passport)', err);
       });
   });
 
-  console.log('STATE UPDATE', user);
+  console.log('STATE UPDATE', user, dob, sign);
 
   return (
     <>
       <Title>Crudstrology</Title>
-      <UserContext.Provider value={user}>
+      <UserContext.Provider value={ {user, dob, setDob, sign, setSign} }>
         <div>
           <NavBar />
           <a href="/auth/google">Authenticate with Google</a>
