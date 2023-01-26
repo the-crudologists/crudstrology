@@ -17,36 +17,36 @@ const Astrology = () => {
         sign: fetchSign
       }
     })
-    .then(reading => {
-      // console.log('READING THEN CLIENT from server API hit', reading.data);
-      setReading(reading.data);
-      // above everything above working: setting state reading for user DOB
-      // but, currently populating horoscopes array 22x with same reading...
-      // how to hit api on server to fetch from api for every NOT user DOB
-      // zodiacSigns Array and forEach? call with parameter sign? 
-      // fetchHoro(fetchSign)... send to server to hit api 11 times?
-      // setHoroscopes(prevHoro --> not currently being used? () => instead?)
-      zodiacSigns.forEach(el => {
-        if (el !== fetchSign) {
-          axios.post('/api/horo', {
-            user: {
-              sign: el
-            }
-          })
-            .then(reading => {
-              setHoroscopes(prevHoro => {
-                // console.log('STATE HOROSCOPES ARRAY AFTER CLIENT AXIOS', horoscopes, 'READING', reading.data, 'PREVHORO', prevHoro);
-                return [...prevHoro, reading.data];
-              })
+      .then(reading => {
+        // console.log('READING THEN CLIENT from server API hit', reading.data);
+        setReading(reading.data);
+        // above everything above working: setting state reading for user DOB
+        // but, currently populating horoscopes array 22x with same reading...
+        // how to hit api on server to fetch from api for every NOT user DOB
+        // zodiacSigns Array and forEach? call with parameter sign? 
+        // fetchHoro(fetchSign)... send to server to hit api 11 times?
+        // setHoroscopes(prevHoro --> not currently being used? () => instead?)
+        zodiacSigns.forEach(el => {
+          if (el !== fetchSign) {
+            axios.post('/api/horo', {
+              user: {
+                sign: el
+              }
             })
-            .catch(err => console.log('ERROR populating horoscopes != sign array', err));
-        }
+              .then(reading => {
+                setHoroscopes(prevHoro => {
+                  // console.log('STATE HOROSCOPES ARRAY AFTER CLIENT AXIOS', horoscopes, 'READING', reading.data, 'PREVHORO', prevHoro);
+                  return [...prevHoro, reading.data];
+                });
+              })
+              .catch(err => console.log('ERROR populating horoscopes != sign array', err));
+          }
+        });
       })
-    })
-    .catch(err => {
-      console.log('Error AXIOS post to /api/horo from Client', err);
-    })
-  }
+      .catch(err => {
+        console.log('Error AXIOS post to /api/horo from Client', err);
+      });
+  };
 
   useEffect(() => fetchHoro(sign), []);
 
