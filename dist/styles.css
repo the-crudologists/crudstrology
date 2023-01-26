@@ -63,10 +63,16 @@ body {
   width: 400px;
 }
 
+#auth-container {
+  position: absolute;
+  top: 334px;
+}
+
 .profile-card-name {
   position: absolute;
   left: 100px;
-};
+}
+
 .quote {
   object-fit: cover;
   border: 1px solid azure;
