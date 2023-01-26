@@ -47,21 +47,21 @@ const App = () => {
         </div>
       </UserContext.Provider>
     </>
-  )
+  );
 };
 
 export default App;
 
 
 
-  // <-- if we want to fetch user/username with Event Listener -->
-  // const fetchUser = () => {
-  //   axios.get('/auth/user')
-  //     .then(user => {
-  //       console.log('USER FROM AXIOS', user.data.name);
-  //       setUser(user.data.name);
-  //     })
-  //     .catch(err => {
-  //       console.log('Error fetching Authenticated Google User from req.user (server/passport)', err);
-  //     });
-  // };
+// <-- if we want to fetch user/username with Event Listener -->
+// const fetchUser = () => {
+//   axios.get('/auth/user')
+//     .then(user => {
+//       console.log('USER FROM AXIOS', user.data.name);
+//       setUser(user.data.name);
+//     })
+//     .catch(err => {
+//       console.log('Error fetching Authenticated Google User from req.user (server/passport)', err);
+//     });
+// };
