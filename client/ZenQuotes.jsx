@@ -10,15 +10,26 @@ const ZenQuotes = () => {
   //two args: anonymous function and [];
   // Similar to componentDidMount and componentDidUpdate:
 
-
-  const getQuotes = () => {
+  let quote;
+  const getQuote = () => {
     //set interval function to fire an axios 
-
+    axios.get('/api/quotes')
+      .then((quote ) => {
+        console.log(quote.data);
+        quote = quote;
+      })
+      .catch((err) => {
+        console.err('Axios Get /api/quotes', err);
+      });
+  
   };
+  getQuote();
+  console.log(quote);
   return (
+    // map over state array
     <div>
-      <span>{fakeQuotes.results[0].content}</span>
-      <span>{fakeQuotes.results[0].author}</span>
+      <span>{quote}</span>
+      <span>{quote}</span>
 
     </div>
   );

@@ -28,39 +28,39 @@ const App = () => {
   console.log('STATE UPDATE', user);
 
   return (
-  <>
-    <UserContext.Provider value={user}>
-      <div>
-        <NavBar />
-        <a href="/auth/google">Authenticate with Google</a>
-      </div>
-      {/* <div onClick={fetchUser}>setUse State Call</div> */}
-      <div>
-        <Routes>
-          <Route path="/" element={<Feed />}/>
-          <Route path="/astrology" element={<Astrology />}/>
-          <Route path="/tarot" element={<Tarot />}/>
-          <Route path="/favorites" element={<Favorites />}/>
-          {/* <Route path="/dialog" element={<Feed />}/> */}
-        </Routes>
-      </div>
-    </UserContext.Provider>
-  </>
-  )
+    <>
+      <UserContext.Provider value={user}>
+        <div>
+          <NavBar />
+          <a href="/auth/google">Authenticate with Google</a>
+        </div>
+        {/* <div onClick={fetchUser}>setUse State Call</div> */}
+        <div>
+          <Routes>
+            <Route path="/" element={<Feed />} />
+            <Route path="/astrology" element={<Astrology />} />
+            <Route path="/tarot" element={<Tarot />} />
+            <Route path="/favorites" element={<Favorites />} />
+            {/* <Route path="/dialog" element={<Feed />}/> */}
+          </Routes>
+        </div>
+      </UserContext.Provider>
+    </>
+  );
 };
 
-export default App; 
+export default App;
 
 
 
-  // <-- if we want to fetch user/username with Event Listener -->
-  // const fetchUser = () => {
-  //   axios.get('/auth/user')
-  //     .then(user => {
-  //       console.log('USER FROM AXIOS', user.data.name);
-  //       setUser(user.data.name);
-  //     })
-  //     .catch(err => {
-  //       console.log('Error fetching Authenticated Google User from req.user (server/passport)', err);
-  //     });
-  // };
+// <-- if we want to fetch user/username with Event Listener -->
+// const fetchUser = () => {
+//   axios.get('/auth/user')
+//     .then(user => {
+//       console.log('USER FROM AXIOS', user.data.name);
+//       setUser(user.data.name);
+//     })
+//     .catch(err => {
+//       console.log('Error fetching Authenticated Google User from req.user (server/passport)', err);
+//     });
+// };
