@@ -2,6 +2,7 @@ const path = require('path');
 const express = require('express');
 const session = require('express-session');
 const passport = require('passport');
+const axios = require('axios');
 
 const dotenv = require('dotenv').config();
 const { SERVER_SESSION_SECRET } = process.env;
@@ -99,13 +100,24 @@ app.get('/protected', isLoggedIn, (req, res) => {
   res.send('Login Successful');
 });
 
+// GET request from server to quote api
+// result.data is the quote object
+app.get('/api/quotes', (req, res) => {
+  axios.get('https://api.quotable.io/random')
+    .then(result => res.status(200).send(result.data))
+    .catch(err => res.status(500).send(err));
+});
+
+
+
+
 
 // <-- SERVER WILDCARD -->
 
 
 (async () => {
   // <-- build seed script and call seeder() in that file...
-  await seeder();
+  // await seeder();
 
   app.listen(PORT, () => {
     console.log(`listening on port: http://localhost:${PORT}`);
