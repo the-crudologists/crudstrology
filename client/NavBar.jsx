@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
-//import { Nav, NavUl, NavUserInfo, NavImg } from './Styled.jsx';
+import { NavStyle, NavUl, NavUserInfo, NavImg } from './Styled.jsx';
 import { UserContext } from './App.jsx';
 
 const NavBar = () => {
