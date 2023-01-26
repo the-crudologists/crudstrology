@@ -122,9 +122,10 @@ app.post('/api/horo', (req, res) => {
   axios.post(`https://aztro.sameerkumar.website?sign=${user.sign}&day=today`)
     .then(result => {
       // console.log('RESULT from Aztro API', result.data);
+      result.data.sign = user.sign;
       res.status(200).send(result.data);
     })
-    .catch(err => console.log('Error from Aztro api post request SERVER'));
+    .catch(err => console.log('Error from Aztro api post request SERVER', err));
 });
 
 
