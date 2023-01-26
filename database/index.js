@@ -30,7 +30,7 @@ const User = sequelize.define('user', {
   name: {
     type: Sequelize.STRING
   },
-  birthday: {
+  dob: {
     type: Sequelize.STRING
   },
   sign: {
@@ -71,7 +71,11 @@ const Quote = sequelize.define('quote', {
 const seeder = async () => {
   console.log('the seeder function was invoked');
   await sequelize.sync({ force: true });
-  await User.create({ name: 'PtBarnum' })
+  await User.create({ 
+    name: 'PtBarnum',
+    dob: '01/19',
+    sign: 'Banana'
+  })
     .then(() => { console.log('User Model Create Success'); })
     .catch((err) => { console.error('User Model Create Failure', err); });
   await Tarot.create(fakeTarot.cards[0])
