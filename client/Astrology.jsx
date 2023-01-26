@@ -18,7 +18,7 @@ const Astrology = () => {
       }
     })
     .then(reading => {
-      console.log('READING THEN CLIENT from server API hit', reading.data);
+      // console.log('READING THEN CLIENT from server API hit', reading.data);
       setReading(reading.data);
       // above everything above working: setting state reading for user DOB
       // but, currently populating horoscopes array 22x with same reading...
@@ -28,7 +28,6 @@ const Astrology = () => {
       // setHoroscopes(prevHoro --> not currently being used? () => instead?)
       zodiacSigns.forEach(el => {
         if (el !== fetchSign) {
-          // setHoroscopes(prevHoro => {
           axios.post('/api/horo', {
             user: {
               sign: el
@@ -36,13 +35,11 @@ const Astrology = () => {
           })
             .then(reading => {
               setHoroscopes(prevHoro => {
-                console.log('STATE HOROSCOPES ARRAY AFTER CLIENT AXIOS', horoscopes, 'READING', reading.data, 'PREVHORO', prevHoro);
+                // console.log('STATE HOROSCOPES ARRAY AFTER CLIENT AXIOS', horoscopes, 'READING', reading.data, 'PREVHORO', prevHoro);
                 return [...prevHoro, reading.data];
               })
-              // horoscopes.push(reading.data);
             })
             .catch(err => console.log('ERROR populating horoscopes != sign array', err));
-          // });
         }
       })
     })
