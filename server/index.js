@@ -46,7 +46,7 @@ app.get('/auth/google',
       ['email', 'profile']
   }
   ), (req, res) => {
-    console.log('app.get(/auth/google) passport.authenticate server/index.js req :', req);
+    // console.log('app.get(/auth/google) passport.authenticate server/index.js req :', req);
   });
 
 // ****
@@ -64,7 +64,7 @@ let loggedInUser;
 const loggedInSessions = {};
 app.get('/auth/google/callback',
   passport.authenticate('google', { failureRedirect: '/login' }), (req, res) => {
-    console.log('REQ', req.user);
+    // console.log('REQ', req.user);
     loggedInUser = req.user[0].dataValues;
     if (!loggedInSessions[loggedInUser.googleId]) {
       loggedInSessions[loggedInUser.googleId] = {
@@ -74,14 +74,14 @@ app.get('/auth/google/callback',
         sign: loggedInUser.sign
       };
     }
-    console.log('Logged-In-Sessions OBJECT', loggedInSessions);
+    // console.log('Logged-In-Sessions OBJECT', loggedInSessions);
     res.redirect('/');
   }
 );
 
 // passing res.send(req.user) inside this endpoint becomes undefined.. 'fixed' w/ loggedInUser
 app.get('/auth/user', (req, res) => {
-  console.log('/auth/user endpoint hit', loggedInUser);
+  // console.log('/auth/user endpoint hit', loggedInUser);
   res.send(loggedInUser);
 });
 
@@ -102,6 +102,10 @@ app.get('/protected', isLoggedIn, (req, res) => {
   res.send('Login Successful');
 });
 
+// *****************************
+// ***** EXTERNAL API HITS *****
+// *****************************
+
 // GET request from server to quote api
 // result.data is the quote object
 app.get('/api/quotes', (req, res) => {
@@ -110,8 +114,18 @@ app.get('/api/quotes', (req, res) => {
     .catch(err => res.status(500).send(err));
 });
 
-
-
+app.post('/api/horo', (req, res) => {
+  // console.log('____SERVER____');
+  // console.log('REQ BODY', req.body)
+  const { user } = req.body;
+  // console.log('USER DESTRUCTURED', user);
+  axios.post(`https://aztro.sameerkumar.website?sign=${user.sign}&day=today`)
+    .then(result => {
+      // console.log('RESULT from Aztro API', result.data);
+      res.status(200).send(result.data);
+    })
+    .catch(err => console.log('Error from Aztro api post request SERVER'));
+});
 
 
 // <-- SERVER WILDCARD -->
