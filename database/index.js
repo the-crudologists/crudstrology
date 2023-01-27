@@ -63,7 +63,7 @@ const Horoscope = sequelize.define('horoscope', {
   lucky_time: { type: Sequelize.STRING }
 });
 
-const Quote = sequelize.define('quote', {
+const Quotes = sequelize.define('quote', {
   _id: { type: Sequelize.STRING },
   content: { type: Sequelize.STRING },
   author: { type: Sequelize.STRING },
@@ -98,7 +98,7 @@ const seeder = async () => {
     .then(() => { console.log('User Model Create Success'); })
     .catch((err) => { console.error('User Model Create Failure', err); });
   fetchTarotCards();
-  await Quote.create(fakeQuote.results[0])
+  await Quotes.create(fakeQuote.results[0])
     .then(() => { console.log('Quote Model Create Success'); })
     .catch((err) => { console.error('Quote Model Create Failure', err); });
 
@@ -107,5 +107,6 @@ const seeder = async () => {
 
 module.exports.Tarot = Tarot;
 module.exports.User = User;
+module.exports.Quotes = Quotes;
 module.exports.sequelize = sequelize;
 module.exports.seeder = seeder;

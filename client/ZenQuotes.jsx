@@ -25,7 +25,6 @@ const ZenQuotes = () => {
     }, 5000);
     return () => clearInterval(interval);
   }, []);
-
   return (
 
     <div>
