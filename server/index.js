@@ -3,7 +3,7 @@ const express = require('express');
 const session = require('express-session');
 const passport = require('passport');
 const axios = require('axios');
-const { Quotes, User } = require('../database/index.js');
+const { Quotes, User, Tarot, seeder } = require('../database/index.js');
 
 require('dotenv').config();
 const { SERVER_SESSION_SECRET } = process.env;
@@ -11,11 +11,7 @@ const { SERVER_SESSION_SECRET } = process.env;
 
 require('./auth.js');
 
-const { seeder } = require('../database/index.js');
-const db = require('../database/index.js');
-const { Tarot } = require('../database/index.js');
 const Sequelize = require('sequelize');
-const { Quotes } = require('../database/index.js');
 
 const DIST_DIR = path.resolve(__dirname, '..', 'dist');
 
