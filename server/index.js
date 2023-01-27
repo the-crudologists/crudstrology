@@ -127,7 +127,7 @@ app.patch('/user/:googleId', (req, res) => {
     .then((response) => {
       console.log('response: ', response);
       //findby id.then(res.status(200).send(response);)
-      
+
     })
     .catch((err) => {
       console.log('update user error:', err);
@@ -223,16 +223,22 @@ app.get('/api/tarot', (req, res) => {
 //     })
 // });
 
-// <-- SERVER WILDCARD -->
-
-
 (async () => {
   // <-- build seed script and call seeder() in that file...
   await seeder();
-
-  app.listen(PORT, () => {
-    console.log(`listening on port: http://localhost:${PORT}`);
-  });
-
 })();
 
+// <-- SERVER WILDCARD -->
+
+app.get('*', (req, res) => {
+  res.sendFile(path.resolve(__dirname, '..', 'dist', 'index.html'), (err) => {
+    if (err) {
+      res.status(500).send(err);
+    }
+  });
+});
+
+
+app.listen(PORT, () => {
+  console.log(`listening on port: http://localhost:${PORT}`);
+});
