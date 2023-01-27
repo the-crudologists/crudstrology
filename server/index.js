@@ -107,6 +107,15 @@ app.get('/protected', isLoggedIn, (req, res) => {
   res.send('Login Successful');
 });
 
+
+// app.get('/user/current', (req, res) => {
+//   console.log('Current user: ', loggedInUser);
+//   User.findAll({
+//     where:{
+//       googleId: loggedInUser.
+//     }
+//   })
+// });
 //patch User entry in DB with user input DOB
 app.patch('/user/:googleId', (req, res) => {
   console.log('req.body: ', req.body);
