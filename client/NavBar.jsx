@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { NavStyle, NavUl, NavUserInfo, NavImg } from './Styled.jsx';
 import { UserContext } from './App.jsx';
 import axios from 'axios';
+import zc from '../utils/zodiacConverter.js';
 
 const NavBar = () => {
   const { dob, setDob, sign, setSign, user } = useContext(UserContext);
@@ -17,17 +18,15 @@ const NavBar = () => {
   };
 
   const handleSubmit = () => { //THIS FUNCTION GOOD TO FLESH OUT WITH AXIOS REQUEST TO SERVER TO SAVE DOB AND SIGN
-    //app.get user
-    //app.patch user dob
-    //console.log('tpyeofdobRef: ', typeof(dobRef.current));
-    axios.get('/auth/user', {})
+    axios.get('/auth/user')
       .then((loggedInUser) => {
-        //console.log('resobj:', loggedInUser.data);
-        /////////////////////////above here works/////////////
-        axios.patch(`/user/${loggedInUser.data.googleId}`, {dob: dobRef.current}) //this is the problem //could be not sent correctly
+        //console.log('resobj:', loggedInUser.data)
+        axios.patch(`/user/${loggedInUser.data.googleId}`, {dob: dobRef.current, sign: zc(dobRef.current) })
           .then((anArrayResponse) => {
             //call setters?           
             console.log('Updated User: ', anArrayResponse.data[0]);
+            setDob(anArrayResponse.data[0].dob);
+            setSign(zc(anArrayResponse.data[0].dob));
           })
           .catch(err => {
             console.log('failed to update in db', err);

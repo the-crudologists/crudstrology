@@ -123,6 +123,7 @@ app.patch('/user/:googleId', (req, res) => {
         }
       })
         .then((response) => {
+          // update user entry with new sign? may work on client side
           res.status(200).send(response);
         })
         .catch((err) => {

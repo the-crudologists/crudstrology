@@ -27,7 +27,7 @@ const App = () => {
       .catch(err => {
         console.log('Error fetching Authenticated Google User from req.user (server/passport)', err);
       });
-  });
+  }, []);
 
   console.log('STATE UPDATE', user, dob, sign);
 
