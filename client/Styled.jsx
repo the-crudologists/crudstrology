@@ -40,7 +40,7 @@ const AstroButton = styled.button`
   position: absolute;
   left: 255px;
   top: 335px;
-  cursor: pointer;`
+  cursor: pointer;`;
 
 const UserHoro = styled.div`
   object-fit: cover;
@@ -49,7 +49,7 @@ const UserHoro = styled.div`
   margin-top: 20px;
   margin-left: 5px;
   font-size: 20px;
-  padding: 10px;`
+  padding: 10px;`;
 
 const OtherHoros = styled.div`
   object-fit: cover;
@@ -58,6 +58,6 @@ const OtherHoros = styled.div`
   margin-top: 10px;
   margin-left: 5px;
   font-size: 14px;
-  padding: 10px;`
+  padding: 10px;`;
 
 export { NavStyle, NavUl, NavUserInfo, NavImg, AstroButton, UserHoro, OtherHoros };
