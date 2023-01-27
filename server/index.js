@@ -3,7 +3,7 @@ const express = require('express');
 const session = require('express-session');
 const passport = require('passport');
 const axios = require('axios');
-const { Quotes, User } = require('../database/index.js');
+const { Quotes, User, Tarot, seeder } = require('../database/index.js');
 
 require('dotenv').config();
 const { SERVER_SESSION_SECRET } = process.env;
@@ -11,9 +11,7 @@ const { SERVER_SESSION_SECRET } = process.env;
 
 require('./auth.js');
 
-const { seeder } = require('../database/index.js');
-const db = require('../database/index.js');
-const { Tarot } = require('../database/index.js');
+const Sequelize = require('sequelize');
 
 const DIST_DIR = path.resolve(__dirname, '..', 'dist');
 
@@ -191,6 +189,18 @@ app.post('/api/horo', (req, res) => {
     })
     .catch(err => console.log('Error from Aztro api post request SERVER', err));
 });
+
+app.get('/api/tarot', (req, res) => {
+  Tarot.findAll({ order: Sequelize.literal('RAND()'), limit: 3 })
+    .then((cards) => {
+      console.log('cards from Tarot.fondall /api/tarot server/index.js: ', cards);
+    })
+    .catch((err) => {
+      console.error('Error from Tarot.findall /api/tarot server/index.js: ', err);
+    });
+});
+
+
 
 // <-- TO FETCH ALL TAROT CARDS upon front end, no longer needed -->
 // app.get('/api/cards', (req, res) => {
