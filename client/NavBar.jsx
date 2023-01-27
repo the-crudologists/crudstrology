@@ -2,6 +2,7 @@ import React, { useState, useContext, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { NavStyle, NavUl, NavUserInfo, NavImg } from './Styled.jsx';
 import { UserContext } from './App.jsx';
+import axios from 'axios';
 
 const NavBar = () => {
   const { dob, setDob, sign, setSign, user } = useContext(UserContext);
@@ -15,9 +16,26 @@ const NavBar = () => {
     dobRef.current = input;
   };
 
-  const handleSubmit = (input) => { //THIS FUNCTION GOOD TO FLESH OUT WITH AXIOS REQUEST TO SERVER TO SAVE DOB AND SIGN
-    
-    console.log('dobRef: ', dobRef.current);
+  const handleSubmit = () => { //THIS FUNCTION GOOD TO FLESH OUT WITH AXIOS REQUEST TO SERVER TO SAVE DOB AND SIGN
+    //app.get user
+    //app.patch user dob
+    console.log('tpyeofdobRef: ', typeof(dobRef.current));
+    axios.get('/auth/user', {})
+      .then((loggedInUser) => {
+        console.log('resobj:', loggedInUser.data);
+        /////////////////////////above here works/////////////
+        axios.patch(`/user/${loggedInUser.data.googleId}`, {dob: dobRef.current}) //this is the problem //could be not sent correctly
+          .then((anArrayWithEitherAOneOrZero) => {
+            //call setters?           
+            console.log('anArrayWithEitherAOneOrZero', anArrayWithEitherAOneOrZero);
+          })
+          .catch(err => {
+            console.log('failed to update in db', err);
+          });
+      })
+      .catch(err => {
+        console.log('failed to verify current user', err);
+      });
   };
   const getAvatar = (googleName) => (
     <NavImg src={`https://robohash.org/${googleName}?set=set5`} />

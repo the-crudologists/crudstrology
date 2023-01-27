@@ -3,6 +3,7 @@ const express = require('express');
 const session = require('express-session');
 const passport = require('passport');
 const axios = require('axios');
+const { User } = require('../database/index.js');
 
 const dotenv = require('dotenv').config();
 const { SERVER_SESSION_SECRET } = process.env;
@@ -81,7 +82,7 @@ app.get('/auth/google/callback',
 
 // passing res.send(req.user) inside this endpoint becomes undefined.. 'fixed' w/ loggedInUser
 app.get('/auth/user', (req, res) => {
-  // console.log('/auth/user endpoint hit', loggedInUser);
+  console.log('/auth/user endpoint hit', loggedInUser);
   res.send(loggedInUser);
 });
 
@@ -101,6 +102,28 @@ app.get('/auth/user', (req, res) => {
 app.get('/protected', isLoggedIn, (req, res) => {
   res.send('Login Successful');
 });
+
+//patch User entry in DB with user input DOB
+app.patch('/user/:googleId', (req, res) => {
+  console.log('req.body: ', req.body);
+  const {googleId} = req.params;
+  User.update(req.body, {
+    where: {
+      googleId: googleId
+    },
+    returning: true
+  })
+    .then((response) => {
+      console.log('response: ', response);
+      //findby id.then(res.status(200).send(response);)
+      
+    })
+    .catch((err) => {
+      console.log('update user error:', err);
+      res.sendStatus(500);
+    });
+});
+
 
 // *****************************
 // ***** EXTERNAL API HITS *****
