@@ -3,6 +3,7 @@ const express = require('express');
 const session = require('express-session');
 const passport = require('passport');
 const axios = require('axios');
+const { Quotes } = require('../database/index.js');
 
 const dotenv = require('dotenv').config();
 const { SERVER_SESSION_SECRET } = process.env;
@@ -82,6 +83,7 @@ app.get('/auth/google/callback',
   }
 );
 
+
 // passing res.send(req.user) inside this endpoint becomes undefined.. 'fixed' w/ loggedInUser
 app.get('/auth/user', (req, res) => {
   // console.log('/auth/user endpoint hit', loggedInUser);
@@ -105,6 +107,34 @@ app.get('/protected', isLoggedIn, (req, res) => {
   res.send('Login Successful');
 });
 
+
+app.post('/api/quote', (req, res) => {
+  const { quote } = req.body;
+  console.log(quote);
+  Quotes.create(quote)
+    .then(() => {
+      res.sendStatus(201);
+    })
+    .catch((error) => {
+      console.log('POST /api/quote', error);
+      res.sendStatus(500);
+    });
+});
+
+app.get('/api/all_quotes/', (req, res) => {
+  Quotes.findAll()
+    .then((quotesArr) => {
+      console.log(quotesArr);
+      res.status(200).send(quotesArr);
+    }).catch((err) => {
+      console.log('GET /api/quotes', err);
+      res.sendStatus(500);
+    });
+
+  //if the get is not successful, set sc to 500 and log the err
+});
+
+// when a quote is liked it is added to database
 // *****************************
 // ***** EXTERNAL API HITS *****
 // *****************************
