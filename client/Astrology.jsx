@@ -62,6 +62,7 @@ const Astrology = () => {
         }
       </UserHoro>
       <p></p>
+      <div style={{ fontSize: '20px' }}><p><b>The other 11 signs.</b></p></div>
       <div>
         {
           horoscopes.map((el, i) => {

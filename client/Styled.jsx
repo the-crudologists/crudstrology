@@ -54,7 +54,7 @@ const UserHoro = styled.div`
 const OtherHoros = styled.div`
   object-fit: cover;
   border: 3px double azure;
-  background-color: rgb(30,30,30);
+  background-color: rgb(60,60,60);
   margin-top: 10px;
   margin-left: 5px;
   font-size: 14px;
