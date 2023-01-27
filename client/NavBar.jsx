@@ -19,15 +19,15 @@ const NavBar = () => {
   const handleSubmit = () => { //THIS FUNCTION GOOD TO FLESH OUT WITH AXIOS REQUEST TO SERVER TO SAVE DOB AND SIGN
     //app.get user
     //app.patch user dob
-    console.log('tpyeofdobRef: ', typeof(dobRef.current));
+    //console.log('tpyeofdobRef: ', typeof(dobRef.current));
     axios.get('/auth/user', {})
       .then((loggedInUser) => {
-        console.log('resobj:', loggedInUser.data);
+        //console.log('resobj:', loggedInUser.data);
         /////////////////////////above here works/////////////
         axios.patch(`/user/${loggedInUser.data.googleId}`, {dob: dobRef.current}) //this is the problem //could be not sent correctly
           .then((anArrayWithEitherAOneOrZero) => {
             //call setters?           
-            console.log('anArrayWithEitherAOneOrZero', anArrayWithEitherAOneOrZero);
+            //console.log('anArrayWithEitherAOneOrZero', anArrayWithEitherAOneOrZero);
           })
           .catch(err => {
             console.log('failed to update in db', err);
