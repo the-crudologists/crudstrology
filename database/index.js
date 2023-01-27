@@ -3,6 +3,8 @@ const fakeTarot = require('./fakeData/tarot.json');
 const fakeHoro = require('./fakeData/horoscope.json');
 const fakeQuote = require('./fakeData/quotes.json');
 
+const axios = require('axios');
+
 
 // console.log('fake Tarot', fakeTarot.cards[0]);
 
@@ -42,10 +44,10 @@ const User = sequelize.define('user', {
 const Tarot = sequelize.define('tarotCard', {
   type: { type: Sequelize.STRING },
   name_short: { type: Sequelize.STRING },
-  name: { type: Sequelize.STRING },
+  name: { type: Sequelize.STRING, unique: true },
   value: { type: Sequelize.STRING },
   value_int: { type: Sequelize.INTEGER },
-  meaning_up: { type: Sequelize.STRING },
+  meaning_up: { type: Sequelize.TEXT },
   meaning_rev: { type: Sequelize.STRING },
   desc: { type: Sequelize.TEXT }
 });
@@ -61,11 +63,28 @@ const Horoscope = sequelize.define('horoscope', {
   lucky_time: { type: Sequelize.STRING }
 });
 
-const Quotes = sequelize.define('quote', {
+const Quote = sequelize.define('quote', {
+  _id: { type: Sequelize.STRING },
   content: { type: Sequelize.STRING },
   author: { type: Sequelize.STRING },
-  liked: { type: Sequelize.BOOLEAN, defaultValue: true }
 });
+
+const fetchTarotCards = () => {
+  axios.get('https://tarot-api.onrender.com/api/v1/cards')
+    .then(response => {
+      console.log('<-- FROM TAROT API -->'); // response.data.cards
+      Tarot.bulkCreate(response.data.cards)
+        .then(bulk => {
+          console.log('<-- DATABASE --> BULK CREATED TAROT TABLE');
+        })
+        .catch(err => {
+          console.log('<-- DATABASE --> ERROR BULK CREATE TAROT TABLE', err);
+        });
+    })
+    .catch(err => {
+      console.log('<-- API --> ERROR FROM TAROT API', err);
+    });
+};
 
 // <-- might not need to be async -->
 const seeder = async () => {
@@ -78,17 +97,15 @@ const seeder = async () => {
   })
     .then(() => { console.log('User Model Create Success'); })
     .catch((err) => { console.error('User Model Create Failure', err); });
-  await Tarot.create()
-    .then(() => { console.log('Tarot Model Create Success'); })
-    .catch((err) => { console.error('Tarot Model Create Failure', err); });
-  await Quotes.create()
+  fetchTarotCards();
+  await Quote.create(fakeQuote.results[0])
     .then(() => { console.log('Quote Model Create Success'); })
     .catch((err) => { console.error('Quote Model Create Failure', err); });
 
   console.log('Database seeded with a test quote table and data');
 };
 
+module.exports.Tarot = Tarot;
 module.exports.User = User;
-module.exports.Quotes = Quotes;
 module.exports.sequelize = sequelize;
 module.exports.seeder = seeder;
