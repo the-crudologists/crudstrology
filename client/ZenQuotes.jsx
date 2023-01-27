@@ -24,7 +24,6 @@ const ZenQuotes = () => {
       getQuote();
     }, 60000);
   }, []);
-
   return (
 
     <div>
