@@ -40,7 +40,7 @@ const NavBar = () => {
   const getAvatar = (googleName) => (
     <NavImg src={`https://robohash.org/${googleName}?set=set5`} />
   );
-  // 'FatTubBetty'  name 
+  // 'FatTubBetty'  name
   return (
     <>
 

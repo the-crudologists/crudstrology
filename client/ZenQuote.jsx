@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import axios from 'axios';
 //import fakeQuotes from '../database/fakeData/quotes.json';
 import { BsHandThumbsUpFill } from 'react-icons/bs';
 import Button from 'react-bootstrap/Button';
+
 const ZenQuote = (quote) => {
   //quote is added to database when liked
   const likeQuote = () => {
@@ -18,7 +19,6 @@ const ZenQuote = (quote) => {
   //create a click handler function that fires axios request
 
 
-  console.log(quote);
   return (
 
     <div className='quote'>
