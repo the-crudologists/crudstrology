@@ -26,7 +26,7 @@ const NavBar = () => {
         /////////////////////////above here works/////////////
         axios.patch(`/user/${loggedInUser.data.googleId}`, {dob: dobRef.current}) //this is the problem //could be not sent correctly
           .then((anArrayWithEitherAOneOrZero) => {
-            //call setters?           
+            //call setters?
             //console.log('anArrayWithEitherAOneOrZero', anArrayWithEitherAOneOrZero);
           })
           .catch(err => {
@@ -40,7 +40,7 @@ const NavBar = () => {
   const getAvatar = (googleName) => (
     <NavImg src={`https://robohash.org/${googleName}?set=set5`} />
   );
-  // 'FatTubBetty'  name 
+  // 'FatTubBetty'  name
   return (
     <>
 
