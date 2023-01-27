@@ -25,9 +25,9 @@ const NavBar = () => {
         //console.log('resobj:', loggedInUser.data);
         /////////////////////////above here works/////////////
         axios.patch(`/user/${loggedInUser.data.googleId}`, {dob: dobRef.current}) //this is the problem //could be not sent correctly
-          .then((anArrayWithEitherAOneOrZero) => {
+          .then((anArrayResponse) => {
             //call setters?           
-            //console.log('anArrayWithEitherAOneOrZero', anArrayWithEitherAOneOrZero);
+            console.log('Updated User: ', anArrayResponse.data[0]);
           })
           .catch(err => {
             console.log('failed to update in db', err);
