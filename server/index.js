@@ -7,9 +7,12 @@ const axios = require('axios');
 const dotenv = require('dotenv').config();
 const { SERVER_SESSION_SECRET } = process.env;
 // try requiring files for database like this...
+
 require('./auth.js');
+
 const { seeder } = require('../database/index.js');
 const db = require('../database/index.js');
+const { Tarot } = require('../database/index.js');
 
 const DIST_DIR = path.resolve(__dirname, '..', 'dist');
 
@@ -52,8 +55,8 @@ app.get('/auth/google',
 // ****
 // <-- BELOW -->
 // assign information to above object from authenticated req object from google API
-// ex: 
-// req.sessionID, 
+// ex:
+// req.sessionID,
 // req.user === user entered into DB from auth.js profile
 // req.user[0].dataValues.name === name from above
 // req.user[0].dataValues.googleId === googleId from database
@@ -128,6 +131,26 @@ app.post('/api/horo', (req, res) => {
     .catch(err => console.log('Error from Aztro api post request SERVER', err));
 });
 
+// <-- TO FETCH ALL TAROT CARDS upon front end, no longer needed -->
+// app.get('/api/cards', (req, res) => {
+//   axios.get('https://tarot-api.onrender.com/api/v1/cards')
+//     .then(response => {
+//       console.log('<-- FROM TAROT API -->'); // response.data.cards
+//       Tarot.bulkCreate(response.data.cards)
+//         .then(() => {
+//           console.log('<-- DATABASE --> BULK CREATED TAROT TABLE');
+//           res.sendStatus(200);
+//         })
+//         .catch(err => {
+//           console.log('<-- DATABASE --> ERROR BULK CREATE TAROT TABLE', err);
+//           res.sendStatus(500);
+//         })
+//     })
+//     .catch(err => {
+//       console.log('<-- API --> ERROR FROM TAROT API', err);
+//       res.sendStatus(400);
+//     })
+// });
 
 // <-- SERVER WILDCARD -->
 
