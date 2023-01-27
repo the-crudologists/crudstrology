@@ -61,27 +61,27 @@ const Horoscope = sequelize.define('horoscope', {
   lucky_time: { type: Sequelize.STRING }
 });
 
-const Quote = sequelize.define('quote', {
-  _id: { type: Sequelize.STRING },
+const Quotes = sequelize.define('quote', {
   content: { type: Sequelize.STRING },
   author: { type: Sequelize.STRING },
+  liked: { type: Sequelize.BOOLEAN, defaultValue: true }
 });
 
 // <-- might not need to be async -->
 const seeder = async () => {
   console.log('the seeder function was invoked');
   await sequelize.sync({ force: true });
-  await User.create({ 
+  await User.create({
     name: 'PtBarnum',
     dob: '01/19',
     sign: 'Banana'
   })
     .then(() => { console.log('User Model Create Success'); })
     .catch((err) => { console.error('User Model Create Failure', err); });
-  await Tarot.create(fakeTarot.cards[0])
+  await Tarot.create()
     .then(() => { console.log('Tarot Model Create Success'); })
     .catch((err) => { console.error('Tarot Model Create Failure', err); });
-  await Quote.create(fakeQuote.results[0])
+  await Quotes.create()
     .then(() => { console.log('Quote Model Create Success'); })
     .catch((err) => { console.error('Quote Model Create Failure', err); });
 
@@ -89,5 +89,6 @@ const seeder = async () => {
 };
 
 module.exports.User = User;
+module.exports.Quotes = Quotes;
 module.exports.sequelize = sequelize;
 module.exports.seeder = seeder;
