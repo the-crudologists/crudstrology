@@ -106,4 +106,4 @@ export default Astrology;
 //         .catch(err => console.log('ERROR populating horoscopes != sign array', err));
 //     });
 //   }
-// })
+// });

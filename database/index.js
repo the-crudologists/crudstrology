@@ -71,19 +71,19 @@ const Quote = sequelize.define('quote', {
 
 const fetchTarotCards = () => {
   axios.get('https://tarot-api.onrender.com/api/v1/cards')
-  .then(response => {
-    console.log('<-- FROM TAROT API -->'); // response.data.cards
-    Tarot.bulkCreate(response.data.cards)
-      .then(bulk => {
-        console.log('<-- DATABASE --> BULK CREATED TAROT TABLE');
-      })
-      .catch(err => {
-        console.log('<-- DATABASE --> ERROR BULK CREATE TAROT TABLE', err);
-      })
-  })
-  .catch(err => {
-    console.log('<-- API --> ERROR FROM TAROT API', err);
-  })
+    .then(response => {
+      console.log('<-- FROM TAROT API -->'); // response.data.cards
+      Tarot.bulkCreate(response.data.cards)
+        .then(bulk => {
+          console.log('<-- DATABASE --> BULK CREATED TAROT TABLE');
+        })
+        .catch(err => {
+          console.log('<-- DATABASE --> ERROR BULK CREATE TAROT TABLE', err);
+        });
+    })
+    .catch(err => {
+      console.log('<-- API --> ERROR FROM TAROT API', err);
+    });
 };
 
 // <-- might not need to be async -->
