@@ -7,13 +7,17 @@ const Tarot = () => {
   const [tarot, setTarot] = useState({});
   // ref
 
-  // useEffect(() => {
-  //   axios.get('/api/tarot')
-  //     .then(({ data }) =>
-  //       setTarot(data))
-  //     .catch((err) =>
-  //       console.log('ERROR in useEffect in Tarot.jsx: ', err));
-  // }, []);
+  useEffect(() => {
+    if (!tarot.length) {
+      axios.get('/api/tarot')
+        .then(({ data }) =>
+          setTarot(data))
+        .catch((err) =>
+          console.log('ERROR in useEffect in Tarot.jsx: ', err));
+    } else {
+      return;
+    }
+  }, []);
 
   // useLayoutEffect(() => {
   //   axios.get('/api/cards')
