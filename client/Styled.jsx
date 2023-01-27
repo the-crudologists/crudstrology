@@ -38,8 +38,8 @@ const NavImg = styled.img`
 
 const AstroButton = styled.button`
   position: absolute;
-  left: 255px;
-  top: 335px;
+  left: 247px;
+  top: 333px;
   cursor: pointer;`;
 
 const UserHoro = styled.div`

@@ -3,17 +3,15 @@ const express = require('express');
 const session = require('express-session');
 const passport = require('passport');
 const axios = require('axios');
-const { Quotes } = require('../database/index.js');
+const { Quotes, User, Tarot, seeder } = require('../database/index.js');
 
-const dotenv = require('dotenv').config();
+require('dotenv').config();
 const { SERVER_SESSION_SECRET } = process.env;
 // try requiring files for database like this...
 
 require('./auth.js');
 
-const { seeder } = require('../database/index.js');
-const db = require('../database/index.js');
-const { Tarot } = require('../database/index.js');
+const Sequelize = require('sequelize');
 
 const DIST_DIR = path.resolve(__dirname, '..', 'dist');
 
@@ -86,7 +84,7 @@ app.get('/auth/google/callback',
 
 // passing res.send(req.user) inside this endpoint becomes undefined.. 'fixed' w/ loggedInUser
 app.get('/auth/user', (req, res) => {
-  // console.log('/auth/user endpoint hit', loggedInUser);
+  console.log('/auth/user endpoint hit', loggedInUser);
   res.send(loggedInUser);
 });
 
@@ -106,6 +104,37 @@ app.get('/auth/user', (req, res) => {
 app.get('/protected', isLoggedIn, (req, res) => {
   res.send('Login Successful');
 });
+
+
+// app.get('/user/current', (req, res) => {
+//   console.log('Current user: ', loggedInUser);
+//   User.findAll({
+//     where:{
+//       googleId: loggedInUser.
+//     }
+//   })
+// });
+//patch User entry in DB with user input DOB
+app.patch('/user/:googleId', (req, res) => {
+  console.log('req.body: ', req.body);
+  const {googleId} = req.params;
+  User.update(req.body, {
+    where: {
+      googleId: googleId
+    },
+    returning: true
+  })
+    .then((response) => {
+      console.log('response: ', response);
+      //findby id.then(res.status(200).send(response);)
+      
+    })
+    .catch((err) => {
+      console.log('update user error:', err);
+      res.sendStatus(500);
+    });
+});
+
 
 
 app.post('/api/quote', (req, res) => {
@@ -160,6 +189,18 @@ app.post('/api/horo', (req, res) => {
     })
     .catch(err => console.log('Error from Aztro api post request SERVER', err));
 });
+
+app.get('/api/tarot', (req, res) => {
+  Tarot.findAll({ order: Sequelize.literal('RAND()'), limit: 3 })
+    .then((cards) => {
+      console.log('cards from Tarot.fondall /api/tarot server/index.js: ', cards);
+    })
+    .catch((err) => {
+      console.error('Error from Tarot.findall /api/tarot server/index.js: ', err);
+    });
+});
+
+
 
 // <-- TO FETCH ALL TAROT CARDS upon front end, no longer needed -->
 // app.get('/api/cards', (req, res) => {
