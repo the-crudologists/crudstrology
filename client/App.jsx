@@ -36,7 +36,9 @@ const App = () => {
       <UserContext.Provider value={ {user, dob, setDob, sign, setSign} }>
         <div>
           <NavBar />
-          <a href="/auth/google">Authenticate with Google</a>
+          <div id='auth-container'>
+            <a href="/auth/google">Authenticate with Google</a>
+          </div>
         </div>
         {/* <div onClick={fetchUser}>setUse State Call</div> */}
         <div>

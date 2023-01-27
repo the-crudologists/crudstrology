@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
-//import fakeQuotes from '../database/fakeData/quotes.json';
+import fakeQuotes from '../database/fakeData/quotes.json';
 import axios from 'axios';
 import { BsHandThumbsUpFill } from 'react-icons/bs';
 import Button from 'react-bootstrap/Button';
+import ZenQuote from './ZenQuote.jsx';
 
 
 const ZenQuotes = () => {
-  const [quotes, setQuote] = useState([]);
+  const [quotes, setQuote] = useState([fakeQuotes.results[Math.floor(Math.random() * 20)]]);
   useEffect(() => {
     const getQuote = () => {
       axios.get('/api/quotes')
@@ -17,6 +18,8 @@ const ZenQuotes = () => {
           console.log('Axios Get /api/quotes', err);
         });
     };
+    //TODO: fix this to only have one quote on render
+    //getQuote();///this adds two quotes on render
     const interval = setInterval(() => {
       getQuote();
     }, 60000);
@@ -25,14 +28,18 @@ const ZenQuotes = () => {
   return (
 
     <div>
-      {quotes.map((quote, i) =>
-        <div key={i} className='quote'>
-          <span>{quote.content}</span>
-          <span> -{quote.author}  </span>
-          <Button variant="primary"><BsHandThumbsUpFill /></Button>{' '}
-        </div>
-      )}
-    </div>);
+      {
+        quotes.map((quote, i) => {
+          return (
+            <ZenQuote
+              quote={quote}
+              key={i}
+            />
+          );
+        })
+      }
+    </div>
+  );
 };
 
 export default ZenQuotes;

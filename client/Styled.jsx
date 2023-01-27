@@ -36,5 +36,28 @@ const NavImg = styled.img`
   margin-bottom: 5px;
   margin-left: 5px;`;
 
+const AstroButton = styled.button`
+  position: absolute;
+  left: 255px;
+  top: 335px;
+  cursor: pointer;`;
 
-export { NavStyle, NavUl, NavUserInfo, NavImg };
+const UserHoro = styled.div`
+  object-fit: cover;
+  border: 3px groove azure;
+  background-color: black;
+  margin-top: 20px;
+  margin-left: 5px;
+  font-size: 20px;
+  padding: 10px;`;
+
+const OtherHoros = styled.div`
+  object-fit: cover;
+  border: 3px double azure;
+  background-color: rgb(30,30,30);
+  margin-top: 10px;
+  margin-left: 5px;
+  font-size: 14px;
+  padding: 10px;`;
+
+export { NavStyle, NavUl, NavUserInfo, NavImg, AstroButton, UserHoro, OtherHoros };

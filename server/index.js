@@ -3,14 +3,17 @@ const express = require('express');
 const session = require('express-session');
 const passport = require('passport');
 const axios = require('axios');
-const { User } = require('../database/index.js');
+const { Quotes, User } = require('../database/index.js');
 
-const dotenv = require('dotenv').config();
+require('dotenv').config();
 const { SERVER_SESSION_SECRET } = process.env;
 // try requiring files for database like this...
+
 require('./auth.js');
+
 const { seeder } = require('../database/index.js');
 const db = require('../database/index.js');
+const { Tarot } = require('../database/index.js');
 
 const DIST_DIR = path.resolve(__dirname, '..', 'dist');
 
@@ -53,8 +56,8 @@ app.get('/auth/google',
 // ****
 // <-- BELOW -->
 // assign information to above object from authenticated req object from google API
-// ex: 
-// req.sessionID, 
+// ex:
+// req.sessionID,
 // req.user === user entered into DB from auth.js profile
 // req.user[0].dataValues.name === name from above
 // req.user[0].dataValues.googleId === googleId from database
@@ -79,6 +82,7 @@ app.get('/auth/google/callback',
     res.redirect('/');
   }
 );
+
 
 // passing res.send(req.user) inside this endpoint becomes undefined.. 'fixed' w/ loggedInUser
 app.get('/auth/user', (req, res) => {
@@ -125,6 +129,34 @@ app.patch('/user/:googleId', (req, res) => {
 });
 
 
+
+app.post('/api/quote', (req, res) => {
+  const { quote } = req.body;
+  console.log(quote);
+  Quotes.create(quote)
+    .then(() => {
+      res.sendStatus(201);
+    })
+    .catch((error) => {
+      console.log('POST /api/quote', error);
+      res.sendStatus(500);
+    });
+});
+
+app.get('/api/all_quotes/', (req, res) => {
+  Quotes.findAll()
+    .then((quotesArr) => {
+      console.log(quotesArr);
+      res.status(200).send(quotesArr);
+    }).catch((err) => {
+      console.log('GET /api/quotes', err);
+      res.sendStatus(500);
+    });
+
+  //if the get is not successful, set sc to 500 and log the err
+});
+
+// when a quote is liked it is added to database
 // *****************************
 // ***** EXTERNAL API HITS *****
 // *****************************
@@ -151,6 +183,26 @@ app.post('/api/horo', (req, res) => {
     .catch(err => console.log('Error from Aztro api post request SERVER', err));
 });
 
+// <-- TO FETCH ALL TAROT CARDS upon front end, no longer needed -->
+// app.get('/api/cards', (req, res) => {
+//   axios.get('https://tarot-api.onrender.com/api/v1/cards')
+//     .then(response => {
+//       console.log('<-- FROM TAROT API -->'); // response.data.cards
+//       Tarot.bulkCreate(response.data.cards)
+//         .then(() => {
+//           console.log('<-- DATABASE --> BULK CREATED TAROT TABLE');
+//           res.sendStatus(200);
+//         })
+//         .catch(err => {
+//           console.log('<-- DATABASE --> ERROR BULK CREATE TAROT TABLE', err);
+//           res.sendStatus(500);
+//         })
+//     })
+//     .catch(err => {
+//       console.log('<-- API --> ERROR FROM TAROT API', err);
+//       res.sendStatus(400);
+//     })
+// });
 
 // <-- SERVER WILDCARD -->
 

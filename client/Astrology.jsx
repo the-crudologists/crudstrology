@@ -1,6 +1,7 @@
 import React, { useState, useContext, useEffect } from 'react';
 import fakeHoro from '../database/fakeData/horoscope.json';
 import { UserContext } from './App.jsx';
+import { AstroButton, UserHoro, OtherHoros } from './Styled.jsx';
 import axios from 'axios';
 
 const Astrology = () => {
@@ -20,58 +21,60 @@ const Astrology = () => {
       .then(reading => {
         // console.log('READING THEN CLIENT from server API hit', reading.data);
         setReading(reading.data);
-
-        zodiacSigns.forEach(el => {
-          if (el !== fetchSign) {
-            axios.post('/api/horo', {
-              user: {
-                sign: el
-              }
-            })
-              .then(reading => {
-                setHoroscopes(prevHoro => {
-                  console.log('STATE HOROSCOPES ARRAY AFTER CLIENT AXIOS', horoscopes, 'READING', reading.data, 'PREVHORO', prevHoro);
-                  return [...prevHoro, reading.data];
-                });
-              })
-              .catch(err => console.log('ERROR populating horoscopes != sign array', err));
-          }
-        });
       })
       .catch(err => {
         console.log('Error AXIOS post to /api/horo from Client', err);
       });
   };
 
-  useEffect(() => fetchHoro(sign), []);
+  const fetchOtherSigns = (userSign) => {
+    zodiacSigns.forEach(el => {
+      if (el !== userSign) {
+        axios.post('/api/horo', {
+          user: {
+            sign: el
+          }
+        })
+          .then(reading => {
+            setHoroscopes(prevHoro => {
+              console.log('STATE HOROSCOPES ARRAY AFTER CLIENT AXIOS', horoscopes, 'READING', reading.data, 'PREVHORO', prevHoro);
+              return [...prevHoro, reading.data];
+            });
+          })
+          .catch(err => console.log('ERROR populating horoscopes != sign array', err));
+      }
+    });
+  };
+
+  useEffect(() => fetchHoro(sign), []); // <-- reading?
 
   return (
 
     <div className='horoscope'>
       <h1 className='horo-title'>Your Daily Horoscope</h1>
-      <p>Your birthday is {dob}, so your sign is {sign}.</p>
-      <div id='horo-item' className='container'>
+      <div style={{ fontSize: '20px' }}><p><b>Your birthday is {dob}, so your sign is {sign}.</b></p></div>
+      <AstroButton onClick={() => fetchOtherSigns(sign)} className='text'>Get Other Horoscopes</AstroButton>
+      <UserHoro>
         {
           Object.entries(reading).map((el, i) => {
             return <div key={i}><b>{el[0]}</b>: <em>{el[1]}</em></div>;
           })
         }
-      </div>
+      </UserHoro>
       <p></p>
       <div>
         {
           horoscopes.map((el, i) => {
             return (
-              <div id='non-user-horo-item' key={i}>
-                <p></p>
+              <OtherHoros key={i}>
                 {Object.entries(el).map((attr, i) => {
                   return (
-                    <div key={i} smooth={true}>
+                    <div key={i}>
                       <b>{attr[0]}: </b><em>{attr[1]}</em>
                     </div>
                   );
                 })}
-              </div>
+              </OtherHoros>
             );
           })
         }
@@ -103,4 +106,4 @@ export default Astrology;
 //         .catch(err => console.log('ERROR populating horoscopes != sign array', err));
 //     });
 //   }
-// })
+// });
