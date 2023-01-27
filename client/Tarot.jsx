@@ -5,6 +5,7 @@ import axios from 'axios';
 const Tarot = () => {
 
   const [tarot, setTarot] = useState({});
+  // ref
 
   useEffect(() => {
     if (!tarot.length) {
