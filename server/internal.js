@@ -64,9 +64,8 @@ Internal.delete('/quotes/:id', (req, res) => {
       id: id
     }
   })
-    .then((data) => {
-      console.log(data);
-      res.status(204).send(data);
+    .then(() => {
+      res.sendStatus(204);
     }).catch((err) => {
       console.log(err);
       res.sendStatus(500);
