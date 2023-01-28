@@ -35,7 +35,7 @@ const Tarot = () => {
           tarot.map((card, i) => {
             return (
               <TarotCard key={i}>
-                <img src={import(`../utils/tarotImgs/${card.name_short}.jpg`)}></img>
+                {/* <img src={import(`../utils/tarotImgs/${card.name_short}.jpg`)}></img> */}
                 <div key={i + 1}>
                   {Object.entries(card).map((el, i) => {
                     return <div style={{ fontSize: '18px' }} key={i}>

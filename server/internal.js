@@ -56,4 +56,21 @@ Internal.get('/tarot', (req, res) => {
     });
 });
 
+Internal.delete('/quotes/:id', (req, res) => {
+  const { id } = req.params;
+  console.log(id);
+  Quotes.destroy({
+    where: {
+      id: id
+    }
+  })
+    .then((data) => {
+      console.log(data);
+      res.status(204).send(data);
+    }).catch((err) => {
+      console.log(err);
+      res.sendStatus(500);
+    });
+});
+
 module.exports = { Internal };
