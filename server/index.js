@@ -160,9 +160,28 @@ app.get('/db/all_quotes/', (req, res) => {
       console.log('GET /api/quotes', err);
       res.sendStatus(500);
     });
-
-  //if the get is not successful, set sc to 500 and log the err
 });
+
+app.delete('/api/quotes/:id', (req, res) => {
+  const { id } = req.params;
+  console.log(id);
+  Quotes.destroy({
+    where: {
+      id: id
+    }
+  })
+    .then((data) => {
+      console.log(data);
+      res.status(204).send(data);
+    }).catch((err) => {
+      console.log(err);
+      res.sendStatus(500);
+    });
+});
+
+
+
+
 
 // when a quote is liked it is added to database
 // *****************************

@@ -89,3 +89,11 @@ body {
   border-color: darkslategray;
 }
 
+.btn-secondary {
+  position: relative;
+  height: 2.5rem;
+  width: 7rem;
+  margin-top: .6rem;
+  left: 1rem;
+  color: black;
+}

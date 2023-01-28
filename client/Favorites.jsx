@@ -17,14 +17,14 @@ const Favorites = () => {
   useEffect(() => {
     getAllQuotes();
   }, []);
-  console.log('flat', quotes.flat());
 
   return (
     <div>
       {quotes.flat().map((quote, i) => {
         return (
           <Favorite quote={quote}
-            key={i} />
+            key={i}
+            getAllQuotes={getAllQuotes}/>
         );
       })
       }
