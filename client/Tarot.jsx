@@ -10,7 +10,7 @@ const Tarot = () => {
   const [tarot, setTarot] = useState([]);
 
   const drawCards = () => {
-    axios.get('/api/tarot')
+    axios.get('/db/tarot')
       .then(({ data }) => {
         setTarot(() => [...data]);
         console.log('TAROT data', data[0].name_short);

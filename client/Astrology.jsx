@@ -28,6 +28,7 @@ const Astrology = () => {
   };
 
   const fetchOtherSigns = (userSign) => {
+    setHoroscopes([]);
     zodiacSigns.forEach(el => {
       if (el !== userSign) {
         axios.post('/api/horo', {
