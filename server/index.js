@@ -151,7 +151,7 @@ app.post('/api/quote', (req, res) => {
     });
 });
 
-app.get('/api/all_quotes/', (req, res) => {
+app.get('/db/all_quotes/', (req, res) => {
   Quotes.findAll()
     .then((quotesArr) => {
       console.log(quotesArr);

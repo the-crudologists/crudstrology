@@ -23,7 +23,7 @@ const NavBar = () => {
         //console.log('resobj:', loggedInUser.data)
         axios.patch(`/user/${loggedInUser.data.googleId}`, { dob: dobRef.current, sign: zc(dobRef.current) })
           .then((anArrayResponse) => {
-            //call setters?           
+            //call setters?           <-----Ben's trailing whitespace
             console.log('Updated User: ', anArrayResponse.data[0]);
             setDob(anArrayResponse.data[0].dob);
             setSign(zc(anArrayResponse.data[0].dob));
