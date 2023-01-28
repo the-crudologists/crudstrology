@@ -98,11 +98,12 @@ const seeder = async () => {
     .then(() => { console.log('User Model Create Success'); })
     .catch((err) => { console.error('User Model Create Failure', err); });
   fetchTarotCards();
-  await Quotes.create()
+  /*await Quotes.create()
     .then(() => { console.log('Quote Model Create Success'); })
     .catch((err) => { console.error('Quote Model Create Failure', err); });
 
   console.log('Database seeded with a test quote table and data');
+  */
 };
 
 module.exports.Tarot = Tarot;
