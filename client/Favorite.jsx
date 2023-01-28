@@ -7,14 +7,12 @@ import Button from 'react-bootstrap/Button';
 const Favorite = (quote, getAllQuotes) => {
 
   const deleteQuote = () => {
-    console.log('fired');
-    axios.delete(`/api/quotes/${quote.quote.id}`)
+    axios.delete(`/db/quotes/${quote.quote.id}`)
       .then(getAllQuotes)
       .catch((error) => {
         console.log('axios DELETE', error);
       });
   };
-
 
   return (
 

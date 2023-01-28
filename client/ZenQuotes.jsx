@@ -13,7 +13,7 @@ const ZenQuotes = () => {
           setQuote(prevQuote => [quote.data, ...prevQuote]);
         })
         .catch(err => {
-          console.log('Axios Get /api/quotes', err);
+          console.log('Axios Get /db/quotes', err);
         });
     };
     //TODO: fix this to only have one quote on render
