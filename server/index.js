@@ -105,19 +105,10 @@ app.get('/protected', isLoggedIn, (req, res) => {
   res.send('Login Successful');
 });
 
-
-// app.get('/user/current', (req, res) => {
-//   console.log('Current user: ', loggedInUser);
-//   User.findAll({
-//     where:{
-//       googleId: loggedInUser.
-//     }
-//   })
-// });
 //patch User entry in DB with user input DOB
 app.patch('/user/:googleId', (req, res) => {
-  console.log('req.body: ', req.body);
-  const {googleId} = req.params;
+  //console.log('req.body: ', req.body);
+  const { googleId } = req.params;
   User.update(req.body, {
     where: {
       googleId: googleId
@@ -125,9 +116,19 @@ app.patch('/user/:googleId', (req, res) => {
     returning: true
   })
     .then((response) => {
-      console.log('response: ', response);
-      //findby id.then(res.status(200).send(response);)
-
+      //console.log('response: ', response);
+      User.findAll({
+        where: {
+          googleId: loggedInUser.googleId
+        }
+      })
+        .then((response) => {
+          // update user entry with new sign? may work on client side
+          res.status(200).send(response);
+        })
+        .catch((err) => {
+          console.log('failed to find user after updating DOB', err);
+        });
     })
     .catch((err) => {
       console.log('update user error:', err);
