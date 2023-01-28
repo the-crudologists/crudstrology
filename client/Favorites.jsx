@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import Favorite from './Favorite.jsx';
+//import Favorite from './Favorite.jsx';
+import { BsHandThumbsUpFill } from 'react-icons/bs';
+import Button from 'react-bootstrap/Button';
 
 const Favorites = () => {
 
@@ -18,13 +20,30 @@ const Favorites = () => {
     getAllQuotes();
   }, []);
 
+  const deleteQuote = (id) => {
+    axios.delete(`/db/quotes/${id}`)
+      .then(() => {
+        axios.get('/db/all_quotes')
+          .then(quotesObj => {
+            setQuotes(quotesObj.data);
+          })
+          .catch(err => {
+            console.log('Axios Get /db/quotes', err);
+          });
+      })
+      .catch((error) => {
+        console.log('axios DELETE', error);
+      });
+  };
   return (
     <div>
       {quotes.flat().map((quote, i) => {
         return (
-          <Favorite quote={quote}
-            key={i}
-            getAllQuotes={getAllQuotes}/>
+          <div className='quote' key={i}>
+            <span>{quote.content} --</span>
+            <span>{quote.author}  </span>
+            <Button variant="primary" onClick={() => { deleteQuote(quote.id); }}><BsHandThumbsUpFill /></Button>{' '}
+          </div>
         );
       })
       }
