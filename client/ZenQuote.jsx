@@ -8,7 +8,7 @@ const ZenQuote = (quote) => {
   //quote is added to database when liked
   const likeQuote = () => {
     //axios request to put the quote in the db
-    axios.post('/api/quote', {
+    axios.post('/db/quote', {
       quote: {
         content: quote.quote.content,
         author: quote.quote.author
