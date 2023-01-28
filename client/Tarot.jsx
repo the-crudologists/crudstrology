@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useLayoutEffect } from 'react';
 import axios from 'axios';
+import { UserHoro } from './Styled.jsx';
+// import ar00 from '../utils/tarotImgs/ar00.jpg';
 
 
 const Tarot = () => {
@@ -10,8 +12,10 @@ const Tarot = () => {
   useEffect(() => {
     if (!tarot.length) {
       axios.get('/api/tarot')
-        .then(({ data }) =>
-          setTarot(JSON.stringify(data)))
+        .then(({ data }) => {
+          setTarot(() => [...data]);
+          console.log('TAROT data', data[0].name_short);
+        })
         .catch((err) =>
           console.log('ERROR in useEffect in Tarot.jsx: ', err));
     }
@@ -26,10 +30,38 @@ const Tarot = () => {
   // }, []);
   return (
     <div>
-      {tarot}
+      <div placeholder='{tarot}'>
+      </div>
+      {/* <div src={`../utils/tarotImgs/${tarot[0].name_short}`}></div> */}
+      {/* <div>{tarot[0].name_short}</div> */}
+      <UserHoro>
+        {
+          tarot.map((card, i) => {
+            return (
+              <div key={i}>
+                {/* <img src={import('../utils/tarotImgs/ar00.jpg')}></img> */}
+                <div key={i + 1}>
+                  {Object.entries(card).map((el, i) => {
+                    return <div style={{ fontSize: '18px' }} key={i}>
+                      <b>{el[0]}</b>: <em>{el[1]}</em></div>;
+                  })}
+                </div>
+              </div>
+            );
+          })
+        }
+      </UserHoro>
     </div>
   );
 };
 
 
 export default Tarot;
+
+{ /* <img src={import(`../utils/tarotImgs/${card.name_short}.jpg`)}></img> */ }
+
+{ /* <div>
+{
+  Object.entries(tarot[0]).length > 0 ? <h1>{Object.entries(tarot[0])}</h1> : <h1>{null}</h1>
+}
+</div> */ }
