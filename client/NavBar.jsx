@@ -17,13 +17,11 @@ const NavBar = () => {
     dobRef.current = input;
   };
 
-  const handleSubmit = () => { //THIS FUNCTION GOOD TO FLESH OUT WITH AXIOS REQUEST TO SERVER TO SAVE DOB AND SIGN
+  const handleSubmit = () => { 
     axios.get('/auth/user')
       .then((loggedInUser) => {
-        //console.log('resobj:', loggedInUser.data)
         axios.patch(`/user/${loggedInUser.data.googleId}`, { dob: dobRef.current, sign: zc(dobRef.current) })
           .then((anArrayResponse) => {
-            //call setters?           <-----Ben's trailing whitespace
             console.log('Updated User: ', anArrayResponse.data[0]);
             setDob(anArrayResponse.data[0].dob);
             setSign(zc(anArrayResponse.data[0].dob));
@@ -39,18 +37,11 @@ const NavBar = () => {
   const getAvatar = (googleName) => (
     <NavImg src={`https://robohash.org/${googleName}?set=set5`} />
   );
-  // 'FatTubBetty'  name
+
   return (
-
     <NavStyle>
-
       <div>{getAvatar(user || 'FatTubBetty')}</div>
-
-
-
-
       <NavUserInfo>
-
         <hr />
         <WrapCardText>Name: {user || 'sign in'}</WrapCardText>
         <WrapCardText>DOB:<input
@@ -76,21 +67,11 @@ const NavBar = () => {
         </div>
         <hr />
       </NavUserInfo>
-
-
-
       <NavItem> <Link to="/" onClick={(e) => handleClick(e, 'Feed')}> Your Home </Link></NavItem>
       <NavItem> <Link to="/astrology" onClick={(e) => handleClick(e, 'Scopes')}> Today's Horoscopes </Link></NavItem>
       <NavItem>  <Link to="/tarot" onClick={(e) => handleClick(e, 'Tarot')}> Get A reading </Link></NavItem>
       <NavItem> <Link to="/favorites" onClick={(e) => handleClick(e, 'Favorites')}> Favorite Quotes </Link></NavItem>
-
-      {/* <Link to="/" onClick={(e) => handleClick(e, 'Dialog')}> Fortune Teller </Link>*/}
-
-
-
-
     </NavStyle >
-
   );
 };
 
