@@ -193,9 +193,9 @@ app.post('/api/horo', (req, res) => {
 
 app.get('/api/tarot', (req, res) => {
   Tarot.findAll({ order: Sequelize.literal('RAND()'), limit: 3 })
-    .then((cards) => {
-      console.log('cards from Tarot.fondall /api/tarot server/index.js: ', cards);
-    })
+    .then((cards) =>
+      res.status(200).send(cards)
+    )
     .catch((err) => {
       console.error('Error from Tarot.findall /api/tarot server/index.js: ', err);
     });
