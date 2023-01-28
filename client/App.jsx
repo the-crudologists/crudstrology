@@ -27,7 +27,7 @@ const App = () => {
       .catch(err => {
         console.log('Error fetching Authenticated Google User from req.user (server/passport)', err);
       });
-  });
+  }, []);
 
   console.log('STATE UPDATE', user, dob, sign);
 
@@ -36,9 +36,6 @@ const App = () => {
       <UserContext.Provider value={ {user, dob, setDob, sign, setSign} }>
         <div>
           <NavBar />
-          <div id='auth-container'>
-            <a href="/auth/google">Authenticate with Google</a>
-          </div>
         </div>
         {/* <div onClick={fetchUser}>setUse State Call</div> */}
         <div>

@@ -1,13 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import fakeQuotes from '../database/fakeData/quotes.json';
 import axios from 'axios';
-import { BsHandThumbsUpFill } from 'react-icons/bs';
-import Button from 'react-bootstrap/Button';
 import ZenQuote from './ZenQuote.jsx';
 
 
 const ZenQuotes = () => {
-  const [quotes, setQuote] = useState([fakeQuotes.results[Math.floor(Math.random() * 20)]]);
+  const [quotes, setQuote] = useState([]);
   useEffect(() => {
     const getQuote = () => {
       axios.get('/api/quotes')
@@ -19,10 +17,10 @@ const ZenQuotes = () => {
         });
     };
     //TODO: fix this to only have one quote on render
-    //getQuote();///this adds two quotes on render
+    getQuote();///this adds two quotes on render
     const interval = setInterval(() => {
       getQuote();
-    }, 60000);
+    }, 5000);
   }, []);
   return (
 
