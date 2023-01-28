@@ -60,4 +60,10 @@ const OtherHoros = styled.div`
   font-size: 14px;
   padding: 10px;`;
 
-export { NavStyle, NavUl, NavUserInfo, NavImg, AstroButton, UserHoro, OtherHoros };
+const TarotCard = styled.div`
+  border: .15rem groove azure;
+  margin: .6rem;
+  padding: .5rem;
+`;
+
+export { NavStyle, NavUl, NavUserInfo, NavImg, AstroButton, UserHoro, OtherHoros, TarotCard };
