@@ -2,44 +2,49 @@ import styled, { keyframes } from 'styled-components';
 
 const NavStyle = styled.div`
   background-color: darkslategrey;
+  flex-wrap: wrap;
   display: flex;
-  justify-content: space-between;
-  flex-basis: auto;`;
+  justify-content: space-around;
+  align-items: center;`;
 
-const NavUl = styled.div`
-  font-size: 24px;
-  padding: 10px;
-  margin: 20px;
-  margin-right: 100px;
-  display: flex;
-  flex-basis: auto;
-  gap: 150px;
+const WrapCardText = styled.p`
+  word-break: break-all;
+    white-space: normal;
+`;
+
+const NavItem = styled.div`
+  font-size: 1.5rem;
+  text-align: center;
+  flex: 1 1;
+  margin: 1rem;
   text-shadow: 1px 1px 2px black, 0 0 1em black, 0 0 0.2em black;`;
 
+
 const NavUserInfo = styled.div`
-  font-size: 20px;
-  padding-top: 62px;
-  padding-bottom: 62px;
-  padding-left: 10px;
-  padding-right: 10px;
-  margin-right: auto;
+  font-size: 1rem;
+  flex: 1 1;
+  min-height: 206px;
+  max-height: 206px;
+  width: 100%;
+  padding: 3rem;
   text-shadow: 1px 1px 2px black, 0 0 1em black, 0 0 0.2em black;
   border: 1px solid azure;
-  margin-top: 10px;
-  margin-bottom: 10px;`;
+  `;
 
 const NavImg = styled.img`
-  object-fit: cover;
+
+  width: 100%;
+  margin-top: .3rem;
+  height: auto;
   border: 1px solid azure;
   background-color: black;
-  margin-top: 10px;
-  margin-bottom: 5px;
-  margin-left: 5px;`;
+`;
 
 const AstroButton = styled.button`
-  position: absolute;
-  left: 247px;
-  top: 333px;
+  display: flex;
+  font-size: 1rem;
+  align-items: center;
+  padding: .1rem;
   cursor: pointer;`;
 
 const UserHoro = styled.div`
@@ -66,4 +71,4 @@ const TarotCard = styled.div`
   padding: .5rem;
 `;
 
-export { NavStyle, NavUl, NavUserInfo, NavImg, AstroButton, UserHoro, OtherHoros, TarotCard };
+export { NavStyle, NavItem, NavUserInfo, NavImg, AstroButton, UserHoro, OtherHoros, TarotCard, WrapCardText };
