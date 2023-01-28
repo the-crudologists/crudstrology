@@ -23,7 +23,7 @@ const NavBar = () => {
         //console.log('resobj:', loggedInUser.data)
         axios.patch(`/user/${loggedInUser.data.googleId}`, {dob: dobRef.current, sign: zc(dobRef.current) })
           .then((anArrayResponse) => {
-            //call setters?           
+            //call setters?           <-----Ben's trailing whitespace
             console.log('Updated User: ', anArrayResponse.data[0]);
             setDob(anArrayResponse.data[0].dob);
             setSign(zc(anArrayResponse.data[0].dob));
@@ -74,7 +74,7 @@ const NavBar = () => {
             <Link to="/" onClick={(e) => handleClick(e, 'Feed')}> Your Home </Link>
             <Link to="/astrology" onClick={(e) => handleClick(e, 'Scopes')}> Today's Horoscopes </Link>
             <Link to="/tarot" onClick={(e) => handleClick(e, 'Tarot')}> Get A reading </Link>
-            <Link to="/favorites" onClick={(e) => handleClick(e, 'Favorites')}> Your Faves </Link>
+            <Link to="/favorites" onClick={(e) => handleClick(e, 'Favorites')}> Favorite Quotes </Link>
 
             {/* <Link to="/" onClick={(e) => handleClick(e, 'Dialog')}> Fortune Teller </Link>*/}
           </NavUl>

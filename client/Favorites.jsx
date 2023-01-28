@@ -3,23 +3,25 @@ import axios from 'axios';
 import Favorite from './Favorite.jsx';
 
 const Favorites = () => {
-  const [quotes, setQuote] = useState([]);
+
+  const [quotes, setQuotes] = useState([]);
+  const getAllQuotes = () => {
+    axios.get('/db/all_quotes')
+      .then(quotesObj => {
+        setQuotes(prevQuotes => [...prevQuotes, quotesObj.data]);
+      })
+      .catch(err => {
+        console.log('Axios Get /db/quotes', err);
+      });
+  };
   useEffect(() => {
-    const getAllQuotes = () => {
-      axios.get('/api/all_quotes')
-        .then(quote => {
-          setQuote(prevQuote => [quote.data, ...prevQuote]);
-        })
-        .catch(err => {
-          console.log('Axios Get /api/quotes', err);
-        });
-    };
     getAllQuotes();
   }, []);
-  //console.log(quotes);
+  console.log('flat', quotes.flat());
+
   return (
     <div>
-      {quotes.map((quote, i) => {
+      {quotes.flat().map((quote, i) => {
         return (
           <Favorite quote={quote}
             key={i} />
