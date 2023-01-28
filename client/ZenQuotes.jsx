@@ -22,7 +22,7 @@ const ZenQuotes = () => {
     //getQuote();///this adds two quotes on render
     const interval = setInterval(() => {
       getQuote();
-    }, 60000);
+    }, 5000);
   }, []);
   return (
 
