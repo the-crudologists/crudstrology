@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-//import Favorite from './Favorite.jsx';
 import { BsHandThumbsUpFill } from 'react-icons/bs';
 import Button from 'react-bootstrap/Button';
 
@@ -50,9 +49,6 @@ const Favorites = () => {
     </div >
   );
 
-
 };
 
-
 export default Favorites;
-
