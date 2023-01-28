@@ -26,4 +26,3 @@ const ZenQuote = (quote) => {
 };
 
 export default ZenQuote;
-

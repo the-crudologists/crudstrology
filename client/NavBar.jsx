@@ -1,4 +1,4 @@
-import React, { useState, useContext, useRef } from 'react';
+import React, { useContext, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { NavStyle, NavItem, NavUserInfo, NavImg, WrapCardText } from './Styled.jsx';
 import { UserContext } from './App.jsx';
