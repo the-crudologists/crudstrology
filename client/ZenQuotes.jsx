@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import fakeQuotes from '../database/fakeData/quotes.json';
 import axios from 'axios';
-import { BsHandThumbsUpFill } from 'react-icons/bs';
-import Button from 'react-bootstrap/Button';
 import ZenQuote from './ZenQuote.jsx';
 
 
