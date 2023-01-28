@@ -74,7 +74,7 @@ const NavBar = () => {
             <Link to="/" onClick={(e) => handleClick(e, 'Feed')}> Your Home </Link>
             <Link to="/astrology" onClick={(e) => handleClick(e, 'Scopes')}> Today's Horoscopes </Link>
             <Link to="/tarot" onClick={(e) => handleClick(e, 'Tarot')}> Get A reading </Link>
-            <Link to="/favorites" onClick={(e) => handleClick(e, 'Favorites')}> Favorites </Link>
+            <Link to="/favorites" onClick={(e) => handleClick(e, 'Favorites')}> Favorite Quotes </Link>
 
             {/* <Link to="/" onClick={(e) => handleClick(e, 'Dialog')}> Fortune Teller </Link>*/}
           </NavUl>
