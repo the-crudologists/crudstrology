@@ -37,6 +37,8 @@ const Favorites = () => {
   };
   return (
     <div>
+      <h1 className='horo-title'>Favorites</h1>
+      <div style={{ fontSize: '20px' }}><b><p>Unlike to remove</p></b></div>
       {quotes.flat().map((quote, i) => {
         return (
           <div className='quote' key={i}>
@@ -48,6 +50,7 @@ const Favorites = () => {
       })
       }
     </div >
+
   );
 
 
