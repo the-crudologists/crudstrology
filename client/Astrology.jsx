@@ -7,7 +7,6 @@ import axios from 'axios';
 const Astrology = () => {
   const zodiacSigns = ['Aries', 'Taurus', 'Gemini', 'Cancer', 'Leo', 'Virgo', 'Libra', 'Scorpio', 'Sagittarius', 'Capricorn', 'Aquarius', 'Pisces'];
 
-  // maybe replace fakeHoro to avoid initial render...?
   const [reading, setReading] = useState(fakeHoro);
   const [horoscopes, setHoroscopes] = useState([]);
   const { dob, sign } = useContext(UserContext);
@@ -19,7 +18,6 @@ const Astrology = () => {
       }
     })
       .then(reading => {
-        // console.log('READING THEN CLIENT from server API hit', reading.data);
         setReading(reading.data);
       })
       .catch(err => {
@@ -47,7 +45,7 @@ const Astrology = () => {
     });
   };
 
-  useEffect(() => fetchHoro(sign), [dob]); // <-- reading?
+  useEffect(() => fetchHoro(sign), [dob]);
 
   return (
 
@@ -87,25 +85,3 @@ const Astrology = () => {
 };
 
 export default Astrology;
-
-
-
-
-// {
-//   horoscopes.map(el, i => {
-//     <div key={i}><em>{el.lucky_number}</em></div>
-//   })
-// }
-
-
-// zodiacSigns.forEach(el => {
-//   if (el !== fetchSign) {
-//     setHoroscopes(prevHoro => {
-//       fetchHoro(el)
-//         .then(reading => {
-//           horoscopes.push(reading.data);
-//         })
-//         .catch(err => console.log('ERROR populating horoscopes != sign array', err));
-//     });
-//   }
-// });

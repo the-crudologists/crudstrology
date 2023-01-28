@@ -1,9 +1,8 @@
-import React, { useState, useEffect, useLayoutEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { UserHoro, TarotCard } from './Styled.jsx';
+import {TarotCard } from './Styled.jsx';
 import Button from 'react-bootstrap/Button';
 // import ar00 from '../utils/tarotImgs/ar00.jpg';
-
 
 const Tarot = () => {
 
@@ -50,7 +49,6 @@ const Tarot = () => {
     </div>
   );
 };
-
 
 export default Tarot;
 
