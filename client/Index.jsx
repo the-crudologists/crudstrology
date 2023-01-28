@@ -22,9 +22,9 @@ import App from './App.jsx';
 
 
 ReactDOM.createRoot(document.getElementById('app')).render(
-  <React.StrictMode>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
-  </React.StrictMode>
+// In the event of mystery errors, try putting strict mode back in
+  <BrowserRouter>
+    <App />
+  </BrowserRouter>
+
 );

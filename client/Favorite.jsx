@@ -4,6 +4,7 @@ import { BsHandThumbsUpFill } from 'react-icons/bs';
 import Button from 'react-bootstrap/Button';
 
 const Favorite = (quote) => {
+  console.log('quote', quote);
   //console.log(quote.quote);//array of objects
   return (
 
