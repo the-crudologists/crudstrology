@@ -7,7 +7,7 @@ import ZenQuote from './ZenQuote.jsx';
 
 
 const ZenQuotes = () => {
-  const [quotes, setQuote] = useState([fakeQuotes.results[Math.floor(Math.random() * 20)]]);
+  const [quotes, setQuote] = useState([]);
   useEffect(() => {
     const getQuote = () => {
       axios.get('/api/quotes')
@@ -19,7 +19,7 @@ const ZenQuotes = () => {
         });
     };
     //TODO: fix this to only have one quote on render
-    //getQuote();///this adds two quotes on render
+    getQuote();///this adds two quotes on render
     const interval = setInterval(() => {
       getQuote();
     }, 5000);
