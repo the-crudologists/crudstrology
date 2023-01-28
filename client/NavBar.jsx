@@ -82,7 +82,7 @@ const NavBar = () => {
       <NavItem> <Link to="/" onClick={(e) => handleClick(e, 'Feed')}> Your Home </Link></NavItem>
       <NavItem> <Link to="/astrology" onClick={(e) => handleClick(e, 'Scopes')}> Today's Horoscopes </Link></NavItem>
       <NavItem>  <Link to="/tarot" onClick={(e) => handleClick(e, 'Tarot')}> Get A reading </Link></NavItem>
-      <NavItem> <Link to="/favorites" onClick={(e) => handleClick(e, 'Favorites')}> Your Faves </Link></NavItem>
+      <NavItem> <Link to="/favorites" onClick={(e) => handleClick(e, 'Favorites')}> Favorite Quotes </Link></NavItem>
 
       {/* <Link to="/" onClick={(e) => handleClick(e, 'Dialog')}> Fortune Teller </Link>*/}
 
