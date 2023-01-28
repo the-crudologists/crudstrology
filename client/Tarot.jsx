@@ -1,15 +1,15 @@
 import React, { useState, useEffect, useLayoutEffect } from 'react';
 import axios from 'axios';
 import { UserHoro, TarotCard } from './Styled.jsx';
+import Button from 'react-bootstrap/Button';
 // import ar00 from '../utils/tarotImgs/ar00.jpg';
 
 
 const Tarot = () => {
 
   const [tarot, setTarot] = useState([]);
-  // ref
 
-  useEffect(() => {
+  const drawCards = () => {
     axios.get('/api/tarot')
       .then(({ data }) => {
         setTarot(() => [...data]);
@@ -17,17 +17,15 @@ const Tarot = () => {
       })
       .catch((err) =>
         console.log('ERROR in useEffect in Tarot.jsx: ', err));
-  }, []);
+  };
+
+  useEffect(drawCards, []);
+
   console.log(tarot);
-  // useLayoutEffect(() => {
-  //   axios.get('/api/cards')
-  //     .then((status) =>
-  //       console.log('status in useLayoutEffect Tarot.jsx: ', status))
-  //     .catch((err) =>
-  //       console.error('Error in useLayoutEffect Tarot.jsx: ', err))
-  // }, []);
+
   return (
     <div>
+      <Button variant='secondary' onClick={drawCards}>Pull Another Reading</Button>
       <div placeholder='{tarot}'>
       </div>
       {/* <div src={`../utils/tarotImgs/${tarot[0].name_short}`}></div> */}
@@ -37,7 +35,7 @@ const Tarot = () => {
           tarot.map((card, i) => {
             return (
               <TarotCard key={i}>
-                {/* <img src={import('../utils/tarotImgs/ar00.jpg')}></img> */}
+                <img src={import(`../utils/tarotImgs/${card.name_short}.jpg`)}></img>
                 <div key={i + 1}>
                   {Object.entries(card).map((el, i) => {
                     return <div style={{ fontSize: '18px' }} key={i}>

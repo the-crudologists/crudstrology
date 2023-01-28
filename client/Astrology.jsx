@@ -46,7 +46,7 @@ const Astrology = () => {
     });
   };
 
-  useEffect(() => fetchHoro(sign), []); // <-- reading?
+  useEffect(() => fetchHoro(sign), [dob]); // <-- reading?
 
   return (
 
