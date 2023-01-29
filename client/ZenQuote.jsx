@@ -17,9 +17,9 @@ const ZenQuote = (quote) => {
   return (
 
     <div className='quote'>
+      <Button variant="primary" onClick={() => { likeQuote(quote.quote); }}><BsHandThumbsUpFill /></Button>{' '}
       <span>{quote.quote.content} --</span>
       <span>{quote.quote.author}  </span>
-      <Button variant="primary" onClick={() => { likeQuote(quote.quote); }}><BsHandThumbsUpFill /></Button>{' '}
     </div>
   );
 
