@@ -66,9 +66,17 @@ const OtherHoros = styled.div`
   padding: 10px;`;
 
 const TarotCard = styled.div`
+  background-color: black;
   border: .15rem groove azure;
   margin: .6rem;
   padding: .5rem;
 `;
 
-export { NavStyle, NavItem, NavUserInfo, NavImg, AstroButton, UserHoro, OtherHoros, TarotCard, WrapCardText };
+const Reading = styled.div`
+  background-color: grey;
+  border: .4rem double white;
+  margin: .6rem;
+  padding: .5rem;
+`;
+
+export { NavStyle, NavItem, NavUserInfo, NavImg, AstroButton, UserHoro, OtherHoros, TarotCard, WrapCardText, Reading };
