@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { BsHandThumbsUpFill } from 'react-icons/bs';
+import { BsHandThumbsDownFill } from 'react-icons/bs';
 import Button from 'react-bootstrap/Button';
 
 const Favorites = () => {
@@ -43,7 +43,7 @@ const Favorites = () => {
           <div className='quote' key={i}>
             <span>{quote.content} --</span>
             <span>{quote.author}  </span>
-            <Button variant="primary" onClick={() => { deleteQuote(quote.id); }}><BsHandThumbsUpFill /></Button>{' '}
+            <Button variant="primary" onClick={() => { deleteQuote(quote.id); }}><BsHandDownUpFill /></Button>{' '}
           </div>
         );
       })
