@@ -16,6 +16,12 @@ const QuoteButton = styled.button`
 `;
 
 const NavStyle = styled.div`
+display: block;
+color: midnightblue;
+padding: 40px;
+margin: -10px 0;
+border-top: 10px solid midnightblue;
+border-bottom: 10px solid midnightblue;
   background-color: darkslategrey;
   flex-wrap: wrap;
   display: flex;
@@ -30,11 +36,20 @@ const WrapCardText = styled.p`
 `;
 
 const NavItem = styled.div`
+background-color: midnightblue;
+border: .9rem solid midnightblue;
+position: relative;
   font-size: 1.5rem;
   text-align: center;
   flex: 1 1;
   margin: 1rem;
-  text-shadow: 1px 1px 2px black, 0 0 1em black, 0 0 0.2em black;`;
+  text-shadow: 1px 1px 2px black, 0 0 1em black, 0 0 0.2em black;
+  &:hover {
+    border-color: #8a04dd;
+    color: #8a04dd;
+    box-shadow: .05rem .05rem .05rem .05rem  #5d0593;
+    transform: scale(.95);
+  }`;
 
 
 const NavUserInfo = styled.div`

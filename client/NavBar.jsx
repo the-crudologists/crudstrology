@@ -67,10 +67,10 @@ const NavBar = () => {
         </div>
         <hr />
       </NavUserInfo>
-      <NavItem> <Link to="/" onClick={(e) => handleClick(e, 'Feed')}> Your Home </Link></NavItem>
-      <NavItem> <Link to="/astrology" onClick={(e) => handleClick(e, 'Scopes')}> Today's Horoscopes </Link></NavItem>
-      <NavItem>  <Link to="/tarot" onClick={(e) => handleClick(e, 'Tarot')}> Get A reading </Link></NavItem>
-      <NavItem> <Link to="/favorites" onClick={(e) => handleClick(e, 'Favorites')}> Favorite Quotes </Link></NavItem>
+      <NavItem> <Link to="/" onClick={(e) => handleClick(e, 'Feed')}>Your Home</Link></NavItem>
+      <NavItem> <Link to="/astrology" onClick={(e) => handleClick(e, 'Scopes')}>Horoscopes</Link></NavItem>
+      <NavItem>  <Link to="/tarot" onClick={(e) => handleClick(e, 'Tarot')}>Get A reading</Link></NavItem>
+      <NavItem> <Link to="/favorites" onClick={(e) => handleClick(e, 'Favorites')}>Favorite Quotes</Link></NavItem>
     </NavStyle >
   );
 };
