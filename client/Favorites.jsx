@@ -41,9 +41,9 @@ const Favorites = () => {
       {quotes.flat().map((quote, i) => {
         return (
           <div className='quote' key={i}>
+            <Button variant="primary" onClick={() => { deleteQuote(quote.id); }}><BsHandThumbsDownFill /></Button>{' '}
             <span>{quote.content} --</span>
             <span>{quote.author}  </span>
-            <Button variant="primary" onClick={() => { deleteQuote(quote.id); }}><BsHandThumbsDownFill /></Button>{' '}
           </div>
         );
       })
