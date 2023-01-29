@@ -35,7 +35,7 @@ External.post('/horo', (req, res) => {
       result.data.sign = user.sign;
       res.status(200).send(result.data);
     })
-    .catch(err => console.log('Error from Aztro api post request SERVER', err));
+    .catch(err => res.sendStatus(500)); // console.log('Error from Aztro api post request SERVER', err)
 });
 
 module.exports = { External };

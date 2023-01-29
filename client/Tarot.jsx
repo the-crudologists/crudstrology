@@ -1,18 +1,33 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import {TarotCard } from './Styled.jsx';
+import { TarotCard, Reading } from './Styled.jsx';
 import Button from 'react-bootstrap/Button';
+import TarotDeck from '../utils/tarot-images.json';
 // import ar00 from '../utils/tarotImgs/ar00.jpg';
 
 const Tarot = () => {
 
   const [tarot, setTarot] = useState([]);
+  const [fortune, setFortune] = useState([]);
 
   const drawCards = () => {
+    setFortune([]);
     axios.get('/db/tarot')
       .then(({ data }) => {
         setTarot(() => [...data]);
-        console.log('TAROT data', data[0].name_short);
+        data.forEach((drawnCard, i) => {
+          // console.log('FIRST forEach, drawnCard', drawnCard);
+          TarotDeck.cards.forEach((deckCard) => {
+            console.log(i);
+            if (deckCard.name === drawnCard.name) {
+              console.log('MATCH', deckCard.name, deckCard.fortune_telling[0]);
+              setFortune(prevFortune => [...prevFortune, deckCard.fortune_telling[i]]); // change to [i]
+              console.log('USER FORTUNE', fortune);
+              return;
+            }
+          });
+        });
+        console.log('TAROT data', data);
       })
       .catch((err) =>
         console.log('ERROR in useEffect in Tarot.jsx: ', err));
@@ -20,15 +35,20 @@ const Tarot = () => {
 
   useEffect(drawCards, []);
 
-  console.log(tarot);
-
+  console.log(TarotDeck);
+  console.log('USER FORTUNE', fortune);
+  console.log('USER CARDS?', tarot[0]);
   return (
     <div>
-      <h1 className='horo-title'>Your Reading</h1>
-      <div style={{ fontSize: '20px' }}><p><b>Spoiler alert: you're gonna die</b></p></div>
+      <p></p>
       <Button variant='secondary' onClick={drawCards}>Pull Another Reading</Button>
-      <div placeholder='{tarot}'>
-      </div>
+      <p></p>
+      <Reading> <b>The interpretation of your reading...
+        Past: {tarot.length > 0 && <u>{tarot[0].name}</u>},
+        Present: {tarot.length > 0 && <u>{tarot[1].name}</u>},
+        Future: {tarot.length > 0 && <u>{tarot[2].name}</u>}</b>
+      <div>{fortune.map((el, i) => <span key={i}><i>{el}. </i></span>)}</div>
+      </Reading>
       {/* <div src={`../utils/tarotImgs/${tarot[0].name_short}`}></div> */}
       {/* <div>{tarot[0].name_short}</div> */}
       <div>
@@ -40,7 +60,8 @@ const Tarot = () => {
                 <div key={i + 1}>
                   {Object.entries(card).map((el, i) => {
                     return <div style={{ fontSize: '18px' }} key={i}>
-                      <b>{el[0]}</b>: <em>{el[1]}</em></div>;
+                      <b>{el[0] === 'desc' ? <u>{el[0]}</u> : el[0]}: </b>
+                      {el[0] === 'desc' ? <b>{el[1]}</b> : <em>{el[1]}</em>}</div>;
                   })}
                 </div>
               </TarotCard>

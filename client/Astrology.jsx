@@ -56,7 +56,7 @@ const Astrology = () => {
       <UserHoro>
         {
           Object.entries(reading).map((el, i) => {
-            return <div key={i}><b>{el[0]}</b>: <em>{el[1]}</em></div>;
+            return <div key={i}><b>{el[0]}</b>: {el[0] === 'description' ? el[1] : <em>{el[1]}</em>}</div>;
           })
         }
       </UserHoro>
