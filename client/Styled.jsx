@@ -4,7 +4,7 @@ const QuoteButton = styled.button`
 
   cursor: pointer;
   border: .2rem solid;
-  border-color: white;
+  border-color: azure;
   padding: .5rem;
   align-self: center;
   transition: all 0.3s;
