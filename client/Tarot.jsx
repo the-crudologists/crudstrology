@@ -43,8 +43,11 @@ const Tarot = () => {
       <p></p>
       <Button variant='secondary' onClick={drawCards}>Pull Another Reading</Button>
       <p></p>
-      <Reading> <b>The interpretation of your reading... Past: {tarot.length > 0 && <u>{tarot[0].name}</u>}, Present: {tarot.length > 0 && <u>{tarot[1].name}</u>}, Future: {tarot.length > 0 && <u>{tarot[2].name}</u>}</b>
-        <div>{fortune.map((el, i) => <span key={i}><i>{el}. </i></span>)}</div>
+      <Reading> <b>The interpretation of your reading...
+        Past: {tarot.length > 0 && <u>{tarot[0].name}</u>},
+        Present: {tarot.length > 0 && <u>{tarot[1].name}</u>},
+        Future: {tarot.length > 0 && <u>{tarot[2].name}</u>}</b>
+      <div>{fortune.map((el, i) => <span key={i}><i>{el}. </i></span>)}</div>
       </Reading>
       {/* <div src={`../utils/tarotImgs/${tarot[0].name_short}`}></div> */}
       {/* <div>{tarot[0].name_short}</div> */}
