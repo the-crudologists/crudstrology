@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 import { BsHandThumbsUpFill } from 'react-icons/bs';
 import Button from 'react-bootstrap/Button';
-
+import { QuoteButton } from './Styled.jsx';
 
 const ZenQuote = ({ quote, isActive, onClick }) => {
   const [localIsActive, setLocalIsActive] = useState(isActive);
@@ -12,8 +11,8 @@ const ZenQuote = ({ quote, isActive, onClick }) => {
   return (
 
     <div className='quote'>
-      <Button style={localIsActive || quote.like ? { backgroundColor: 'midnightblue' } : { backgroundColor: 'darkslategrey' }} onClick={onClick}><BsHandThumbsUpFill />
-      </Button>{' '}
+      <QuoteButton style={localIsActive || quote.like ? { backgroundColor: 'midnightblue' } : { backgroundColor: 'darkslategrey' }} onClick={onClick}><BsHandThumbsUpFill />
+      </QuoteButton>{' '}
       <span>{quote.content} --</span>
       <span>{quote.author}  </span>
     </div>
