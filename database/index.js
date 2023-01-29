@@ -65,7 +65,7 @@ const Horoscope = sequelize.define('horoscope', {
 
 const Quotes = sequelize.define('quote', {
   _id: { type: Sequelize.STRING },
-  content: { type: Sequelize.STRING },
+  content: { type: Sequelize.STRING, unique: true },
   author: { type: Sequelize.STRING },
 });
 
