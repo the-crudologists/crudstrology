@@ -43,7 +43,7 @@ const Favorites = () => {
           <div className='quote' key={i}>
             <span>{quote.content} --</span>
             <span>{quote.author}  </span>
-            <Button variant="primary" onClick={() => { deleteQuote(quote.id); }}><BsHandDownUpFill /></Button>{' '}
+            <Button variant="primary" onClick={() => { deleteQuote(quote.id); }}><BsHandThumbsDownFill /></Button>{' '}
           </div>
         );
       })
