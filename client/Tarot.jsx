@@ -17,11 +17,11 @@ const Tarot = () => {
         setTarot(() => [...data]);
         data.forEach((drawnCard, i) => {
           // console.log('FIRST forEach, drawnCard', drawnCard);
-          TarotDeck.cards.forEach((deckCard, i) => {
-            console.log('TarotDeck Loop, deckCard:', deckCard, deckCard.name, drawnCard.name);
+          TarotDeck.cards.forEach((deckCard) => {
+            console.log(i);
             if (deckCard.name === drawnCard.name) {
               console.log('MATCH', deckCard.name, deckCard.fortune_telling[0]);
-              setFortune(prevFortune => [...prevFortune, deckCard.fortune_telling[0]]); // change to [i]
+              setFortune(prevFortune => [...prevFortune, deckCard.fortune_telling[i]]); // change to [i]
               console.log('USER FORTUNE', fortune);
               return;
             }
