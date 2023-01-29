@@ -24,6 +24,8 @@ const Tarot = () => {
 
   return (
     <div>
+      <h1 className='horo-title'>Your Reading</h1>
+      <div style={{ fontSize: '20px' }}><p><b>Spoiler alert: you're gonna die</b></p></div>
       <Button variant='secondary' onClick={drawCards}>Pull Another Reading</Button>
       <div placeholder='{tarot}'>
       </div>
