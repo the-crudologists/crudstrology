@@ -17,7 +17,7 @@ const NavBar = () => {
     dobRef.current = input;
   };
 
-  const handleSubmit = () => { 
+  const handleSubmit = () => {
     axios.get('/auth/user')
       .then((loggedInUser) => {
         axios.patch(`/user/${loggedInUser.data.googleId}`, { dob: dobRef.current, sign: zc(dobRef.current) })
@@ -44,7 +44,7 @@ const NavBar = () => {
       <NavUserInfo>
         <hr />
         <WrapCardText>Name: {user || 'sign in'}</WrapCardText>
-        <WrapCardText>DOB:<input
+        <WrapCardText style={{display: 'block'}}>DOB:<input
           className='dobInput'
           style={{ color: 'black' }}
           placeholder={dob || 'Enter DOB as mm/dd'}

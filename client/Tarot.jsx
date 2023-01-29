@@ -40,6 +40,8 @@ const Tarot = () => {
   console.log('USER CARDS?', tarot[0]);
   return (
     <div>
+      <h1 className='horo-title'>Tarot Reading</h1>
+      <div style={{ fontSize: '20px' }}><b><p>Your fate will be told...</p></b></div>
       <p></p>
       <Button variant='secondary' onClick={drawCards}>Pull Another Reading</Button>
       <p></p>

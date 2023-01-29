@@ -9,7 +9,9 @@ const NavStyle = styled.div`
 
 const WrapCardText = styled.p`
   word-break: break-all;
-    white-space: normal;
+  white-space: normal;
+  display: block;
+  max-height: 21px;
 `;
 
 const NavItem = styled.div`
@@ -23,8 +25,10 @@ const NavItem = styled.div`
 const NavUserInfo = styled.div`
   font-size: 1rem;
   flex: 1 1;
+  display: block;
   min-height: 206px;
   max-height: 206px;
+  min-width: 275px;
   width: 100%;
   padding: 3rem;
   text-shadow: 1px 1px 2px black, 0 0 1em black, 0 0 0.2em black;
