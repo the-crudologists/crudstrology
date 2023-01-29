@@ -40,7 +40,7 @@ const NavBar = () => {
 
   return (
     <NavStyle>
-      <div>{getAvatar(user || 'FatTubBetty')}</div>
+      <div>{getAvatar(user || <img style={{height: '302px', width: '302px'}} src='https://w0.peakpx.com/wallpaper/689/789/HD-wallpaper-majoras-mask-quote-game-gaming-link-majoras-mask-nintendo-sayings-zelda.jpg'></img>)}</div>
       <NavUserInfo>
         <hr />
         <WrapCardText>Name: {user || 'sign in'}</WrapCardText>
