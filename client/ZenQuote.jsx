@@ -1,25 +1,21 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { BsHandThumbsUpFill } from 'react-icons/bs';
 import Button from 'react-bootstrap/Button';
 
-const ZenQuote = (quote) => {
-  const likeQuote = () => {
-    axios.post('/db/quote', {
-      quote: {
-        content: quote.quote.content,
-        author: quote.quote.author
-      }
-    }).then(() => console.log('post successful'))
-      .catch((err) => console.error(err));
-  };
 
+const ZenQuote = ({ quote, isActive, onClick }) => {
+  const [localIsActive, setLocalIsActive] = useState(isActive);
+  useEffect(() => {
+    setLocalIsActive(isActive);
+  }, [isActive]);
   return (
 
     <div className='quote'>
-      <Button variant="primary" onClick={() => { likeQuote(quote.quote); }}><BsHandThumbsUpFill /></Button>{' '}
-      <span>{quote.quote.content} --</span>
-      <span>{quote.quote.author}  </span>
+      <Button style={localIsActive || quote.like ? { backgroundColor: 'midnightblue' } : { backgroundColor: 'darkslategrey' }} onClick={onClick}><BsHandThumbsUpFill />
+      </Button>{' '}
+      <span>{quote.content} --</span>
+      <span>{quote.author}  </span>
     </div>
   );
 

@@ -1,5 +1,10 @@
 import styled, { keyframes } from 'styled-components';
 
+const QuoteButton = styled.button`
+
+  
+`;
+
 const NavStyle = styled.div`
   background-color: darkslategrey;
   flex-wrap: wrap;
