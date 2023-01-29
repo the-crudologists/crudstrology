@@ -1,5 +1,20 @@
 import styled, { keyframes } from 'styled-components';
 
+const QuoteButton = styled.button`
+
+  cursor: pointer;
+  border: .2rem solid;
+  border-color: azure;
+  padding: .5rem;
+  align-self: center;
+  transition: all 0.3s;
+  &:hover {
+    border-color: #8a04dd;
+    box-shadow: .1rem .1rem .1rem .1rem  #5d0593;
+    transform: scale(.8);
+  }
+`;
+
 const NavStyle = styled.div`
   background-color: darkslategrey;
   flex-wrap: wrap;
@@ -83,4 +98,4 @@ const Reading = styled.div`
   padding: .5rem;
 `;
 
-export { NavStyle, NavItem, NavUserInfo, NavImg, AstroButton, UserHoro, OtherHoros, TarotCard, WrapCardText, Reading };
+export { NavStyle, NavItem, NavUserInfo, NavImg, AstroButton, UserHoro, OtherHoros, TarotCard, WrapCardText, Reading, QuoteButton };
