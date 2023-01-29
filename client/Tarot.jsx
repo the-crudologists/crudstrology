@@ -60,7 +60,8 @@ const Tarot = () => {
                 <div key={i + 1}>
                   {Object.entries(card).map((el, i) => {
                     return <div style={{ fontSize: '18px' }} key={i}>
-                      <b>{el[0] === 'desc' ? <u>{el[0]}</u> : el[0]}: </b>: {el[0] === 'desc' ? <b>{el[1]}</b> : <em>{el[1]}</em>}</div>;
+                      <b>{el[0] === 'desc' ? <u>{el[0]}</u> : el[0]}: </b>
+                      {el[0] === 'desc' ? <b>{el[1]}</b> : <em>{el[1]}</em>}</div>;
                   })}
                 </div>
               </TarotCard>
