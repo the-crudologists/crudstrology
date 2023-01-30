@@ -22,7 +22,6 @@ Internal.use(express.urlencoded({ extended: true }));
 // DB
 Internal.post('/quote', (req, res) => {
   const { quote } = req.body;
-  console.log(quote);
   Quotes.create(quote)
     .then(() => {
       res.sendStatus(201);
@@ -37,7 +36,6 @@ Internal.post('/quote', (req, res) => {
 Internal.get('/all_quotes/', (req, res) => {
   Quotes.findAll()
     .then((quotesArr) => {
-      console.log(quotesArr);
       res.status(200).send(quotesArr);
     }).catch((err) => {
       console.log('GET /api/quotes', err);
@@ -58,7 +56,6 @@ Internal.get('/tarot', (req, res) => {
 
 Internal.delete('/quotes/:id', (req, res) => {
   const { id } = req.params;
-  console.log(id);
   Quotes.destroy({
     where: {
       id: id

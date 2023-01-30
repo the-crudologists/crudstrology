@@ -31,13 +31,6 @@ passport.use(new GoogleStrategy({
 }
 ));
 
-// original callback passed to .findOrCreate({}, ...)
-// (err, user) => {
-//   return done(err, user);
-// });
-
-
-// ???
 passport.serializeUser((user, done) => {
   done(null, user);
 });

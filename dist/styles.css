@@ -14,45 +14,6 @@ body {
   color: black;
 }
 
-/* .navBar {
-  background-color: darkslategrey;
-  display: flex;
-  justify-content: space-between;
-  width: fit-content;
-  flex-basis: auto;
-} */
-
-/* .navBar ul {
-  font-size: 24px;
-  padding: 10px;
-  margin: 20px;
-  display: flex;
-  gap: 75px;
-  text-shadow: 1px 1px 2px black, 0 0 1em black, 0 0 0.2em black;
-} */
-
-/* #userInfo {
-  font-size: 20px;
-  padding-top: 60px;
-  padding-left: 10px;
-  padding-right: 10px;
-  text-shadow: 1px 1px 2px black, 0 0 1em black, 0 0 0.2em black;
-  border: 1px solid azure;
-  margin-top: 5px;
-  margin-bottom: 5px;
-} */
-
-/* .navBar img {
-  filter:grayscale(100%);
-  width: 50px;
-  height: 76px;
-  object-fit: cover;
-  border: 1px solid azure;
-  background-color: black;
-  margin-top: 5px;
-  margin-left: 5px;
-} */
-
 #profile-card-container {
   position: absolute;
   top: 300px;
@@ -85,6 +46,7 @@ body {
 
 .btn-primary {
   color: #fff;
+  cursor: pointer;
   background-color: darkslategrey;
   border-color: darkslategray;
 }
@@ -92,6 +54,7 @@ body {
 .btn-secondary {
   position: relative;
   height: 2.5rem;
+  cursor: pointer;
   width: 7rem;
   margin-top: .6rem;
   left: 1rem;

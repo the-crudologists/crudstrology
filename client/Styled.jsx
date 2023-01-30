@@ -1,7 +1,6 @@
-import styled, { keyframes } from 'styled-components';
+import styled from 'styled-components';
 
 const QuoteButton = styled.button`
-
   cursor: pointer;
   border: .2rem solid;
   border-color: azure;
@@ -15,7 +14,32 @@ const QuoteButton = styled.button`
   }
 `;
 
+
+
+const DeleteButton = styled.button`
+  cursor: pointer;
+  border: .2rem solid;
+  background-color: darkslategrey;
+  border-color: azure;
+  padding: .5rem;
+  align-self: center;
+  transition: all 0.3s;
+  &:hover {
+    background-color: #cc0000;
+    border-color: #520000;
+    box-shadow:  #7e0015;
+    transform: scale(.9);
+  }
+`;
+
+
 const NavStyle = styled.div`
+display: block;
+color: midnightblue;
+padding: 40px;
+margin: -10px 0;
+border-top: 10px solid midnightblue;
+border-bottom: 10px solid midnightblue;
   background-color: darkslategrey;
   flex-wrap: wrap;
   display: flex;
@@ -30,11 +54,20 @@ const WrapCardText = styled.p`
 `;
 
 const NavItem = styled.div`
+background-color: midnightblue;
+border: .9rem solid midnightblue;
+position: relative;
   font-size: 1.5rem;
   text-align: center;
   flex: 1 1;
   margin: 1rem;
-  text-shadow: 1px 1px 2px black, 0 0 1em black, 0 0 0.2em black;`;
+  text-shadow: 1px 1px 2px black, 0 0 1em black, 0 0 0.2em black;
+  &:hover {
+    border-color: #8a04dd;
+    color: #8a04dd;
+    box-shadow: .05rem .05rem .05rem .05rem  #5d0593;
+    transform: scale(.95);
+  }`;
 
 
 const NavUserInfo = styled.div`
@@ -98,4 +131,4 @@ const Reading = styled.div`
   padding: .5rem;
 `;
 
-export { NavStyle, NavItem, NavUserInfo, NavImg, AstroButton, UserHoro, OtherHoros, TarotCard, WrapCardText, Reading, QuoteButton };
+export { NavStyle, NavItem, NavUserInfo, NavImg, AstroButton, UserHoro, OtherHoros, TarotCard, WrapCardText, Reading, QuoteButton, DeleteButton };

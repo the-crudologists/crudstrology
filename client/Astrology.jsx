@@ -36,7 +36,6 @@ const Astrology = () => {
         })
           .then(reading => {
             setHoroscopes(prevHoro => {
-              console.log('STATE HOROSCOPES ARRAY AFTER CLIENT AXIOS', horoscopes, 'READING', reading.data, 'PREVHORO', prevHoro);
               return [...prevHoro, reading.data];
             });
           })

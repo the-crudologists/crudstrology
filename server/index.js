@@ -74,7 +74,6 @@ app.get('/auth/google/callback',
 
 // passing res.send(req.user) inside this endpoint becomes undefined.. 'fixed' w/ loggedInUser
 app.get('/auth/user', (req, res) => {
-  console.log('/auth/user endpoint hit', loggedInUser);
   res.send(loggedInUser);
 });
 
