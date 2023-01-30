@@ -1,7 +1,6 @@
-import styled, { keyframes } from 'styled-components';
+import styled from 'styled-components';
 
 const QuoteButton = styled.button`
-
   cursor: pointer;
   border: .2rem solid;
   border-color: azure;
@@ -14,6 +13,25 @@ const QuoteButton = styled.button`
     transform: scale(.8);
   }
 `;
+
+
+
+const DeleteButton = styled.button`
+  cursor: pointer;
+  border: .2rem solid;
+  background-color: darkslategrey;
+  border-color: azure;
+  padding: .5rem;
+  align-self: center;
+  transition: all 0.3s;
+  &:hover {
+    background-color: #cc0000;
+    border-color: #520000;
+    box-shadow:  #7e0015;
+    transform: scale(.9);
+  }
+`;
+
 
 const NavStyle = styled.div`
 display: block;
@@ -113,4 +131,4 @@ const Reading = styled.div`
   padding: .5rem;
 `;
 
-export { NavStyle, NavItem, NavUserInfo, NavImg, AstroButton, UserHoro, OtherHoros, TarotCard, WrapCardText, Reading, QuoteButton };
+export { NavStyle, NavItem, NavUserInfo, NavImg, AstroButton, UserHoro, OtherHoros, TarotCard, WrapCardText, Reading, QuoteButton, DeleteButton };

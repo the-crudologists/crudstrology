@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { BsHandThumbsDownFill } from 'react-icons/bs';
-import Button from 'react-bootstrap/Button';
-
+import { DeleteButton } from './Styled.jsx';
 const Favorites = () => {
 
   const [quotes, setQuotes] = useState([]);
@@ -41,8 +40,8 @@ const Favorites = () => {
       {quotes.flat().map((quote, i) => {
         return (
           <div className='quote' key={i}>
-            <Button variant="primary" onClick={() => { deleteQuote(quote.id); }}><BsHandThumbsDownFill /></Button>{' '}
-            <span>{quote.content} --</span>
+            <DeleteButton onClick={() => { deleteQuote(quote.id); }}><BsHandThumbsDownFill /></DeleteButton>{' '}
+            <span >{quote.content} --</span>
             <span>{quote.author}  </span>
           </div>
         );
