@@ -28,7 +28,6 @@ const App = () => {
       });
   }, []);
 
-  console.log('STATE UPDATE', user, dob, sign);
 
   return (
     <>

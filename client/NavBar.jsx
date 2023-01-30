@@ -22,7 +22,6 @@ const NavBar = () => {
       .then((loggedInUser) => {
         axios.patch(`/user/${loggedInUser.data.googleId}`, { dob: dobRef.current, sign: zc(dobRef.current) })
           .then((anArrayResponse) => {
-            console.log('Updated User: ', anArrayResponse.data[0]);
             setDob(anArrayResponse.data[0].dob);
             setSign(zc(anArrayResponse.data[0].dob));
           })
