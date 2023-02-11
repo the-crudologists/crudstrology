@@ -35,4 +35,4 @@
 
 ## Contact Info
 
- - for more information please write your question on a note-card and shove it up your ass. 
+ - report issues and ask questions via Github Issues @ https://github.com/krewe-deaux-code/crudstrology/issues
