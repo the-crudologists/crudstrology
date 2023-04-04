@@ -131,4 +131,36 @@ const Reading = styled.div`
   padding: .5rem;
 `;
 
-export { NavStyle, NavItem, NavUserInfo, NavImg, AstroButton, UserHoro, OtherHoros, TarotCard, WrapCardText, Reading, QuoteButton, DeleteButton };
+const CompatibilityInput = styled.input`
+background: #252c37;
+border-radius: 15px;
+border: 0px;
+outline: 2px solid white;
+width: 250px;
+height: 28px;
+margin-top: 20px;
+margin-left: 5px;
+margin-right: 40px;
+padding: 10px;
+color: white;
+font-size: 16px;
+&::placeholder {
+  padding: 15px;
+}
+`;
+
+const CompatibilityButton = styled.button`
+  background: black;
+  border-radius: 3px;
+  border: 2px solid ;
+  color: white;
+  margin: 0.5em 1em;
+  padding: 0.25em 1em;
+  `;
+
+  const NavBarInline = styled.div`
+  display: inline;
+  
+  
+  `;
+export { NavStyle, NavItem, NavUserInfo, NavImg, AstroButton, UserHoro, OtherHoros, TarotCard, WrapCardText, Reading, QuoteButton, DeleteButton, CompatibilityInput, CompatibilityButton, NavBarInline };
