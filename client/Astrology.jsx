@@ -3,6 +3,7 @@ import fakeHoro from '../database/fakeData/horoscope.json';
 import { UserContext } from './App.jsx';
 import { AstroButton, UserHoro, OtherHoros } from './Styled.jsx';
 import axios from 'axios';
+import Journal from './UserStory 2/Journal.jsx';
 
 const Astrology = () => {
   const zodiacSigns = ['Aries', 'Taurus', 'Gemini', 'Cancer', 'Leo', 'Virgo', 'Libra', 'Scorpio', 'Sagittarius', 'Capricorn', 'Aquarius', 'Pisces'];
@@ -78,6 +79,7 @@ const Astrology = () => {
           })
         }
       </div>
+      <Journal></Journal>
     </div>
 
   );
