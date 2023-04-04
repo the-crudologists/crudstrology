@@ -26,14 +26,20 @@ External.get('/quotes', (req, res) => {
 // API
 External.post('/horo', (req, res) => {
   // console.log('____SERVER____');
-  // console.log('REQ BODY', req.body)
+  console.log('REQ BODY', req.body)
   const { user } = req.body;
-  // console.log('USER DESTRUCTURED', user);
-  axios.post(`https://aztro.sameerkumar.website?sign=${user.sign}&day=today`)
+  console.log('USER DESTRUCTURED', user);
+    axios.get(`http://sandipbgt.com/theastrologer/api/horoscope/gemini/today/`)
+  // axios.post(`https://aztro.sameerkumar.website?sign=${user.sign}&day=today`)
     .then(result => {
-      // console.log('RESULT from Aztro API', result.data);
-      result.data.sign = user.sign;
-      res.status(200).send(result.data);
+      console.log('RESULT from Aztro API', result.data);
+      const{horoscope, sunsign} = result.data
+      const newObj = {
+        horoscope,
+        sign: sunsign,
+      };
+      // result.data.sunsign = user.sign;
+      res.status(200).send(newObj);
     })
     .catch(err => res.sendStatus(500)); // console.log('Error from Aztro api post request SERVER', err)
 });
