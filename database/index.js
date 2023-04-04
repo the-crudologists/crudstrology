@@ -70,6 +70,34 @@ const Quotes = sequelize.define('quote', {
   author: { type: Sequelize.STRING },
 });
 
+const TimeLine = sequelize.define('timeline', {
+  post: { type: Sequelize.STRING }
+});
+
+const UserPost = sequelize.define('userPost', {
+  id: {
+    type: Sequelize.INTEGER,
+    primaryKey: true,
+    autoIncrement: true
+  }
+});
+
+TimeLine.belongsTo(User, { foreignKey: 'id_manager' });
+User.hasMany(TimeLine, { foreignKey: 'id_manager' });
+
+const addProject = async (userId, postObj) => {
+  const user = await User.findOne({ where: { id: userId } });
+  const post = await TimeLine.create(postObj);
+
+  post.setUser(user);
+};
+
+const joinPostWithUser = async (userId, postId) => {
+  const user = await User.findOne({ where: { id: userId } });
+  const post = await TimeLine.findOne({ where: { id: postId } });
+  post.addUser(user);
+};
+
 const fetchTarotCards = () => {
   axios.get('https://tarot-api.onrender.com/api/v1/cards')
     .then(response => {
@@ -87,6 +115,7 @@ const fetchTarotCards = () => {
     });
 };
 
+
 // <-- might not need to be async -->
 const seeder = async () => {
   console.log('the seeder function was invoked');
@@ -98,6 +127,11 @@ const seeder = async () => {
   })
     .then(() => { console.log('User Model Create Success'); })
     .catch((err) => { console.error('User Model Create Failure', err); });
+  await TimeLine.create({
+    post: 'This is a new test post!!!'
+  })
+    .then(() => { console.log('Created Post'); })
+    .catch((err) => { console.error('Failed to create Post', err); });
   fetchTarotCards();
   /*await Quotes.create()
     .then(() => { console.log('Quote Model Create Success'); })
@@ -110,5 +144,6 @@ const seeder = async () => {
 module.exports.Tarot = Tarot;
 module.exports.User = User;
 module.exports.Quotes = Quotes;
+module.exports.TimeLine = TimeLine;
 module.exports.sequelize = sequelize;
 module.exports.seeder = seeder;

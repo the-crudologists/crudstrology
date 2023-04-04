@@ -7,6 +7,7 @@ import Compatibility from './ Compatibility.jsx';
 import Favorites from './Favorites.jsx';
 import { Route, Routes } from 'react-router-dom';
 import axios from 'axios';
+import Journal from './Journal Component/Journal.jsx';
 
 
 export const UserContext = React.createContext();
@@ -20,10 +21,11 @@ const App = () => {
   // this will append all USER state information (name, DOB, sign)
   useEffect(() => {
     axios.get('/auth/user')
-      .then(user => {
-        setUser(user.data.name);
-        setDob(user.data.dob); // May be null on initialization need logic in sub components accordingly
-        setSign(user.data.sign); //see above comment^
+      .then(({ data }) => {
+        // console.log(data);
+        setUser(data[0].name);
+        setDob(data[0].dob); // May be null on initialization need logic in sub components accordingly
+        setSign(data[0].sign); //see above comment^
       })
       .catch(err => {
         console.log('Error fetching Authenticated Google User from req.user (server/passport)', err);
@@ -33,7 +35,7 @@ const App = () => {
 
   return (
     <>
-      <UserContext.Provider value={ {user, dob, setDob, sign, setSign} }>
+      <UserContext.Provider value={{ user, dob, setDob, sign, setSign }}>
         <div>
           <NavBar />
         </div>
@@ -44,6 +46,7 @@ const App = () => {
             <Route path="/tarot" element={<Tarot />} />
             <Route path="/favorites" element={<Favorites />} />
             <Route path="/compatibility" element={<Compatibility />} />
+            <Route path="/journal" element={<Journal />} />
           </Routes>
         </div>
       </UserContext.Provider>
