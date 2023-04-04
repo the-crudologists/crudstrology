@@ -6,6 +6,7 @@ import Tarot from './Tarot.jsx';
 import Favorites from './Favorites.jsx';
 import { Route, Routes } from 'react-router-dom';
 import axios from 'axios';
+import Journal from './Journal Component/Journal.jsx';
 
 export const UserContext = React.createContext();
 
@@ -42,6 +43,7 @@ const App = () => {
             <Route path="/astrology" element={<Astrology />} />
             <Route path="/tarot" element={<Tarot />} />
             <Route path="/favorites" element={<Favorites />} />
+            <Route path="/journal" element={<Journal />} />
           </Routes>
         </div>
       </UserContext.Provider>
