@@ -1,8 +1,9 @@
 const path = require('path');
 const express = require('express');
-const session = require('express-session');
+// const session = require('express-session');
+const cookieSession = require('cookie-session');
 const passport = require('passport');
-const { User, seeder } = require('../database/index.js');
+const { User, TimeLine, seeder } = require('../database/index.js');
 
 require('dotenv').config();
 const { SERVER_SESSION_SECRET } = process.env;
@@ -21,7 +22,9 @@ const PORT = 8080;
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(DIST_DIR));
-app.use(session({ secret: SERVER_SESSION_SECRET }));
+app.use(cookieSession({
+  keys: [SERVER_SESSION_SECRET]
+}));
 app.use(passport.initialize());
 app.use(passport.session());
 app.use('/api', External);
@@ -47,34 +50,19 @@ app.get('/auth/google',
   passport.authenticate('google', {
     scope:
       ['email', 'profile']
-  }
-  ), (req, res) => {
-    // console.log('app.get(/auth/google) passport.authenticate server/index.js req :', req);
-  });
+  }));
 
 // <-- shoddy logged in auth/object -->
-let loggedInUser;
-const loggedInSessions = {};
 app.get('/auth/google/callback',
   passport.authenticate('google', { failureRedirect: '/login' }), (req, res) => {
-    // console.log('REQ', req.user);
-    loggedInUser = req.user[0].dataValues;
-    if (!loggedInSessions[loggedInUser.googleId]) {
-      loggedInSessions[loggedInUser.googleId] = {
-        name: loggedInUser.name,
-        sessionID: req.sessionID,
-        dob: loggedInUser.dob,
-        sign: loggedInUser.sign
-      };
-    }
-    // console.log('Logged-In-Sessions OBJECT', loggedInSessions);
     res.redirect('/');
   }
 );
 
 // passing res.send(req.user) inside this endpoint becomes undefined.. 'fixed' w/ loggedInUser
 app.get('/auth/user', (req, res) => {
-  res.send(loggedInUser);
+  // console.log(req);
+  res.send(req.user);
 });
 
 // <-- END PASSPORT DOCS
@@ -106,6 +94,18 @@ app.patch('/user/:googleId', (req, res) => {
     })
     .catch((err) => {
       console.log('update user error:', err);
+      res.sendStatus(500);
+    });
+});
+
+// Fetches all the posts made by any user
+app.get('/users/feed', (req, res) => {
+  TimeLine.findAll()
+    .then((result) => {
+      res.status(200).send(result);
+    })
+    .catch((err) => {
+      console.error('Cannot find anything:', err);
       res.sendStatus(500);
     });
 });
