@@ -3,9 +3,11 @@ import NavBar from './NavBar.jsx';
 import Astrology from './Astrology.jsx';
 import Feed from './Feed.jsx';
 import Tarot from './Tarot.jsx';
+import Compatibility from './ Compatibility.jsx';
 import Favorites from './Favorites.jsx';
 import { Route, Routes } from 'react-router-dom';
 import axios from 'axios';
+
 
 export const UserContext = React.createContext();
 
@@ -41,6 +43,7 @@ const App = () => {
             <Route path="/astrology" element={<Astrology />} />
             <Route path="/tarot" element={<Tarot />} />
             <Route path="/favorites" element={<Favorites />} />
+            <Route path="/compatibility" element={<Compatibility />} />
           </Routes>
         </div>
       </UserContext.Provider>

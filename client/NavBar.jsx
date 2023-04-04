@@ -1,6 +1,6 @@
 import React, { useContext, useRef } from 'react';
 import { Link } from 'react-router-dom';
-import { NavStyle, NavItem, NavUserInfo, NavImg, WrapCardText } from './Styled.jsx';
+import { NavStyle, NavItem, NavUserInfo, NavImg, WrapCardText, NavBarInline } from './Styled.jsx';
 import { UserContext } from './App.jsx';
 import axios from 'axios';
 import zc from '../utils/zodiacConverter.js';
@@ -66,10 +66,13 @@ const NavBar = () => {
         </div>
         <hr />
       </NavUserInfo>
-      <NavItem> <Link to="/" onClick={(e) => handleClick(e, 'Feed')}>Your Home</Link></NavItem>
+      <NavBarInline>
+      <NavItem> <Link to="/" onClick={(e) => handleClick(e, 'Feed')}>Home</Link></NavItem>
       <NavItem> <Link to="/astrology" onClick={(e) => handleClick(e, 'Scopes')}>Horoscopes</Link></NavItem>
-      <NavItem>  <Link to="/tarot" onClick={(e) => handleClick(e, 'Tarot')}>Get A reading</Link></NavItem>
+      <NavItem>  <Link to="/tarot" onClick={(e) => handleClick(e, 'Tarot')}>Get A Reading</Link></NavItem>
       <NavItem> <Link to="/favorites" onClick={(e) => handleClick(e, 'Favorites')}>Favorite Quotes</Link></NavItem>
+      <NavItem> <Link to="/compatibility" onClick={(e) => handleClick(e, 'Compatibility')}>Compatibility</Link> ❤️</NavItem>
+      </NavBarInline>
     </NavStyle >
   );
 };
