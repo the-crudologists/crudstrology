@@ -8,7 +8,7 @@ const Internal = express.Router();
 require('./auth.js');
 
 // database
-const { Quotes, Tarot } = require('../database/index.js');
+const { Quotes, Tarot, JournalEntry } = require('../database/index.js');
 const Sequelize = require('sequelize');
 
 // middleware
@@ -67,6 +67,20 @@ Internal.delete('/quotes/:id', (req, res) => {
       console.log(err);
       res.sendStatus(500);
     });
+});
+
+// For Journal entry
+Internal.get('/jEntry', (req, res) => {
+  console.log('hi');
+  res.status(200).send('Journal entry route hit successfully');
+});
+
+Internal.post('/jEntry', (req, res) => {
+  const {data} = req.body
+console.log(data)
+  // JournalEntry.create(data)
+  console.log('hi');
+  res.status(200).send('Journal entry route hit successfully');
 });
 
 module.exports = { Internal };

@@ -15,12 +15,17 @@ const TextBox = () => {
     }
   }, [quill]);
 
-  const handleButtonClick = async() => {
+  const handleButtonClick = () => {
     if (quillRef.current) {
       // console.log(quillRef.current.querySelector('.ql-editor').innerText);
       const newEntry = quillRef.current.querySelector('.ql-editor').innerText;
       setEntries(prevEntries => [...prevEntries, newEntry]);
-     
+     axios.post('/api/jEntry', {entry: newEntry}).then(response => {
+          console.log(response.data);
+        })
+        .catch(error => {
+          console.error(error);
+        });
     }
   };
   // console.log(quill); // undefined > Quill Object

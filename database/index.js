@@ -105,6 +105,12 @@ const Horoscope = sequelize.define('horoscope', {
 //   //   }
 //   // }
 // });
+const JournalEntry = sequelize.define('journal_entry', {
+  body: {
+    type: Sequelize.STRING,
+    allowNull: false
+  }
+});
 
 const Quotes = sequelize.define('quote', {
   _id: { type: Sequelize.STRING },
