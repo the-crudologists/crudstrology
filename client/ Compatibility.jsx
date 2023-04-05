@@ -39,7 +39,7 @@ const Compatibility = () => {
   const [highlightsHeader, setHighlightsHeader] = useState('');
   const [highlights, setHighlights] = useState('');
   const [displayText, setDisplayText] = useState(
-    'Choose your two zodiac signs to get started!'
+    <div>Select your two zodiac signs to get started! <img src="https://img1.picmix.com/output/stamp/normal/3/3/5/2/1942533_bb75b.gif" width="20" height="20" style={{padding:'0px 10px', marginTop:'-10px'}}></img></div>
   );
   const [displayHeader, setDisplayHeader] = useState('');
   const [isNavBarVisible, setIsNavBarVisible] = useState(false);
@@ -140,7 +140,7 @@ const Compatibility = () => {
           showNavBar();
         }}
       >
-        Submit &hearts;{' '}
+        Submit{' '}
       </CompatibilityButton>
      {/* <TooltipCard> <SignChartButton>Not sure?</SignChartButton><TooltipBox><p>First item</p></TooltipBox></TooltipCard> */}
 
