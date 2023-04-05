@@ -139,7 +139,7 @@ outline: 2px solid white;
 width: 250px;
 height: 28px;
 margin-top: 20px;
-margin-left: 5px;
+margin-left: 20px;
 margin-right: 40px;
 padding: 10px;
 color: white;
@@ -160,7 +160,17 @@ const CompatibilityButton = styled.button`
 
   const NavBarInline = styled.div`
   display: inline;
-  
-  
+  margin-left: 50px;
   `;
-export { NavStyle, NavItem, NavUserInfo, NavImg, AstroButton, UserHoro, OtherHoros, TarotCard, WrapCardText, Reading, QuoteButton, DeleteButton, CompatibilityInput, CompatibilityButton, NavBarInline };
+
+  const CompNavBarInline = styled.div`
+  display: block;
+color: midnightblue;
+padding: 0px;
+  flex-wrap: wrap;
+  display: flex;
+  justify-content: space-around;
+  display: inline-flex;
+  align-content: right;
+  `;
+export { NavStyle, NavItem, NavUserInfo, NavImg, AstroButton, UserHoro, OtherHoros, TarotCard, WrapCardText, Reading, QuoteButton, DeleteButton, CompatibilityInput, CompatibilityButton, NavBarInline, CompNavBarInline };
