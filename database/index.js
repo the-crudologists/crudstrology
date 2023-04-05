@@ -141,7 +141,9 @@ const fetchTarotCards = () => {
       console.log('<-- API --> ERROR FROM TAROT API', err);
     });
 };
+// you can run this to update tables without seeding
 
+ //sequelize.sync({ force: true });
 
 // <-- might not need to be async -->
 const seeder = async () => {
