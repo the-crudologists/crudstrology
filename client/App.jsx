@@ -7,7 +7,7 @@ import Compatibility from './ Compatibility.jsx';
 import Favorites from './Favorites.jsx';
 import { Route, Routes } from 'react-router-dom';
 import axios from 'axios';
-import Journal from './Journal Component/Journal.jsx';
+import Journal from './Journal/Journal.jsx';
 
 
 export const UserContext = React.createContext();

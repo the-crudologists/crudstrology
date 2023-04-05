@@ -52,17 +52,59 @@ const Tarot = sequelize.define('tarotCard', {
   meaning_rev: { type: Sequelize.STRING },
   desc: { type: Sequelize.TEXT }
 });
-
 const Horoscope = sequelize.define('horoscope', {
   date_range: { type: Sequelize.STRING },
-  current_date: { type: Sequelize.STRING },
+  current_date: { 
+    type: Sequelize.STRING,
+    defaultValue: () => new Date().toLocaleDateString()
+  },
   description: { type: Sequelize.STRING },
-  compatibility: { type: Sequelize.STRING },
-  mood: { type: Sequelize.STRING },
-  color: { type: Sequelize.STRING },
-  lucky_number: { type: Sequelize.STRING },
+  sunsign: { type: Sequelize.STRING },
+  keywords: { type: Sequelize.STRING },
+  intensity: { type: Sequelize.STRING },
+  lucky_number: { type: Sequelize.INTEGER },
   lucky_time: { type: Sequelize.STRING }
 });
+// const Horoscope = sequelize.define('horoscope', {
+//   date_range: { type: Sequelize.STRING },
+//   current_date: { type: Sequelize.STRING },
+//   description: { type: Sequelize.STRING },
+//   compatibility: { type: Sequelize.STRING },
+//   mood: { type: Sequelize.STRING },
+//   color: { type: Sequelize.STRING },
+//   lucky_number: { type: Sequelize.STRING },
+//   lucky_time: { type: Sequelize.STRING }
+// });
+// const JournalEntry =  sequelize.define('journal_entry', {
+//   entry_id: {
+//     type: Sequelize.INTEGER,
+//     autoIncrement: true,
+//     allowNull: false,
+//     primaryKey: true
+//   },
+//   title: {
+//     type: Sequelize.STRING,
+//     allowNull: false
+//   },
+//   body: {
+//     type: Sequelize.STRING,
+//     allowNull: false
+//   },
+//   user_id: {
+//     type: Sequelize.INTEGER,
+//     references: {
+//       model: 'users',
+//       key: 'user_id'
+//     }
+//   },
+//   horoscope_id: {
+//     type: Sequelize.INTEGER,
+//     references: {
+//       model: 'horoscopes',
+//       key: 'horoscope_id'
+//     }
+//   }
+// });
 
 const Quotes = sequelize.define('quote', {
   _id: { type: Sequelize.STRING },
@@ -143,11 +185,34 @@ const seeder = async () => {
   ])
     .then(() => { console.log('Created Post'); })
     .catch((err) => { console.error('Failed to create Post', err); });
+  await Horoscope.bulkCreate([
+    {
+      date_range: 'March 21 - April 19',
+      current_date: new Date().toLocaleDateString(),
+      description: 'Today is a good day for taking action and making decisions. Trust your instincts and go after what you want.',
+      sunsign: 'Aries',
+      keywords: 'Action, Confidence, Decisiveness',
+      intensity: '35%',
+      lucky_number: 9,
+      lucky_time: '3pm'
+    },
+    {
+      date_range: 'April 20 - May 20',
+      current_date: new Date().toLocaleDateString(),
+      description: 'You may find yourself feeling more emotional than usual today. Take some time to process your feelings and communicate your needs to those around you.',
+      sunsign: 'Taurus',
+      keywords: 'Emotions, Communication, Self-Care',
+      intensity: '40%',
+      lucky_number: 6,
+      lucky_time: '7pm'
+    },
+  ])
+    .then(() => { console.log('Created Post'); })
+    .catch((err) => { console.error('Failed to create Post', err); });
   fetchTarotCards();
   /*await Quotes.create()
     .then(() => { console.log('Quote Model Create Success'); })
     .catch((err) => { console.error('Quote Model Create Failure', err); });
-
   console.log('Database seeded with a test quote table and data');
   */
 };
