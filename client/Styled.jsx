@@ -139,7 +139,7 @@ outline: 2px solid white;
 width: 250px;
 height: 28px;
 margin-top: 20px;
-margin-left: 5px;
+margin-left: 20px;
 margin-right: 40px;
 padding: 10px;
 color: white;
@@ -149,18 +149,60 @@ font-size: 16px;
 }
 `;
 
+const SignChartButton = styled.button`
+background: black;
+border-radius: 3px;
+border: 2px solid ;
+color: white;
+height: 45px;
+width: 100px;
+margin: 1em 1em;
+transition: fill 0.25s;
+cursor: pointer;
+  `;
+
+
 const CompatibilityButton = styled.button`
   background: black;
   border-radius: 3px;
   border: 2px solid ;
   color: white;
+  height: 45px;
+  width: 100px;
   margin: 0.5em 1em;
   padding: 0.25em 1em;
+  transition: fill 0.25s;
+  cursor: pointer;
   `;
 
   const NavBarInline = styled.div`
   display: inline;
-  
-  
+  margin-left: 50px;
   `;
-export { NavStyle, NavItem, NavUserInfo, NavImg, AstroButton, UserHoro, OtherHoros, TarotCard, WrapCardText, Reading, QuoteButton, DeleteButton, CompatibilityInput, CompatibilityButton, NavBarInline };
+
+  const CompNavBarInline = styled.div`
+  display: block;
+color: midnightblue;
+padding: 0px;
+  flex-wrap: wrap;
+  display: flex;
+  justify-content: space-around;
+  display: inline-flex;
+  align-content: right;
+  `;
+
+  const TooltipBox = styled.div`
+  visibility: hidden;
+`;
+const TooltipCard = styled.div`
+   margin: 16px;
+   & ${SignChartButton}:hover + ${TooltipBox} {
+      visibility: visible;
+      color: #fff;
+      background-color: rgba(0, 0, 0, 0.8);
+      width: 230px;
+      padding: 8px 8px;
+      border-radius: 4px;
+   }
+`;
+export { NavStyle, NavItem, NavUserInfo, NavImg, AstroButton, UserHoro, OtherHoros, TarotCard, WrapCardText, Reading, QuoteButton, DeleteButton, CompatibilityInput, CompatibilityButton, NavBarInline, CompNavBarInline, SignChartButton, TooltipBox, TooltipCard };
