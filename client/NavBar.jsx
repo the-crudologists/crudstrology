@@ -67,13 +67,13 @@ const NavBar = () => {
         <hr />
       </NavUserInfo>
       <NavBarInline>
-      <NavItem> <Link to="/" onClick={(e) => handleClick(e, 'Feed')}>Home</Link></NavItem>
-      <NavItem> <Link to="/astrology" onClick={(e) => handleClick(e, 'Scopes')}>Horoscopes</Link></NavItem>
-      <NavItem>  <Link to="/tarot" onClick={(e) => handleClick(e, 'Tarot')}>Get A Reading</Link></NavItem>
-      <NavItem> <Link to="/favorites" onClick={(e) => handleClick(e, 'Favorites')}>Favorite Quotes</Link></NavItem>
-      <NavItem> <Link to="/compatibility" onClick={(e) => handleClick(e, 'Compatibility')}>Compatibility</Link> ❤️</NavItem>
+        <NavItem> <Link to="/" onClick={(e) => handleClick(e, 'Feed')}>Home</Link></NavItem>
+        <NavItem> <Link to="/astrology" onClick={(e) => handleClick(e, 'Scopes')}>Horoscopes</Link></NavItem>
+        <NavItem>  <Link to="/tarot" onClick={(e) => handleClick(e, 'Tarot')}>Get A Reading</Link></NavItem>
+        <NavItem> <Link to="/favorites" onClick={(e) => handleClick(e, 'Favorites')}>Favorite Quotes</Link></NavItem>
+        <NavItem> <Link to="/compatibility" onClick={(e) => handleClick(e, 'Compatibility')}>Compatibility</Link> ❤️</NavItem>
+        <NavItem> <Link to="/journal" onClick={(e) => handleClick(e, 'Journal')}>Journal</Link></NavItem>
       </NavBarInline>
-      <NavItem> <Link to="/journal" onClick={(e) => handleClick(e, 'Journal')}>Journal</Link></NavItem>
     </NavStyle >
   );
 };

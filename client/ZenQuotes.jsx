@@ -44,7 +44,7 @@ const ZenQuotes = () => {
 
   return (
 
-    <div style={{ maxHeight: '100%' }}>
+    <div>
       {
         quotes.map((quote, index) => {
 

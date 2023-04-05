@@ -36,7 +36,6 @@ const DeleteButton = styled.button`
 const NavStyle = styled.div`
 display: block;
 color: midnightblue;
-padding: 40px;
 margin: -10px 0;
 border-top: 10px solid midnightblue;
 border-bottom: 10px solid midnightblue;
@@ -158,9 +157,7 @@ const CompatibilityButton = styled.button`
   padding: 0.25em 1em;
   `;
 
-  const NavBarInline = styled.div`
+const NavBarInline = styled.div`
   display: inline;
-  
-  
   `;
 export { NavStyle, NavItem, NavUserInfo, NavImg, AstroButton, UserHoro, OtherHoros, TarotCard, WrapCardText, Reading, QuoteButton, DeleteButton, CompatibilityInput, CompatibilityButton, NavBarInline };

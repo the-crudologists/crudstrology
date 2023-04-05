@@ -64,18 +64,23 @@ const Feed = () => {
       'grid-template-columns': '1fr 1fr',
       'grid-gap': '20px',
       border: '1px solid black',
-      width: '100%'
+      width: '100%',
+      height: '480px',
+      maxHeight: '480px'
     }}>
-      <div style={{
-        'border-style': 'solid'
-      }}>
-        <h1 className='chat-feed'>Timeline</h1>
-        <Chat userPost={userPost} />
+      <div style={{ display: 'inline-block', 'border-style': 'solid', maxHeight: '100%', overflow: 'auto hidden' }}>
+        <h1 className='chat-feed' style={{ textAlign: 'center' }}> Chat Timeline</h1>
+        <div style={{ fontSize: '20px', textAlign: 'center' }}><b><p>See everyone's posts</p></b></div>
+        <div style={{ 'border-style': 'solid', maxHeight: '73%', overflow: 'auto' }}>
+          <Chat userPost={userPost} />
+        </div>
       </div>
-      <div style={{ display: 'inline-block', 'border-style': 'solid', maxHeight: '100%', overflow: 'auto' }}>
-        <h1 className='horo-title'>Wise Quotes</h1>
-        <div style={{ fontSize: '20px' }}><b><p>Like a quote to add to Favorites</p></b></div>
-        {/* <ZenQuotes /> */}
+      <div style={{ display: 'inline-block', 'border-style': 'solid', maxHeight: '100%', overflow: 'auto hidden' }}>
+        <h1 className='horo-title' style={{ textAlign: 'center' }}>Wise Quotes</h1>
+        <div style={{ fontSize: '20px', textAlign: 'center' }}><b><p>Like a quote to add to Favorites</p></b></div>
+        <div style={{ 'border-style': 'solid', maxHeight: '73%', overflow: 'auto' }}>
+          <ZenQuotes />
+        </div>
       </div>
     </div>
 
