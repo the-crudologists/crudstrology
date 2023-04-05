@@ -11,15 +11,15 @@ import axios from 'axios';
 
 const Compatibility = () => {
   //Using useEffect to fetch the current users' zodiac sign, in order to set sign1's input field defaultValue to their respective zodiac sign
-  // useEffect(() => {
-  //     axios.get('/auth/user')
-  //       .then(user => {
-  //         setSign1(user.data.sign);
-  //       })
-  //       .catch(err => {
-  //         console.log('Error fetching Authenticated Google User from req.user (server/passport)', err);
-  //       });
-  //   }, []);
+  useEffect(() => {
+      axios.get('/auth/user')
+        .then(({data}) => {
+        setSign1(data[0].sign);
+        })
+        .catch(err => {
+          console.log('Error fetching Authenticated Google User from req.user (server/passport)', err);
+        });
+    }, []);
 
   const [sign1, setSign1] = useState(''); //Note to self: change to user's sign
   const [sign2, setSign2] = useState('');

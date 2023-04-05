@@ -5,6 +5,7 @@
   font-family: 'Courier New', Courier, monospace;
   color: azure;
 }
+
 /* dark background */
 body {
   background-color: rgb(37, 37, 37);
@@ -40,8 +41,7 @@ body {
   background-color: black;
   margin-top: 20px;
   margin-left: 5px;
-  font-size: 20px;
- padding: .825rem;
+  padding: .825rem;
 }
 
 .btn-primary {
