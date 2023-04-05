@@ -51,4 +51,27 @@ External.post('/horo', (req, res) => {
     .catch(err => res.sendStatus(500)); // console.log('Error from Aztro api post request SERVER', err)
 });
 
+// Compatibility API
+External.get('/compatibility/:sign1/:sign2', (req, res) => {
+  const {sign1, sign2} = req.params;
+  const options = {
+    method: 'GET',
+    url: 'https://horoscope-astrology.p.rapidapi.com/affinity',
+    params: { sign1: `${sign1}`, sign2: `${sign2}` },
+    headers: {
+      'X-RapidAPI-Key': '511614080cmshd904ca8292330bcp1c75bbjsnbf2078960186',
+      'X-RapidAPI-Host': 'horoscope-astrology.p.rapidapi.com',
+    },
+  };
+
+  // When a user clicks submit, data from the API should be fetched through a GET request
+  axios(options)
+    .then(({data}) => {
+      res.send(data);
+    })
+    .catch((err) => console.log('Error in retrieving from comp api'));
+
+
+})
+
 module.exports = { External };
