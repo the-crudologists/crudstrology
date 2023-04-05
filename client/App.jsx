@@ -22,7 +22,7 @@ const App = () => {
   useEffect(() => {
     axios.get('/auth/user')
       .then(({ data }) => {
-        // console.log(data);
+        console.log(data);
         setUser(data[0].name);
         setDob(data[0].dob); // May be null on initialization need logic in sub components accordingly
         setSign(data[0].sign); //see above comment^
