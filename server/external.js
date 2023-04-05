@@ -2,6 +2,7 @@
 const express = require('express');
 const External = express.Router();
 const axios = require('axios');
+require('dotenv').config();
 
 // const { External } = Router();
 
@@ -63,7 +64,7 @@ External.get('/compatibility/:sign1/:sign2', (req, res) => {
     url: 'https://horoscope-astrology.p.rapidapi.com/affinity',
     params: { sign1: `${sign1}`, sign2: `${sign2}` },
     headers: {
-      'X-RapidAPI-Key': '511614080cmshd904ca8292330bcp1c75bbjsnbf2078960186',
+      'X-RapidAPI-Key': process.env.CompatibilityKey,
       'X-RapidAPI-Host': 'horoscope-astrology.p.rapidapi.com',
     },
   };
