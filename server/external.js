@@ -28,21 +28,21 @@ External.get('/quotes', (req, res) => {
 // API
 External.post('/horo', (req, res) => {
   // console.log('____SERVER____');
-  console.log('REQ BODY', req.body);
+  // console.log('REQ BODY', req.body);
   const { user } = req.body;
   // getting the sign to be in lowercase for new api
- if (!user || !user.sign) {
+  if (!user || !user.sign) {
     return res.status(400).send('User object or sign is empty');
   }
   const {sign} = user;
   //bug fix
   let lowercaseSign = null;
   // if ((sign && sign.user) || false) {
-     lowercaseSign = sign.toLowerCase();
+  lowercaseSign = sign.toLowerCase();
   // }
 
   console.log('USER DESTRUCTURED', user);
-  console.log(lowercaseSign)
+  console.log(lowercaseSign);
   axios.get(`http://sandipbgt.com/theastrologer/api/horoscope/${lowercaseSign}/today/`)
   // axios.post(`https://aztro.sameerkumar.website?sign=${user.sign}&day=today`)
     .then(result => {
