@@ -157,7 +157,30 @@ const CompatibilityButton = styled.button`
   padding: 0.25em 1em;
   `;
 
+const PostButton = styled.button`
+  background: black;
+  border-radius: 3px;
+  border: 2px solid ;
+  color: white;
+  margin: 0.5em 1em;
+  padding: 0.25em 1em;
+  &:hover {
+    border-color: #8a04dd;
+    color: #8a04dd;
+    box-shadow: .05rem .05rem .05rem .05rem  #5d0593;
+    transform: scale(1.05);
+  }
+  `;
+const PostInput = styled.input`
+  background: black;
+  border-radius: 3px;
+  border: 2px solid;
+  color: white;
+  margin: auto;
+  display: block;
+  `;
+
 const NavBarInline = styled.div`
   display: inline;
   `;
-export { NavStyle, NavItem, NavUserInfo, NavImg, AstroButton, UserHoro, OtherHoros, TarotCard, WrapCardText, Reading, QuoteButton, DeleteButton, CompatibilityInput, CompatibilityButton, NavBarInline };
+export { NavStyle, NavItem, NavUserInfo, NavImg, AstroButton, UserHoro, OtherHoros, TarotCard, WrapCardText, Reading, QuoteButton, DeleteButton, CompatibilityInput, CompatibilityButton, PostButton, PostInput, NavBarInline };

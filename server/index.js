@@ -133,6 +133,33 @@ app.get('/users/username', (req, res) => {
     });
 });
 
+app.post('/user/post', (req, res) => {
+  // console.log(req);
+  const { post } = req.body;
+  const { user_id } = req.user[0];
+
+  User.findAll({
+    where: {
+      user_id: user_id
+    }
+  })
+    .then(user => {
+      if (user) {
+        TimeLine.create({
+          post: post,
+          user_id: user_id
+        });
+        res.sendStatus(201);
+      } else {
+        res.sendStatus(404);
+      }
+    })
+    .catch((err) => {
+      console.error('Request failure:', err);
+      res.sendStatus(500);
+    });
+});
+
 // (async () => {
 //   // <-- build seed script and call seeder() in that file...
 //   await seeder();
