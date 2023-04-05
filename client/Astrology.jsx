@@ -11,6 +11,16 @@ const Astrology = () => {
   const [reading, setReading] = useState(fakeHoro);
   const [horoscopes, setHoroscopes] = useState([]);
   const { dob, sign } = useContext(UserContext);
+  const generateLuckyTime = () => {
+    const hours = Math.floor(Math.random() * 12) + 1;
+    const minutes = Math.floor(Math.random() * 60);
+    const amPm = Math.random() < 0.5 ? 'am' : 'pm';
+    return `${hours}:${minutes < 10 ? '0' + minutes : minutes} ${amPm}`;
+  };
+  const generateLuckyNumber = () => {
+    return Math.floor(Math.random() * 100) + 1;
+  };
+
 
   const fetchHoro = (fetchSign) => {
     axios.post('/api/horo', {
@@ -19,7 +29,22 @@ const Astrology = () => {
       }
     })
       .then(reading => {
-        setReading(reading.data);
+        console.log(reading.data)
+        // const horoscopeData = {
+        //   // date_range: reading.data.date_range,
+        //   current_date: reading.data.date,
+        //   description: reading.data.horoscope,
+        //   compatibility: reading.data.compatibility,
+        //   // mood: reading.data.meta.mood,
+        //   // color: reading.data.meta.intensity,
+        //   lucky_number: Math.floor(Math.random() * 100) + 1,
+        //   lucky_time: generateLuckyTime(),
+        //   // userId: userId
+        // };
+// console.log(horoscopeData)
+  
+       
+        // setReading(reading.data);
       })
       .catch(err => {
         console.log('Error AXIOS post to /api/horo from Client', err);

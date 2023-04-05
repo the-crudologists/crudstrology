@@ -55,14 +55,31 @@ const Tarot = sequelize.define('tarotCard', {
 
 const Horoscope = sequelize.define('horoscope', {
   date_range: { type: Sequelize.STRING },
-  current_date: { type: Sequelize.STRING },
+  current_date: { 
+    type: Sequelize.STRING,
+    defaultValue: () => new Date().toLocaleDateString()
+  },
   description: { type: Sequelize.STRING },
-  compatibility: { type: Sequelize.STRING },
-  mood: { type: Sequelize.STRING },
-  color: { type: Sequelize.STRING },
-  lucky_number: { type: Sequelize.STRING },
+  sunsign: { type: Sequelize.STRING },
+  keywords: { type: Sequelize.STRING },
+  intensity: { type: Sequelize.STRING },
+  lucky_number: { type: Sequelize.INTEGER },
   lucky_time: { type: Sequelize.STRING }
 });
+
+// this is the original schema
+
+// const Horoscope = sequelize.define('horoscope', {
+//   date_range: { type: Sequelize.STRING },
+//   current_date: { type: Sequelize.STRING },
+//   description: { type: Sequelize.STRING },
+//   compatibility: { type: Sequelize.STRING },
+//   mood: { type: Sequelize.STRING },
+//   color: { type: Sequelize.STRING },
+//   lucky_number: { type: Sequelize.STRING },
+//   lucky_time: { type: Sequelize.STRING }
+// });
+
 
 const Quotes = sequelize.define('quote', {
   _id: { type: Sequelize.STRING },
@@ -73,6 +90,38 @@ const Quotes = sequelize.define('quote', {
 const TimeLine = sequelize.define('timeline', {
   post: { type: Sequelize.STRING },
   user_id: { type: Sequelize.INTEGER }
+});
+
+//schema for Journal Entries
+const JournalEntry = sequelize.define('journal_entry', {
+  entry_id: {
+    type: Sequelize.INTEGER,
+    autoIncrement: true,
+    allowNull: false,
+    primaryKey: true
+  },
+  title: {
+    type: Sequelize.STRING,
+    allowNull: false
+  },
+  body: {
+    type: Sequelize.STRING,
+    allowNull: false
+  },
+  user_id: {
+    type: Sequelize.INTEGER,
+    references: {
+      model: 'users',
+      key: 'user_id'
+    }
+  },
+  horoscope_id: {
+    type: Sequelize.INTEGER,
+    references: {
+      model: 'horoscopes',
+      key: 'horoscope_id'
+    }
+  }
 });
 
 // TimeLine.belongsTo(User, { foreignKey: 'user_id' });
@@ -143,6 +192,23 @@ const seeder = async () => {
   ])
     .then(() => { console.log('Created Post'); })
     .catch((err) => { console.error('Failed to create Post', err); });
+  await fetchHoroscope()
+    .then((horoscopeData) => {
+      const horoscope = horoscopeData.data;
+      const luckyNumber = Math.floor(Math.random() * 100) + 1;
+      return Horoscope.create({
+        date_range: horoscope.date_range,
+        current_date: new Date().toDateString(),
+        description: horoscope.description,
+        sunsign: horoscope.sunsign,
+        keywords: horoscope.keywords,
+        intensity: horoscope.intensity,
+        lucky_number: luckyNumber.toString(),
+        lucky_time: horoscope.lucky_time
+      });
+    })
+    .then(() => { console.log('Horoscope Model Create Success'); })
+    .catch((err) => { console.error('Horoscope Model Create Failure', err); });
   fetchTarotCards();
   /*await Quotes.create()
     .then(() => { console.log('Quote Model Create Success'); })
