@@ -90,20 +90,20 @@ const Horoscope = sequelize.define('horoscope', {
 //     type: Sequelize.STRING,
 //     allowNull: false
 //   },
-//   user_id: {
-//     type: Sequelize.INTEGER,
-//     references: {
-//       model: 'users',
-//       key: 'user_id'
-//     }
-//   },
-//   horoscope_id: {
-//     type: Sequelize.INTEGER,
-//     references: {
-//       model: 'horoscopes',
-//       key: 'horoscope_id'
-//     }
-//   }
+//   // user_id: {
+//   //   type: Sequelize.INTEGER,
+//   //   references: {
+//   //     model: 'users',
+//   //     key: 'user_id'
+//   //   }
+//   // },
+//   // horoscope_id: {
+//   //   type: Sequelize.INTEGER,
+//   //   references: {
+//   //     model: 'horoscopes',
+//   //     key: 'horoscope_id'
+//   //   }
+//   // }
 // });
 
 const Quotes = sequelize.define('quote', {
@@ -223,3 +223,4 @@ module.exports.Quotes = Quotes;
 module.exports.TimeLine = TimeLine;
 module.exports.sequelize = sequelize;
 module.exports.seeder = seeder;
+module.exports.JournalEntry = JournalEntry;
