@@ -71,7 +71,6 @@ const Compatibility = () => {
     axios
       .get(`api/compatibility/${sign1}/${sign2}`)
       .then(({ data }) => {
-        console.log(data, 'this is the display header');
         setDisplayHeader(data[0].header);
         setDisplayText(data[0].text);
         setResultHeader(data[0].header);
@@ -86,11 +85,12 @@ const Compatibility = () => {
   };
 
  const showNavBar = () => {
-    setIsNavBarVisible((isVisible) => !isVisible)
+    setIsNavBarVisible(true)
   }
 
   return (
     <div name='parent'>
+          {console.log(isNavBarVisible)}
       <h1 className='comp-title'>Compatibility Selector</h1>
       {/* First Zodiac Sign Input */}
       <label name='sign-1'>
