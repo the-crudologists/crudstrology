@@ -32,9 +32,9 @@ External.post('/horo', (req, res) => {
   const {sign} = user;
   //bug fix
   const lowercaseSign = null
-if ((sign && sign.user) || false) {
-   lowercaseSign = sign.toLowerCase();
-}
+// if ((sign && sign.user) || false) {
+//    lowercaseSign = sign.toLowerCase();
+// }
 
   console.log('USER DESTRUCTURED', user);
   axios.get(`http://sandipbgt.com/theastrologer/api/horoscope/${lowercaseSign}/today/`)
