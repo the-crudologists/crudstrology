@@ -71,32 +71,11 @@ const Quotes = sequelize.define('quote', {
 });
 
 const TimeLine = sequelize.define('timeline', {
-  post: { type: Sequelize.STRING }
+  post: { type: Sequelize.STRING },
+  user_id: { type: Sequelize.INTEGER }
 });
 
-const UserPost = sequelize.define('userPost', {
-  id: {
-    type: Sequelize.INTEGER,
-    primaryKey: true,
-    autoIncrement: true
-  }
-});
-
-TimeLine.belongsTo(User, { foreignKey: 'id_manager' });
-User.hasMany(TimeLine, { foreignKey: 'id_manager' });
-
-const addProject = async (userId, postObj) => {
-  const user = await User.findOne({ where: { id: userId } });
-  const post = await TimeLine.create(postObj);
-
-  post.setUser(user);
-};
-
-const joinPostWithUser = async (userId, postId) => {
-  const user = await User.findOne({ where: { id: userId } });
-  const post = await TimeLine.findOne({ where: { id: postId } });
-  post.addUser(user);
-};
+// TimeLine.belongsTo(User, { foreignKey: 'user_id' });
 
 const fetchTarotCards = () => {
   axios.get('https://tarot-api.onrender.com/api/v1/cards')
@@ -120,16 +99,48 @@ const fetchTarotCards = () => {
 const seeder = async () => {
   console.log('the seeder function was invoked');
   await sequelize.sync({ force: true });
-  await User.create({
-    name: 'PtBarnum',
-    dob: '01/19',
-    sign: 'Banana'
-  })
+  await User.bulkCreate([
+    {
+      name: 'Francis',
+      dob: '01/19',
+      sign: 'Aquarius'
+    },
+    {
+      name: 'Jessica',
+      dob: '03/20',
+      sign: 'Pisces'
+    },
+    {
+      name: 'Nicole',
+      dob: '05/30',
+      sign: 'Gemini'
+    },
+    {
+      name: 'Carlos',
+      dob: '11/11',
+      sign: 'Scorpius'
+    }
+  ])
     .then(() => { console.log('User Model Create Success'); })
     .catch((err) => { console.error('User Model Create Failure', err); });
-  await TimeLine.create({
-    post: 'This is a new test post!!!'
-  })
+  await TimeLine.bulkCreate([
+    {
+      post: 'Hello everyone',
+      user_id: 1
+    },
+    {
+      post: 'the world is mystifying',
+      user_id: 2
+    },
+    {
+      post: 'I was here!!!',
+      user_id: 3
+    },
+    {
+      post: 'Begin again =)',
+      user_id: 4
+    }
+  ])
     .then(() => { console.log('Created Post'); })
     .catch((err) => { console.error('Failed to create Post', err); });
   fetchTarotCards();
