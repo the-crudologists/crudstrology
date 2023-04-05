@@ -10,6 +10,7 @@ const Feed = () => {
   const [users, setUsers] = useState([{ name: 'X' }]);
   const [userPost, setUserPost] = useState([]);
   const [submitPost, setSubmitPost] = useState('');
+  const [newPost, setNewPost] = useState(false);
 
   // Grab the posts made by a user
   const renderFeed = () => {
@@ -53,6 +54,7 @@ const Feed = () => {
     const submitButton = document.getElementById('submit-button');
 
     submitNewPost(submitPost);
+    setNewPost(true);
 
     chat.style.display = 'block';
     submitButton.style.display = 'none';
@@ -63,7 +65,8 @@ const Feed = () => {
   // Renders the post to state
   useEffect(() => {
     renderFeed();
-  }, []);
+    setNewPost(false);
+  }, [newPost]);
 
   // Renders the users to state after posts
   useEffect(() => {
