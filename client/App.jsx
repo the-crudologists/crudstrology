@@ -39,7 +39,7 @@ const App = () => {
         <div>
           <NavBar />
         </div>
-        <div>
+        <div style={{ marginTop: '10px', height: 'auto' }}>
           <Routes>
             <Route path="/" element={<Feed />} />
             <Route path="/astrology" element={<Astrology />} />

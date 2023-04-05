@@ -64,7 +64,7 @@ const Feed = () => {
       'grid-template-columns': '1fr 1fr',
       'grid-gap': '20px',
       border: '1px solid black',
-      width: '100%',
+      width: '100%'
     }}>
       <div style={{
         'border-style': 'solid'
@@ -72,7 +72,7 @@ const Feed = () => {
         <h1 className='chat-feed'>Timeline</h1>
         <Chat userPost={userPost} />
       </div>
-      <div style={{ display: 'inline-block', 'border-style': 'solid' }}>
+      <div style={{ display: 'inline-block', 'border-style': 'solid', maxHeight: '100%', overflow: 'auto' }}>
         <h1 className='horo-title'>Wise Quotes</h1>
         <div style={{ fontSize: '20px' }}><b><p>Like a quote to add to Favorites</p></b></div>
         {/* <ZenQuotes /> */}
