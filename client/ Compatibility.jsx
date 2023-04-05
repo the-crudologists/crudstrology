@@ -7,19 +7,22 @@ import {
   NavItem,
 } from './Styled.jsx';
 import axios from 'axios';
-//require('dotenv').config
 
 const Compatibility = () => {
   //Using useEffect to fetch the current users' zodiac sign, in order to set sign1's input field defaultValue to their respective zodiac sign
   useEffect(() => {
-      axios.get('/auth/user')
-        .then(({data}) => {
+    axios
+      .get('/auth/user')
+      .then(({ data }) => {
         setSign1(data[0].sign);
-        })
-        .catch(err => {
-          console.log('Error fetching Authenticated Google User from req.user (server/passport)', err);
-        });
-    }, []);
+      })
+      .catch((err) => {
+        console.log(
+          'Error fetching Authenticated Google User from req.user (server/passport)',
+          err
+        );
+      });
+  }, []);
 
   const [sign1, setSign1] = useState(''); //Note to self: change to user's sign
   const [sign2, setSign2] = useState('');
@@ -84,13 +87,13 @@ const Compatibility = () => {
       .catch((err) => console.log('Error in retrieving from comp api'));
   };
 
- const showNavBar = () => {
-    setIsNavBarVisible(true)
-  }
+  const showNavBar = () => {
+    setIsNavBarVisible(true);
+  };
 
   return (
     <div name='parent'>
-          {console.log(isNavBarVisible)}
+      {console.log(isNavBarVisible)}
       <h1 className='comp-title'>Compatibility Selector</h1>
       {/* First Zodiac Sign Input */}
       <label name='sign-1'>
@@ -137,48 +140,50 @@ const Compatibility = () => {
 
       <h1 className='comp-results-title'>Compatibility Results</h1>
 
-      {isNavBarVisible && <CompNavBarInline>
-        <NavItem
-          onClick={() => {
-            setDisplayHeader(resultsHeader);
-            setDisplayText(results);
-          }}
-        >
-          Main
-        </NavItem>
-        <NavItem
-          onClick={() => {
-            setDisplayHeader('Planets');
-            setDisplayText(planets);
-          }}
-        >
-          Planets
-        </NavItem>
-        <NavItem
-          onClick={() => {
-            setDisplayHeader('Elements');
-            setDisplayText(elements);
-          }}
-        >
-          Elements
-        </NavItem>
-        <NavItem
-          onClick={() => {
-            setDisplayHeader('Modalities');
-            setDisplayText(modalities);
-          }}
-        >
-          Modalities
-        </NavItem>
-        <NavItem
-          onClick={() => {
-            setDisplayHeader(highlightsHeader);
-            setDisplayText(highlights);
-          }}
-        >
-          Highlights
-        </NavItem>
-      </CompNavBarInline>}
+      {isNavBarVisible && (
+        <CompNavBarInline>
+          <NavItem
+            onClick={() => {
+              setDisplayHeader(resultsHeader);
+              setDisplayText(results);
+            }}
+          >
+            Main
+          </NavItem>
+          <NavItem
+            onClick={() => {
+              setDisplayHeader('Planets');
+              setDisplayText(planets);
+            }}
+          >
+            Planets
+          </NavItem>
+          <NavItem
+            onClick={() => {
+              setDisplayHeader('Elements');
+              setDisplayText(elements);
+            }}
+          >
+            Elements
+          </NavItem>
+          <NavItem
+            onClick={() => {
+              setDisplayHeader('Modalities');
+              setDisplayText(modalities);
+            }}
+          >
+            Modalities
+          </NavItem>
+          <NavItem
+            onClick={() => {
+              setDisplayHeader(highlightsHeader);
+              setDisplayText(highlights);
+            }}
+          >
+            Highlights
+          </NavItem>
+        </CompNavBarInline>
+      )}
 
       <TarotCard>
         <h2>{displayHeader}</h2>
