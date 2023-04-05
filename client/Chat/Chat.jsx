@@ -1,12 +1,14 @@
-import React from 'react';
-
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 
 const Chat = (props) => {
-  const { feed } = props;
+  const { userPost } = props;
+
+
   return (
-    <div style={{ 'border-style': 'solid' }}>
-      <span style={{ 'border-style': 'solid' }}>
-        {feed.map(message => <span style={{ 'border-style': 'solid' }}>{message.post}</span>)}
+    <div>
+      <span>
+        {userPost.map(post => <span style={{ 'text-align': 'left' }}><h3>{post.user}</h3>{post.post}</span>)}
       </span>
     </div >
   );

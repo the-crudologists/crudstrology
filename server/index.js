@@ -61,16 +61,28 @@ app.get('/auth/google/callback',
 
 // passing res.send(req.user) inside this endpoint becomes undefined.. 'fixed' w/ loggedInUser
 app.get('/auth/user', (req, res) => {
-  // console.log(req);
-  res.send(req.user);
+  const { googleId } = req.user[0];
+  User.findAll({
+    where: {
+      googleId: googleId
+    }
+  })
+    .then((user) => {
+      res.status(200);
+      res.send(user);
+    })
+    .catch((err) => {
+      console.error('Failed to finish request:', err);
+      res.sendStatus(500);
+    });
 });
 
 // <-- END PASSPORT DOCS
 
 //patch User entry in DB with user input DOB
 app.patch('/user/:googleId', (req, res) => {
-  //console.log('req.body: ', req.body);
-  const { googleId } = req.params;
+  // console.log('req.body: ', req.body);
+  const googleId = req.user[0].googleId;
   User.update(req.body, {
     where: {
       googleId: googleId
@@ -81,7 +93,7 @@ app.patch('/user/:googleId', (req, res) => {
       //console.log('response: ', response);
       User.findAll({
         where: {
-          googleId: loggedInUser.googleId
+          googleId: googleId
         }
       })
         .then((response) => {
@@ -110,10 +122,21 @@ app.get('/users/feed', (req, res) => {
     });
 });
 
-(async () => {
-  // <-- build seed script and call seeder() in that file...
-  await seeder();
-})();
+app.get('/users/username', (req, res) => {
+  User.findAll()
+    .then((data) => {
+      res.status(200).send(data);
+    })
+    .catch((err) => {
+      console.error('Failed to find anything:', err);
+      res.sendStatus(500);
+    });
+});
+
+// (async () => {
+//   // <-- build seed script and call seeder() in that file...
+//   await seeder();
+// })();
 
 // <-- SERVER WILDCARD -->
 app.get('*', (req, res) => {
