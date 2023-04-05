@@ -68,18 +68,19 @@ const Compatibility = () => {
 
   const getCompatibility = () => {
     // When a user clicks submit, data from the API should be fetched through a GET request
-    axios.get(`api/compatibility/${sign1}/${sign2}`)
+    axios
+      .get(`api/compatibility/${sign1}/${sign2}`)
       .then(({ data }) => {
-        console.log(data, 'this is the display header')
-      setDisplayHeader(data[0].header)
-      setDisplayText(data[0].text)
-      setResultHeader(data[0].header)
-      setResults(data[0].text)
-      setPlanets(data[1].text)
-      setElements(data[2].text)
-      setModalities(data[3].text)
-      setHighlightsHeader(data[4].header)
-      setHighlights(data[4].text)
+        console.log(data, 'this is the display header');
+        setDisplayHeader(data[0].header);
+        setDisplayText(data[0].text);
+        setResultHeader(data[0].header);
+        setResults(data[0].text);
+        setPlanets(data[1].text);
+        setElements(data[2].text);
+        setModalities(data[3].text);
+        setHighlightsHeader(data[4].header);
+        setHighlights(data[4].text);
       })
       .catch((err) => console.log('Error in retrieving from comp api'));
   };
