@@ -20,7 +20,7 @@ const TextBox = () => {
       // console.log(quillRef.current.querySelector('.ql-editor').innerText);
       const newEntry = quillRef.current.querySelector('.ql-editor').innerText;
       setEntries(prevEntries => [...prevEntries, newEntry]);
-     axios.post('/api/jEntry', {entry: newEntry}).then(response => {
+     axios.post('/db/jEntry', {body: newEntry}).then(response => {
           console.log(response.data);
         })
         .catch(error => {

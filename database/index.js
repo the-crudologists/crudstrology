@@ -61,7 +61,7 @@ const Horoscope = sequelize.define('horoscope', {
   description: { type: Sequelize.STRING },
   sunsign: { type: Sequelize.STRING },
   keywords: { type: Sequelize.STRING },
-  intensity: { type: Sequelize.STRING },
+  intensity: { type: Sequelize.INTEGER },
   lucky_number: { type: Sequelize.INTEGER },
   lucky_time: { type: Sequelize.STRING }
 });

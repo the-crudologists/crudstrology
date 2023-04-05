@@ -81,7 +81,7 @@ Internal.get('/jEntry', (req, res) => {
 });
 
 Internal.post('/jEntry', (req, res) => {
-  const { body } = req.body;
+  // const { body } = req.body;
   console.log(req.body);
   JournalEntry.create(req.body);
   console.log('hi');
