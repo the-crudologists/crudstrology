@@ -35,7 +35,7 @@ const Compatibility = () => {
     'Choose your two zodiac signs to get started!'
   );
   const [displayHeader, setDisplayHeader] = useState('');
-  const [navBar, setNavBar] = useState('');
+  const [isNavBarVisible, setIsNavBarVisible] = useState(false);
 
   const zodiacSigns = [
     'Aries',
@@ -85,52 +85,9 @@ const Compatibility = () => {
       .catch((err) => console.log('Error in retrieving from comp api'));
   };
 
-  const showNavBar = () => {
-    setNavBar(
-      <CompNavBarInline>
-        <NavItem
-          onClick={() => {
-            setDisplayHeader(resultsHeader);
-            setDisplayText(results);
-          }}
-        >
-          Main
-        </NavItem>
-        <NavItem
-          onClick={() => {
-            setDisplayHeader('Planets');
-            setDisplayText(planets);
-          }}
-        >
-          Planets
-        </NavItem>
-        <NavItem
-          onClick={() => {
-            setDisplayHeader('Elements');
-            setDisplayText(elements);
-          }}
-        >
-          Elements
-        </NavItem>
-        <NavItem
-          onClick={() => {
-            setDisplayHeader('Modalities');
-            setDisplayText(modalities);
-          }}
-        >
-          Modalities
-        </NavItem>
-        <NavItem
-          onClick={() => {
-            setDisplayHeader(highlightsHeader);
-            setDisplayText(highlights);
-          }}
-        >
-          Highlights
-        </NavItem>
-      </CompNavBarInline>
-    );
-  };
+ const showNavBar = () => {
+    setIsNavBarVisible((isVisible) => !isVisible)
+  }
 
   return (
     <div name='parent'>
@@ -172,6 +129,7 @@ const Compatibility = () => {
       <CompatibilityButton
         onClick={() => {
           getCompatibility();
+          showNavBar();
         }}
       >
         Submit &hearts;{' '}
@@ -179,7 +137,7 @@ const Compatibility = () => {
 
       <h1 className='comp-results-title'>Compatibility Results</h1>
 
-      <CompNavBarInline>
+      {isNavBarVisible && <CompNavBarInline>
         <NavItem
           onClick={() => {
             setDisplayHeader(resultsHeader);
@@ -220,7 +178,7 @@ const Compatibility = () => {
         >
           Highlights
         </NavItem>
-      </CompNavBarInline>
+      </CompNavBarInline>}
 
       <TarotCard>
         <h2>{displayHeader}</h2>
