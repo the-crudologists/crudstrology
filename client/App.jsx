@@ -7,7 +7,7 @@ import Compatibility from './ Compatibility.jsx';
 import Favorites from './Favorites.jsx';
 import { Route, Routes } from 'react-router-dom';
 import axios from 'axios';
-import Journal from './Journal Component/Journal.jsx';
+import Journal from './Journal/Journal.jsx';
 
 
 export const UserContext = React.createContext();
@@ -22,7 +22,6 @@ const App = () => {
   useEffect(() => {
     axios.get('/auth/user')
       .then(({ data }) => {
-        console.log(data);
         setUser(data[0].name);
         setDob(data[0].dob); // May be null on initialization need logic in sub components accordingly
         setSign(data[0].sign); //see above comment^
@@ -39,7 +38,7 @@ const App = () => {
         <div>
           <NavBar />
         </div>
-        <div>
+        <div style={{ marginTop: '12px' }}>
           <Routes>
             <Route path="/" element={<Feed />} />
             <Route path="/astrology" element={<Astrology />} />

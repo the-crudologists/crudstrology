@@ -36,7 +36,6 @@ const DeleteButton = styled.button`
 const NavStyle = styled.div`
 display: block;
 color: midnightblue;
-padding: 40px;
 margin: -10px 0;
 border-top: 10px solid midnightblue;
 border-bottom: 10px solid midnightblue;
@@ -175,15 +174,38 @@ const CompatibilityButton = styled.button`
   cursor: pointer;
   `;
 
-  const NavBarInline = styled.div`
+const PostButton = styled.button`
+  background: black;
+  border-radius: 3px;
+  border: 2px solid ;
+  color: white;
+  margin: 0.5em 1em;
+  padding: 0.25em 1em;
+  &:hover {
+    border-color: #8a04dd;
+    color: #8a04dd;
+    box-shadow: .05rem .05rem .05rem .05rem  #5d0593;
+    transform: scale(1.05);
+  }
+  `;
+const PostInput = styled.input`
+  background: black;
+  border-radius: 3px;
+  border: 2px solid;
+  color: white;
+  margin: auto;
+  display: block;
+  `;
+
+const NavBarInline = styled.div`
   display: inline;
   margin-left: 50px;
   `;
 
-  const CompNavBarInline = styled.div`
+const CompNavBarInline = styled.div`
   display: block;
-color: midnightblue;
-padding: 0px;
+  color: midnightblue;
+  padding: 0px;
   flex-wrap: wrap;
   display: flex;
   justify-content: space-around;
@@ -191,9 +213,10 @@ padding: 0px;
   align-content: right;
   `;
 
-  const TooltipBox = styled.div`
+const TooltipBox = styled.div`
   visibility: hidden;
 `;
+
 const TooltipCard = styled.div`
    margin: 16px;
    & ${SignChartButton}:hover + ${TooltipBox} {

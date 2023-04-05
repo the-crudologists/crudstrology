@@ -13,7 +13,7 @@ const ZenQuotes = () => {
         content: quote.content,
         author: quote.author
       }
-    }).then(() => 
+    }).then(() =>
       quote.like = true
     )
       .catch((err) => console.error(err));
