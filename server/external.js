@@ -30,7 +30,12 @@ External.post('/horo', (req, res) => {
   const { user } = req.body;
   // getting the sign to be in lowercase for new api
   const {sign} = user;
-  const lowercaseSign = sign.toLowerCase();
+  //bug fix
+  const lowercaseSign = null
+if ((sign && sign.user) || false) {
+   lowercaseSign = sign.toLowerCase();
+}
+
   console.log('USER DESTRUCTURED', user);
   axios.get(`http://sandipbgt.com/theastrologer/api/horoscope/${lowercaseSign}/today/`)
   // axios.post(`https://aztro.sameerkumar.website?sign=${user.sign}&day=today`)
