@@ -58,10 +58,11 @@ const Horoscope = sequelize.define('horoscope', {
     type: Sequelize.STRING,
     defaultValue: () => new Date().toLocaleDateString()
   },
-  description: { type: Sequelize.STRING },
+  description: { type: Sequelize.TEXT },
   sunsign: { type: Sequelize.STRING },
+  mood: { type: Sequelize.STRING },
   keywords: { type: Sequelize.STRING },
-  intensity: { type: Sequelize.INTEGER },
+  intensity: { type: Sequelize.STRING },
   lucky_number: { type: Sequelize.INTEGER },
   lucky_time: { type: Sequelize.STRING }
 });
@@ -143,7 +144,7 @@ const fetchTarotCards = () => {
 };
 // you can run this to update tables without seeding
 
- //sequelize.sync({ force: true });
+//  sequelize.sync({ force: true });
 
 // <-- might not need to be async -->
 const seeder = async () => {
@@ -232,3 +233,4 @@ module.exports.TimeLine = TimeLine;
 module.exports.sequelize = sequelize;
 module.exports.seeder = seeder;
 module.exports.JournalEntry = JournalEntry;
+module.exports.Horoscope = Horoscope;
