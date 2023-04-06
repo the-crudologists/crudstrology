@@ -6,7 +6,6 @@ const PostForm = (props) => {
 
   const handleChangeInput = (event) => {
     setSubmitPost(event.target.value);
-    console.log(submitPost);
   };
 
   return (
