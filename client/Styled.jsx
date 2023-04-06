@@ -202,4 +202,4 @@ const CompNavBarInline = styled.div`
   `;
 
 
-export { NavStyle, NavItem, NavUserInfo, NavImg, AstroButton, UserHoro, OtherHoros, TarotCard, WrapCardText, Reading, QuoteButton, DeleteButton, CompatibilityInput, CompatibilityButton, NavBarInline, CompNavBarInline, SignChartButton, PostButton, PostInput };
+export { NavStyle, NavItem, NavUserInfo, NavImg, AstroButton, UserHoro, OtherHoros, TarotCard, WrapCardText, Reading, QuoteButton, DeleteButton, CompatibilityInput, CompatibilityButton, NavBarInline, CompNavBarInline, PostButton, PostInput };
