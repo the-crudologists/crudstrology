@@ -14,7 +14,7 @@ const sequelize = new Sequelize(
   'root',
   '',
   {
-    host: 'localhost',
+    host: '127.0.0.1',
     dialect: 'mysql',
     logging: false
   }
@@ -54,7 +54,7 @@ const Tarot = sequelize.define('tarotCard', {
 });
 const Horoscope = sequelize.define('horoscope', {
   date_range: { type: Sequelize.STRING },
-  current_date: { 
+  current_date: {
     type: Sequelize.STRING,
     defaultValue: () => new Date().toLocaleDateString()
   },
