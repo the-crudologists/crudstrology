@@ -1,19 +1,31 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 
 const UserEntries = () => {
-  const test = ['test 1', 'test 2', 'test 3', 'test 4', 'test 5'];
+  const [entries, setEntries] = useState([]);
+
+  useEffect(() => {
+    axios.get('/db/jEntry')
+      .then(response => {
+        setEntries(response.data);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  }, []);
 
   return (
     <div className='UserEntries'>
-      <h1 className='UserEntries-title'> Entries</h1>
+      <h1 className='UserEntries-title'>Entries</h1>
       <ul>
-        {test.map((entry, index) => (
-          <li key={index}onClick={() => console.log(entry)}>{entry}</li>
+        {entries.map(entry => (
+          <li key={entry.entry_id} onClick={() => console.log(entry.body)}>
+            {entry.id}
+          </li>
         ))}
       </ul>
     </div>
   );
 };
-
 
 export default UserEntries;

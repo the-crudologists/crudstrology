@@ -1,7 +1,9 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { useQuill } from 'react-quilljs';
 import 'quill/dist/quill.snow.css';
+const axios = require('axios')
 
+// import { JournalEntry } from '../../database';
 const TextBox = () => {
   // variables for quill
   const { quill, quillRef } = useQuill();
@@ -18,7 +20,12 @@ const TextBox = () => {
       // console.log(quillRef.current.querySelector('.ql-editor').innerText);
       const newEntry = quillRef.current.querySelector('.ql-editor').innerText;
       setEntries(prevEntries => [...prevEntries, newEntry]);
-
+     axios.post('/db/jEntry', {body: newEntry}).then(response => {
+          console.log(response.data);
+        })
+        .catch(error => {
+          console.error(error);
+        });
     }
   };
   // console.log(quill); // undefined > Quill Object

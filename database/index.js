@@ -58,8 +58,9 @@ const Horoscope = sequelize.define('horoscope', {
     type: Sequelize.STRING,
     defaultValue: () => new Date().toLocaleDateString()
   },
-  description: { type: Sequelize.STRING },
+  description: { type: Sequelize.TEXT },
   sunsign: { type: Sequelize.STRING },
+  mood: { type: Sequelize.STRING },
   keywords: { type: Sequelize.STRING },
   intensity: { type: Sequelize.STRING },
   lucky_number: { type: Sequelize.INTEGER },
@@ -90,21 +91,27 @@ const Horoscope = sequelize.define('horoscope', {
 //     type: Sequelize.STRING,
 //     allowNull: false
 //   },
-//   user_id: {
-//     type: Sequelize.INTEGER,
-//     references: {
-//       model: 'users',
-//       key: 'user_id'
-//     }
-//   },
-//   horoscope_id: {
-//     type: Sequelize.INTEGER,
-//     references: {
-//       model: 'horoscopes',
-//       key: 'horoscope_id'
-//     }
-//   }
+//   // user_id: {
+//   //   type: Sequelize.INTEGER,
+//   //   references: {
+//   //     model: 'users',
+//   //     key: 'user_id'
+//   //   }
+//   // },
+//   // horoscope_id: {
+//   //   type: Sequelize.INTEGER,
+//   //   references: {
+//   //     model: 'horoscopes',
+//   //     key: 'horoscope_id'
+//   //   }
+//   // }
 // });
+const JournalEntry = sequelize.define('journal_entry', {
+  body: {
+    type: Sequelize.STRING,
+    allowNull: false
+  }
+});
 
 const Quotes = sequelize.define('quote', {
   _id: { type: Sequelize.STRING },
@@ -135,7 +142,9 @@ const fetchTarotCards = () => {
       console.log('<-- API --> ERROR FROM TAROT API', err);
     });
 };
+// you can run this to update tables without seeding
 
+//  sequelize.sync({ force: true });
 
 // <-- might not need to be async -->
 const seeder = async () => {
@@ -223,3 +232,5 @@ module.exports.Quotes = Quotes;
 module.exports.TimeLine = TimeLine;
 module.exports.sequelize = sequelize;
 module.exports.seeder = seeder;
+module.exports.JournalEntry = JournalEntry;
+module.exports.Horoscope = Horoscope;
