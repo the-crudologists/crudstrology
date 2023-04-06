@@ -38,8 +38,8 @@ const UserProfile = () => {
              </div>
 
 
-    );
-}
+  );
+};
 
 
 

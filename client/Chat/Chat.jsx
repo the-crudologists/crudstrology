@@ -5,10 +5,10 @@ const Chat = (props) => {
 
   return (
     <div>
-      {userPost.map(post => {
+      {userPost.map((post, i) => {
         return (
-          <div className='quote'>
-            <span style={{ fontWeight: 'bold', fontSize: '18px' }}>{post.user}</span>:
+          <div className='quote' key={i}>
+            <a href="/user/profile" style={{ fontWeight: 'bold', fontSize: '18px' }}>{post.user}</a>:
             <span style={{ marginLeft: '10px' }}>{post.post}</span>
           </div>
         );

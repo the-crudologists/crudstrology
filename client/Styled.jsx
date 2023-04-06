@@ -183,6 +183,9 @@ const PostInput = styled.input`
   color: white;
   margin: auto;
   display: block;
+  width: 500px;
+  height: 30px;
+  font-size: 20px;
   `;
 
 const NavBarInline = styled.div`

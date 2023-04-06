@@ -29,7 +29,7 @@ const Astrology = () => {
       }
     })
       .then(reading => {
-        console.log(reading.data)
+        console.log(reading.data);
         // const horoscopeData = {
         //   // date_range: reading.data.date_range,
         //   current_date: reading.data.date,
@@ -41,9 +41,9 @@ const Astrology = () => {
         //   lucky_time: generateLuckyTime(),
         //   // userId: userId
         // };
-// console.log(horoscopeData)
-  
-       
+        // console.log(horoscopeData)
+
+
         // setReading(reading.data);
       })
       .catch(err => {
@@ -104,7 +104,7 @@ const Astrology = () => {
           })
         }
       </div>
-     
+
     </div>
 
   );
