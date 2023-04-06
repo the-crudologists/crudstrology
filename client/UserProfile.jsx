@@ -1,13 +1,22 @@
-import React, { useContext } from 'react';
-import { UserContext } from './App.jsx';
+import React from 'react';
+import {Link, useLocation } from 'react-router-dom'
+
 
 
 const UserProfile = () => {
-    const { dob, setDob, sign, setSign, user } = useContext(UserContext);
+    const { state } = useLocation();
+    console.log(state.name)
+    console.log(useLocation())
     return (
         <div name ="parent">
-                {console.log(user, 'This is the user')}
-             <h1 className='comp-title'>Welcome to ___ </h1>
+             <img src={`https://robohash.org/${state.name}?set=set5`} />
+            <div><h1 className='comp-title'>{state.name}</h1>
+             <h1 className='comp-sign'>{state.dob}</h1>
+             <h1 className='comp-sign'>{state.sign}</h1>
+             </div> 
+             <Link to="/">Go Back</Link>
+
+
         </div>
 
     );
