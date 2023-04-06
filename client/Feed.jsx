@@ -27,7 +27,9 @@ const Feed = () => {
       });
   };
 
-  // Post Form Creator
+  ///////// Post Form Functionality /////////
+
+  // Makes the Post Form appear on screen
   const makePostFormAppear = () => {
     const chat = document.getElementById('chat-post');
     const post = document.getElementById('post-box');
@@ -40,6 +42,7 @@ const Feed = () => {
     post.style.display = 'block';
   };
 
+  // Sends axios post request to the db, then changes our newPost boolean state
   const submitNewPost = (post) => {
     axios.post('/user/post', { post: post })
       .then(() => {
@@ -50,7 +53,7 @@ const Feed = () => {
       });
   };
 
-  // Makes the posts from all users seen again
+  // Unhides the post that are hidden when making a post
   const makePostsReappear = () => {
     const chat = document.getElementById('chat-post');
     const post = document.getElementById('post-box');
@@ -72,6 +75,7 @@ const Feed = () => {
     }
   };
 
+  ///////// This is all for rendering all post in chat /////////
   // Renders the post to state
   useEffect(() => {
     renderFeed();
@@ -92,7 +96,7 @@ const Feed = () => {
       });
   }, []);
 
-
+  // Helper for making the post
   const handlePosts = () => {
     const userPostArr = [];
     let userObj = {};
@@ -120,10 +124,15 @@ const Feed = () => {
     handlePosts();
   }, [feed]);
 
+  // Changes our state condition when there is a new post by user in actual time
   useEffect(() => {
     setNewPost(false);
   }, [userPost]);
 
+  ///////// Finished /////////
+
+
+  // Interval for rendering the feed in real time
   useEffect(() => {
     const interval = setInterval(() => {
       renderFeed();
