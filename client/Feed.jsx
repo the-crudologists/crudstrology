@@ -16,7 +16,11 @@ const Feed = () => {
   const renderFeed = () => {
     axios.get('/users/feed')
       .then(({ data }) => {
-        setFeed(data);
+        const reverseData = [];
+        for (let i = data.length - 1; i >= 0; i--) {
+          reverseData.push(data[i]);
+        }
+        setFeed(reverseData);
       })
       .catch((err) => {
         console.error('Failed to meet request:', err);
@@ -39,7 +43,7 @@ const Feed = () => {
   const submitNewPost = (post) => {
     axios.post('/user/post', { post: post })
       .then(() => {
-        console.log('ding!');
+        setNewPost(true);
       })
       .catch((err) => {
         console.error('Failed request:', err);
@@ -53,23 +57,28 @@ const Feed = () => {
     const postButton = document.getElementById('post-button');
     const submitButton = document.getElementById('submit-button');
 
-    submitNewPost(submitPost);
-    setNewPost(true);
-
-    chat.style.display = 'block';
-    submitButton.style.display = 'none';
-    postButton.style.display = '';
-    post.style.display = 'none';
+    if (submitPost !== '') {
+      submitNewPost(submitPost);
+      renderFeed();
+      chat.style.display = 'block';
+      submitButton.style.display = 'none';
+      postButton.style.display = '';
+      post.style.display = 'none';
+    } else {
+      alert('No message to post');
+    }
   };
 
   // Renders the post to state
   useEffect(() => {
     renderFeed();
     setNewPost(false);
+    console.log(newPost);
   }, [newPost]);
 
   // Renders the users to state after posts
   useEffect(() => {
+    // console.log(newPost);
     axios.get('/users/username')
       .then(({ data }) => {
         setUsers(data);
@@ -77,7 +86,7 @@ const Feed = () => {
       .catch((err) => {
         console.error(err);
       });
-  }, [feed]);
+  }, []);
 
   // Renders a user to a post after the user populates
   useEffect(() => {
@@ -100,7 +109,7 @@ const Feed = () => {
       });
     });
     setUserPost(userPostArr);
-  }, [users]);
+  }, [feed]);
 
   return (
     <div style={{
