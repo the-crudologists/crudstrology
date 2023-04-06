@@ -63,7 +63,7 @@ External.post('/horo', (req, res) => {
         keywords: keywords,
         intensity: intensity,
       };
-      console.log(newObj2);
+      
       Horoscope.create(newObj2)
         .then(() => {
           console.log('New horoscope entry created successfully!');
@@ -77,6 +77,7 @@ External.post('/horo', (req, res) => {
     })
     .catch((err) => res.sendStatus(500)); // console.log('Error from Aztro api post request SERVER', err)
 });
+
 
 // Compatibility API
 External.get('/compatibility/:sign1/:sign2', (req, res) => {

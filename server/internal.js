@@ -8,7 +8,7 @@ const Internal = express.Router();
 require('./auth.js');
 
 // database
-const { Quotes, Tarot, JournalEntry } = require('../database/index.js');
+const { Quotes, Tarot, JournalEntry, Horoscope } = require('../database/index.js');
 const Sequelize = require('sequelize');
 
 // middleware
@@ -86,6 +86,20 @@ Internal.post('/jEntry', (req, res) => {
   JournalEntry.create(req.body);
   console.log('hi');
   res.status(200).send('Journal entry route hit successfully');
+});
+
+Internal.get('/horo', (req, res) => {
+ 
+  Horoscope.findOne({
+    order: [['createdAt', 'DESC']]
+  })
+    .then(latestHoroscope => {
+      res.status(200).send(latestHoroscope);
+    })
+    .catch(error => {
+      console.error(error);
+      res.sendStatus(500);
+    });
 });
 
 module.exports = { Internal };
