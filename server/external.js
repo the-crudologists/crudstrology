@@ -60,6 +60,7 @@ External.post('/horo', (req, res) => {
         mood: mood,
         keywords: keywords,
         intensity: intensity,
+        user_id: user
       };
       
       Horoscope.create(newObj2)

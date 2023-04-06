@@ -10,7 +10,7 @@ const Astrology = () => {
 
   const [reading, setReading] = useState(fakeHoro);
   const [horoscopes, setHoroscopes] = useState([]);
-  const { user ,dob, sign } = useContext(UserContext);
+  const { user ,dob, sign, userId } = useContext(UserContext);
 
   const generateLuckyTime = () => {
     const hours = Math.floor(Math.random() * 12) + 1;
@@ -26,7 +26,7 @@ const Astrology = () => {
   const fetchHoro = (fetchSign) => {
     axios.post('/api/horo', {
       data: {
-        user: user,
+        user: userId,
         sign: fetchSign
       }
     })
