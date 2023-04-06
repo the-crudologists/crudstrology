@@ -6,8 +6,6 @@ import {
   CompNavBarInline,
   NavItem,
   SignChartButton,
-  TooltipBox,
-  TooltipCard,
   NavBarInline
 } from './Styled.jsx';
 import axios from 'axios';
@@ -142,7 +140,6 @@ const Compatibility = () => {
       >
         Submit{' '}
       </CompatibilityButton>
-      {/* <TooltipCard> <SignChartButton>Not sure?</SignChartButton><TooltipBox><p>First item</p></TooltipBox></TooltipCard> */}
 
       <h1 className='comp-results-title'>Compatibility Results</h1>
 
