@@ -4,6 +4,7 @@ import axios from 'axios';
 import Chat from './Chat/Chat.jsx';
 import PostForm from './Chat/PostForm.jsx';
 import { PostButton } from './Styled.jsx';
+import { Link } from 'react-router-dom'
 
 const Feed = () => {
   const [feed, setFeed] = useState([{ post: 'Loading...' }]);
@@ -96,12 +97,12 @@ const Feed = () => {
       users.forEach(user => {
         const userId = message.user_id;
         if (userId === user.user_id) {
-          userObj.user = user.name;
+          userObj.user = <Link to="/profile" state={user}>{user.name}</Link>;
           userObj.post = message.post;
           userPostArr.push(userObj);
           userObj = {};
         } else if (!userId && !user.user_id) {
-          userObj.user = user.name;
+          userObj.user =  user.name;
           userObj.post = message.post;
           userPostArr.push(userObj);
           userObj = {};
