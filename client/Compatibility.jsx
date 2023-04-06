@@ -5,7 +5,6 @@ import {
   TarotCard,
   CompNavBarInline,
   NavItem,
-  SignChartButton,
   NavBarInline
 } from './Styled.jsx';
 import axios from 'axios';

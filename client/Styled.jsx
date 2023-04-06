@@ -148,18 +148,6 @@ font-size: 16px;
 }
 `;
 
-const SignChartButton = styled.button`
-background: black;
-border-radius: 3px;
-border: 2px solid ;
-color: white;
-height: 45px;
-width: 100px;
-margin: 1em 1em;
-transition: fill 0.25s;
-cursor: pointer;
-  `;
-
 
 const CompatibilityButton = styled.button`
   background: black;
