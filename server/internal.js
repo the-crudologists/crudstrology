@@ -1,7 +1,7 @@
 // router
 const express = require('express');
 const Internal = express.Router();
-
+const { TimeLine } = require('../database/index.js');
 // const { Internal } = Router();
 
 // auth
@@ -71,12 +71,12 @@ Internal.delete('/quotes/:id', (req, res) => {
 
 // For Journal entry
 Internal.get('/jEntry', (req, res) => {
-  JournalEntry.findAll({ 
+  JournalEntry.findAll({
     order: [['createdAt', 'DESC']]
   }).then((entries)=>{
-      console.log(entries);
-  res.status(200).send(entries);
-  })
+    console.log(entries);
+    res.status(200).send(entries);
+  });
 
 });
 
@@ -89,7 +89,7 @@ Internal.post('/jEntry', (req, res) => {
 });
 
 Internal.get('/horo', (req, res) => {
- 
+
   Horoscope.findOne({
     order: [['createdAt', 'DESC']]
   })
@@ -101,5 +101,6 @@ Internal.get('/horo', (req, res) => {
       res.sendStatus(500);
     });
 });
+
 
 module.exports = { Internal };

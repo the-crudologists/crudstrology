@@ -10,7 +10,7 @@ const Feed = () => {
   const [users, setUsers] = useState([{ name: 'X' }]);
   const [userPost, setUserPost] = useState([]);
   const [submitPost, setSubmitPost] = useState('');
-  const [newPost, setNewPost] = useState(false);
+  const [newPost, setNewPost] = useState(true);
 
   // Grab the posts made by a user
   const renderFeed = () => {
@@ -59,11 +59,14 @@ const Feed = () => {
 
     if (submitPost !== '') {
       submitNewPost(submitPost);
-      renderFeed();
-      chat.style.display = 'block';
-      submitButton.style.display = 'none';
-      postButton.style.display = '';
-      post.style.display = 'none';
+
+      setTimeout(() => {
+        chat.style.display = 'block';
+        submitButton.style.display = 'none';
+        postButton.style.display = '';
+        post.style.display = 'none';
+      }, 1000);
+
     } else {
       alert('No message to post');
     }
@@ -72,8 +75,9 @@ const Feed = () => {
   // Renders the post to state
   useEffect(() => {
     renderFeed();
-    setNewPost(false);
-    console.log(newPost);
+    // const interval = setInterval(() => {
+    //   renderFeed();
+    // }, 10000);
   }, [newPost]);
 
   // Renders the users to state after posts
@@ -88,8 +92,8 @@ const Feed = () => {
       });
   }, []);
 
-  // Renders a user to a post after the user populates
-  useEffect(() => {
+
+  const handlePosts = () => {
     const userPostArr = [];
     let userObj = {};
     feed.forEach(message => {
@@ -109,19 +113,34 @@ const Feed = () => {
       });
     });
     setUserPost(userPostArr);
+  };
+
+  // Renders a user to a post after the user populates
+  useEffect(() => {
+    handlePosts();
   }, [feed]);
+
+  useEffect(() => {
+    setNewPost(false);
+  }, [userPost]);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      renderFeed();
+    }, 60000);
+  });
 
   return (
     <div style={{
       display: 'grid',
-      'grid-template-columns': '1fr 1fr',
-      'grid-gap': '20px',
+      gridTemplateColumns: '1fr 1fr',
+      gridGap: '20px',
       border: '1px solid black',
       width: '100%',
       height: '480px',
       maxHeight: '480px'
     }}>
-      <div style={{ display: 'inline-block', 'border-style': 'solid', maxHeight: '100%', overflow: 'auto hidden' }}>
+      <div style={{ display: 'inline-block', borderStyle: 'solid', maxHeight: '100%', overflow: 'auto hidden' }}>
         <h1 className='chat-feed' style={{ textAlign: 'center' }}> Chat Timeline</h1>
         <div style={{ fontSize: '20px', textAlign: 'center' }}><b><p>
           See everyone's posts
@@ -135,7 +154,7 @@ const Feed = () => {
           <Chat userPost={userPost} />
         </div>
       </div>
-      <div style={{ display: 'inline-block', 'border-style': 'solid', maxHeight: '100%', overflow: 'auto hidden' }}>
+      <div style={{ display: 'inline-block', borderStyle: 'solid', maxHeight: '100%', overflow: 'auto hidden' }}>
         <h1 className='horo-title' style={{ textAlign: 'center' }}>Wise Quotes</h1>
         <div style={{ fontSize: '20px', textAlign: 'center' }}><b><p>Like a quote to add to Favorites</p></b></div>
         <div style={{ maxHeight: '73%', overflow: 'auto' }}>
