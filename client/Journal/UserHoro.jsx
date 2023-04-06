@@ -1,27 +1,33 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 
 const UserHoro = () => {
+  const [horoscope, setHoroscope] = useState(null);
 
-  const reading = {
-    horoscopeText: 'test',
-    sign: 'testsign',
-    mood: 'testmood',
-    keywords: 'testkey',
-    intensity: 'test intens',
+  useEffect(() => {
+    axios.get('/db/horo')
+      .then(response => {
+        setHoroscope(response.data);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  }, []);
 
-  };
+  if (!horoscope) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <div className='UserHoro' >
       <h1 className='UserHoro-title'> Horoscope</h1>
 
-      {
-        Object.entries(reading).map((el, i) => {
-          return <div key={i}><b>{el[0]}</b>: {el[0] === 'description' ? el[1] : <em>{el[1]}</em>}</div>;
-        })
-      }
+      <div><b>description</b>: {horoscope.description}</div>
+      <div><b>sunsign</b>: {horoscope.sunsign}</div>
+      <div><b>mood</b>: <em>{horoscope.mood}</em></div>
+      <div><b>keywords</b>: <em>{horoscope.keywords}</em></div>
+      <div><b>intensity</b>: <em>{horoscope.intensity}</em></div>
     </div>
-
-
   );
 };
 

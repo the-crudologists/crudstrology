@@ -3,7 +3,7 @@ const express = require('express');
 const External = express.Router();
 const axios = require('axios');
 require('dotenv').config();
-
+const { Horoscope } = require('../database/index.js');
 // const { External } = Router();
 
 // auth
@@ -41,12 +41,12 @@ External.post('/horo', (req, res) => {
   lowercaseSign = sign.toLowerCase();
   // }
 
-  console.log('USER DESTRUCTURED', user);
-  console.log(lowercaseSign);
+  // console.log('USER DESTRUCTURED', user);
+  // console.log(lowercaseSign);
   axios.get(`http://sandipbgt.com/theastrologer/api/horoscope/${lowercaseSign}/today/`)
   // axios.post(`https://aztro.sameerkumar.website?sign=${user.sign}&day=today`)
     .then(result => {
-      console.log('RESULT from Aztro API', result.data);
+      // console.log('RESULT from Aztro API', result.data);
       const { horoscope, sunsign } = result.data;
       const { mood, keywords, intensity } = result.data.meta;
       const newObj = {
@@ -56,11 +56,28 @@ External.post('/horo', (req, res) => {
         keywords: keywords,
         intensity: intensity,
       };
+      const newObj2 = {
+        description: horoscope,
+        sunsign: sunsign,
+        mood: mood,
+        keywords: keywords,
+        intensity: intensity,
+      };
+      
+      Horoscope.create(newObj2)
+        .then(() => {
+          console.log('New horoscope entry created successfully!');
+        })
+        .catch((error) => {
+          console.error('Error creating new horoscope entry:', error);
+        });
+      
       // result.data.sunsign = user.sign;
       res.status(200).send(newObj);
     })
     .catch((err) => res.sendStatus(500)); // console.log('Error from Aztro api post request SERVER', err)
 });
+
 
 // Compatibility API
 External.get('/compatibility/:sign1/:sign2', (req, res) => {

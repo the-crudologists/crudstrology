@@ -216,7 +216,6 @@ const CompNavBarInline = styled.div`
 const TooltipBox = styled.div`
   visibility: hidden;
 `;
-
 const TooltipCard = styled.div`
    margin: 16px;
    & ${SignChartButton}:hover + ${TooltipBox} {
@@ -228,4 +227,4 @@ const TooltipCard = styled.div`
       border-radius: 4px;
    }
 `;
-export { PostButton, PostInput,  NavStyle, NavItem, NavUserInfo, NavImg, AstroButton, UserHoro, OtherHoros, TarotCard, WrapCardText, Reading, QuoteButton, DeleteButton, CompatibilityInput, CompatibilityButton, NavBarInline, CompNavBarInline, SignChartButton, TooltipBox, TooltipCard };
+export { NavStyle, NavItem, NavUserInfo, NavImg, AstroButton, UserHoro, OtherHoros, TarotCard, WrapCardText, Reading, QuoteButton, DeleteButton, CompatibilityInput, CompatibilityButton, NavBarInline, CompNavBarInline, SignChartButton, TooltipBox, TooltipCard, PostButton, PostInput };

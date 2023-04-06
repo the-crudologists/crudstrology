@@ -8,7 +8,7 @@ const Internal = express.Router();
 require('./auth.js');
 
 // database
-const { Quotes, Tarot } = require('../database/index.js');
+const { Quotes, Tarot, JournalEntry, Horoscope } = require('../database/index.js');
 const Sequelize = require('sequelize');
 
 // middleware
@@ -65,6 +65,39 @@ Internal.delete('/quotes/:id', (req, res) => {
       res.sendStatus(204);
     }).catch((err) => {
       console.log(err);
+      res.sendStatus(500);
+    });
+});
+
+// For Journal entry
+Internal.get('/jEntry', (req, res) => {
+  JournalEntry.findAll({ 
+    order: [['createdAt', 'DESC']]
+  }).then((entries)=>{
+      console.log(entries);
+  res.status(200).send(entries);
+  })
+
+});
+
+Internal.post('/jEntry', (req, res) => {
+  // const { body } = req.body;
+  console.log(req.body);
+  JournalEntry.create(req.body);
+  console.log('hi');
+  res.status(200).send('Journal entry route hit successfully');
+});
+
+Internal.get('/horo', (req, res) => {
+ 
+  Horoscope.findOne({
+    order: [['createdAt', 'DESC']]
+  })
+    .then(latestHoroscope => {
+      res.status(200).send(latestHoroscope);
+    })
+    .catch(error => {
+      console.error(error);
       res.sendStatus(500);
     });
 });
