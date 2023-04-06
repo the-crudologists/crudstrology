@@ -1,13 +1,14 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { useQuill } from 'react-quilljs';
+import { UserContext } from '../App.jsx';
 import 'quill/dist/quill.snow.css';
-const axios = require('axios')
+const axios = require('axios');
 
-// import { JournalEntry } from '../../database';
 const TextBox = () => {
-  // variables for quill
+
+  const { user, dob, sign, userId } = useContext(UserContext);
+
   const { quill, quillRef } = useQuill();
-  // setting state for entries in quill
   const [entries, setEntries] = useState([]);
   React.useEffect(() => {
     if (quill) {
@@ -20,7 +21,12 @@ const TextBox = () => {
       // console.log(quillRef.current.querySelector('.ql-editor').innerText);
       const newEntry = quillRef.current.querySelector('.ql-editor').innerText;
       setEntries(prevEntries => [...prevEntries, newEntry]);
-     axios.post('/db/jEntry', {body: newEntry}).then(response => {
+      axios.post('/db/jEntry', {
+        data: {
+          newEntry: newEntry,
+          userId: userId}
+      })
+        .then(response => {
           console.log(response.data);
         })
         .catch(error => {

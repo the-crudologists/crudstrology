@@ -74,16 +74,21 @@ Internal.get('/jEntry', (req, res) => {
   JournalEntry.findAll({ 
     order: [['createdAt', 'DESC']]
   }).then((entries)=>{
-      console.log(entries);
-  res.status(200).send(entries);
-  })
+    console.log(entries);
+    res.status(200).send(entries);
+  });
 
 });
 
 Internal.post('/jEntry', (req, res) => {
-  // const { body } = req.body;
-  console.log(req.body);
-  JournalEntry.create(req.body);
+  const { data } = req.body;
+  const { newEntry, userId} = data;
+  console.log(newEntry, userId);
+  const newObj = {
+    body: newEntry,
+    user_id: userId 
+  };
+  JournalEntry.create(newObj);
   console.log('hi');
   res.status(200).send('Journal entry route hit successfully');
 });

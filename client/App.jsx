@@ -18,7 +18,7 @@ const App = () => {
   const [user, setUser] = useState();
   const [dob, setDob] = useState();
   const [sign, setSign] = useState();
-   const [userId, setUserId] = useState();
+  const [userId, setUserId] = useState();
 
   // this will append all USER state information (name, DOB, sign)
   useEffect(() => {
