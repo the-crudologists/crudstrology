@@ -1,11 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+import { UserContext } from '../App.jsx';
 import axios from 'axios';
 
 const UserHoro = () => {
   const [horoscope, setHoroscope] = useState(null);
-
+const { user, dob, sign, userId } = useContext(UserContext);
   useEffect(() => {
-    axios.get('/db/horo')
+    axios.post('/db/horo', {
+      userId: userId
+    })
       .then(response => {
         setHoroscope(response.data);
       })
