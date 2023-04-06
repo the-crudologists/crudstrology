@@ -201,5 +201,11 @@ const CompNavBarInline = styled.div`
   align-content: right;
   `;
 
+  const ProfileImg = styled.img`
+  margin-top: .3rem;
+  height: 50;
+  border: 1px solid azure;
+  background-color: white;
+`;
 
-export { NavStyle, NavItem, NavUserInfo, NavImg, AstroButton, UserHoro, OtherHoros, TarotCard, WrapCardText, Reading, QuoteButton, DeleteButton, CompatibilityInput, CompatibilityButton, NavBarInline, CompNavBarInline, PostButton, PostInput };
+export { NavStyle, NavItem, NavUserInfo, NavImg, AstroButton, UserHoro, OtherHoros, TarotCard, WrapCardText, Reading, QuoteButton, DeleteButton, CompatibilityInput, CompatibilityButton, NavBarInline, CompNavBarInline, PostButton, PostInput, ProfileImg };
