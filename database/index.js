@@ -52,6 +52,7 @@ const Tarot = sequelize.define('tarotCard', {
   meaning_rev: { type: Sequelize.STRING },
   desc: { type: Sequelize.TEXT }
 });
+// Tarot.belongsTo(User, {foreignKey: 'user_id'})
 const Horoscope = sequelize.define('horoscope', {
   date_range: { type: Sequelize.STRING },
   current_date: {
@@ -66,53 +67,22 @@ const Horoscope = sequelize.define('horoscope', {
   lucky_number: { type: Sequelize.INTEGER },
   lucky_time: { type: Sequelize.STRING }
 });
-// const Horoscope = sequelize.define('horoscope', {
-//   date_range: { type: Sequelize.STRING },
-//   current_date: { type: Sequelize.STRING },
-//   description: { type: Sequelize.STRING },
-//   compatibility: { type: Sequelize.STRING },
-//   mood: { type: Sequelize.STRING },
-//   color: { type: Sequelize.STRING },
-//   lucky_number: { type: Sequelize.STRING },
-//   lucky_time: { type: Sequelize.STRING }
-// });
-// const JournalEntry =  sequelize.define('journal_entry', {
-//   entry_id: {
-//     type: Sequelize.INTEGER,
-//     autoIncrement: true,
-//     allowNull: false,
-//     primaryKey: true
-//   },
-//   title: {
-//     type: Sequelize.STRING,
-//     allowNull: false
-//   },
-//   body: {
-//     type: Sequelize.STRING,
-//     allowNull: false
-//   },
-//   // user_id: {
-//   //   type: Sequelize.INTEGER,
-//   //   references: {
-//   //     model: 'users',
-//   //     key: 'user_id'
-//   //   }
-//   // },
-//   // horoscope_id: {
-//   //   type: Sequelize.INTEGER,
-//   //   references: {
-//   //     model: 'horoscopes',
-//   //     key: 'horoscope_id'
-//   //   }
-//   // }
-// });
+Horoscope.belongsTo(User, {foreignKey: 'user_id'});
+
 const JournalEntry = sequelize.define('journal_entry', {
   body: {
     type: Sequelize.STRING,
-    allowNull: false
+    allowNull: false,
+    user_id: {
+      type: Sequelize.INTEGER,
+      references: {
+        model: 'users',
+        key: 'user_id'
+      }
+    },
   }
 });
-
+JournalEntry.belongsTo(User, {foreignKey: 'user_id'});
 const Quotes = sequelize.define('quote', {
   _id: { type: Sequelize.STRING },
   content: { type: Sequelize.STRING, unique: true },
@@ -144,7 +114,7 @@ const fetchTarotCards = () => {
 };
 // you can run this to update tables without seeding
 
-//  sequelize.sync({ force: true });
+ sequelize.sync({ alter: true });
 
 // <-- might not need to be async -->
 const seeder = async () => {
