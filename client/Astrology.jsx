@@ -66,7 +66,7 @@ const Astrology = () => {
   return (
 
     <div className='horoscope'>
-      <h1 className='horo-title'>{user} </h1>
+      <h1 className='horo-title'>Horoscopes </h1>
       <div style={{ fontSize: '20px' }}><p><b>Your birthday is {dob}, so your sign is {sign}.</b></p></div>
       <AstroButton onClick={() => fetchOtherSigns(sign)} className='text'>Get Other Horoscopes</AstroButton>
       <UserHoro>
