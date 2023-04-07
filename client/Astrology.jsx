@@ -31,10 +31,10 @@ const Astrology = () => {
       }
     })
       .then(reading => {
-        console.log(reading.data);
+        // console.log(reading.data);
   
        
-        // setReading(reading.data);
+        setReading(reading.data);
       })
       .catch(err => {
         console.log('Error AXIOS post to /api/horo from Client', err);
