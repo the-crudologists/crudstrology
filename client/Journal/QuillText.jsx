@@ -10,21 +10,28 @@ const TextBox = () => {
 
   const { quill, quillRef } = useQuill();
   const [entries, setEntries] = useState([]);
+  const [title, setTitle] = useState('');
+  
   React.useEffect(() => {
     if (quill) {
       quill.clipboard.dangerouslyPasteHTML('<h1>Thoughts</h1>');
     }
   }, [quill]);
 
-  const handleButtonClick = () => {
+  const handleTitleChange = (event) => {
+    setTitle(event.target.value);
+  };
+
+  const handleEntrySubmit = () => {
     if (quillRef.current) {
-      // console.log(quillRef.current.querySelector('.ql-editor').innerText);
       const newEntry = quillRef.current.querySelector('.ql-editor').innerText;
-      setEntries(prevEntries => [...prevEntries, newEntry]);
+      setEntries(prevEntries => [...prevEntries, { title, entry: newEntry }]);
       axios.post('/db/jEntry', {
         data: {
-          newEntry: newEntry,
-          userId: userId}
+          title,
+          entry: newEntry,
+          userId: userId
+        }
       })
         .then(response => {
           console.log(response.data);
@@ -32,21 +39,33 @@ const TextBox = () => {
         .catch(error => {
           console.error(error);
         });
+      setTitle('');
     }
   };
+
   // console.log(quill); // undefined > Quill Object
   // console.log(quillRef); // { current: undefined } > { current: Quill Editor Reference }
 
   return (
     <div className='TextBox'>
-      <h1 className='TextBox-title'> TextBox</h1>
+      <h1 className='TextBox-title'>TextBox</h1>
+
+      <label htmlFor='title'>Title:</label>
+      <input id='title' type='text' value={title} onChange={handleTitleChange} />
+
       <div style={{ width: 500, height: 300 }}>
         <div ref={quillRef} />
-        <button className='text' onClick={handleButtonClick}>Submit</button>
+        <button className='text' onClick={handleEntrySubmit}>Submit</button>
       </div>
-      {entries.map((entry, index) => (
-        <li key={index}>{entry}</li>
-      ))}
+      
+      <ul>
+        {entries.map((entry, index) => (
+          <li key={index}>
+            <h3>{entry.title}</h3>
+            <p>{entry.entry}</p>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 };
