@@ -44,7 +44,7 @@ const App = () => {
         </div>
         <div style={{ marginTop: '12px' }}>
           <Routes>
-            {/* <Route path="/" element={<Feed />} /> */}
+            <Route path="/" element={<Feed />} />
             <Route path="/astrology" element={<Astrology />} />
             <Route path="/tarot" element={<Tarot />} />
             <Route path="/favorites" element={<Favorites />} />
