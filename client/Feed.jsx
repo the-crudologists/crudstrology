@@ -4,7 +4,7 @@ import axios from 'axios';
 import Chat from './Chat/Chat.jsx';
 import PostForm from './Chat/PostForm.jsx';
 import { PostButton } from './Styled.jsx';
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
 
 const Feed = () => {
   const [feed, setFeed] = useState([{ post: 'Loading...' }]);
@@ -15,7 +15,8 @@ const Feed = () => {
 
   // Grab the posts made by a user
   const renderFeed = () => {
-    axios.get('/users/feed')
+    axios
+      .get('/users/feed')
       .then(({ data }) => {
         const reverseData = [];
         for (let i = data.length - 1; i >= 0; i--) {
@@ -36,16 +37,19 @@ const Feed = () => {
     const post = document.getElementById('post-box');
     const postButton = document.getElementById('post-button');
     const submitButton = document.getElementById('submit-button');
+    const cancelButton = document.getElementById('cancel-button');
 
     chat.style.display = 'none';
     postButton.style.display = 'none';
     submitButton.style.display = '';
+    cancelButton.style.display = '';
     post.style.display = 'block';
   };
 
   // Sends axios post request to the db, then changes our newPost boolean state
   const submitNewPost = (post) => {
-    axios.post('/user/post', { post: post })
+    axios
+      .post('/user/post', { post: post })
       .then(() => {
         setNewPost(true);
       })
@@ -60,20 +64,42 @@ const Feed = () => {
     const post = document.getElementById('post-box');
     const postButton = document.getElementById('post-button');
     const submitButton = document.getElementById('submit-button');
+    const cancelButton = document.getElementById('cancel-button');
+    const input = document.getElementById('post-input');
+
 
     if (submitPost !== '') {
       submitNewPost(submitPost);
+      setSubmitPost('');
 
       setTimeout(() => {
+        input.value = '';
         chat.style.display = 'block';
         submitButton.style.display = 'none';
         postButton.style.display = '';
+        cancelButton.style.display = 'none';
         post.style.display = 'none';
       }, 1000);
-
     } else {
       alert('No message to post');
     }
+  };
+
+  const cancelPost = () => {
+    const chat = document.getElementById('chat-post');
+    const post = document.getElementById('post-box');
+    const postButton = document.getElementById('post-button');
+    const submitButton = document.getElementById('submit-button');
+    const cancelButton = document.getElementById('cancel-button');
+    const input = document.getElementById('post-input');
+
+    setSubmitPost('');
+    input.value = '';
+    chat.style.display = 'block';
+    submitButton.style.display = 'none';
+    postButton.style.display = '';
+    cancelButton.style.display = 'none';
+    post.style.display = 'none';
   };
 
   ///////// This is all for rendering all post in chat /////////
@@ -88,7 +114,8 @@ const Feed = () => {
   // Renders the users to state after posts
   useEffect(() => {
     // console.log(newPost);
-    axios.get('/users/username')
+    axios
+      .get('/users/username')
       .then(({ data }) => {
         setUsers(data);
       })
@@ -101,16 +128,20 @@ const Feed = () => {
   const handlePosts = () => {
     const userPostArr = [];
     let userObj = {};
-    feed.forEach(message => {
-      users.forEach(user => {
+    feed.forEach((message) => {
+      users.forEach((user) => {
         const userId = message.user_id;
         if (userId === user.user_id) {
-          userObj.user = <Link to="/profile" state={user}>{user.name}</Link>;
+          userObj.user = (
+            <Link to='/profile' state={user}>
+              {user.name}
+            </Link>
+          );
           userObj.post = message.post;
           userPostArr.push(userObj);
           userObj = {};
         } else if (!userId && !user.user_id) {
-          userObj.user =  user.name;
+          userObj.user = user.name;
           userObj.post = message.post;
           userPostArr.push(userObj);
           userObj = {};
@@ -132,7 +163,6 @@ const Feed = () => {
 
   ///////// Finished /////////
 
-
   // Interval for rendering the feed in real time
   useEffect(() => {
     const interval = setInterval(() => {
@@ -141,38 +171,85 @@ const Feed = () => {
   });
 
   return (
-    <div style={{
-      display: 'grid',
-      gridTemplateColumns: '1fr 1fr',
-      gridGap: '20px',
-      border: '1px solid black',
-      width: '100%',
-      height: '480px',
-      maxHeight: '480px'
-    }}>
-      <div style={{ display: 'inline-block', borderStyle: 'solid', maxHeight: '100%', overflow: 'auto hidden' }}>
-        <h1 className='chat-feed' style={{ textAlign: 'center' }}> Chat Timeline</h1>
-        <div style={{ fontSize: '20px', textAlign: 'center' }}><b><p>
-          See everyone's posts
-          <PostButton id='post-button' style={{ display: '' }} onClick={() => makePostFormAppear()}>Post</PostButton>
-          <PostButton id='submit-button' style={{ display: 'none'}} onClick={() => makePostsReappear()}>Submit</PostButton>
-        </p></b></div>
-        <div id='post-box' style={{ display: 'none'}}>
-          <PostForm submitPost={submitPost} setSubmitPost={setSubmitPost}/>
+    <div
+      style={{
+        display: 'grid',
+        gridTemplateColumns: '1fr 1fr',
+        gridGap: '20px',
+        border: '1px solid black',
+        width: '100%',
+        height: '480px',
+        maxHeight: '480px',
+      }}
+    >
+      <div
+        style={{
+          display: 'inline-block',
+          borderStyle: 'solid',
+          maxHeight: '100%',
+          overflow: 'auto hidden',
+        }}
+      >
+        <h1 className='chat-feed' style={{ textAlign: 'center' }}>
+          {' '}
+          Chat Timeline
+        </h1>
+        <div style={{ fontSize: '20px', textAlign: 'center' }}>
+          <b>
+            <p>
+              See everyone's posts
+              <PostButton
+                id='post-button'
+                style={{ display: '' }}
+                onClick={() => makePostFormAppear()}
+              >
+                Post
+              </PostButton>
+              <PostButton
+                id='submit-button'
+                style={{ display: 'none' }}
+                onClick={() => makePostsReappear()}
+              >
+                Submit
+              </PostButton>
+              <PostButton
+                id='cancel-button'
+                style={{ display: 'none' }}
+                onClick={() => cancelPost()}
+              >
+                Cancel
+              </PostButton>
+            </p>
+          </b>
+        </div>
+        <div id='post-box' style={{ display: 'none' }}>
+          <PostForm submitPost={submitPost} setSubmitPost={setSubmitPost} />
         </div>
         <div id='chat-post'>
           <Chat userPost={userPost} />
         </div>
       </div>
-      <div style={{ display: 'inline-block', borderStyle: 'solid', maxHeight: '100%', overflow: 'auto hidden' }}>
-        <h1 className='horo-title' style={{ textAlign: 'center' }}>Wise Quotes</h1>
-        <div style={{ fontSize: '20px', textAlign: 'center' }}><b><p>Like a quote to add to Favorites</p></b></div>
+      <div
+        style={{
+          display: 'inline-block',
+          borderStyle: 'solid',
+          maxHeight: '100%',
+          overflow: 'auto hidden',
+        }}
+      >
+        <h1 className='horo-title' style={{ textAlign: 'center' }}>
+          Wise Quotes
+        </h1>
+        <div style={{ fontSize: '20px', textAlign: 'center' }}>
+          <b>
+            <p>Like a quote to add to Favorites</p>
+          </b>
+        </div>
         <div style={{ maxHeight: '73%', overflow: 'auto' }}>
           <ZenQuotes />
         </div>
       </div>
     </div>
-
   );
 };
 export default Feed;

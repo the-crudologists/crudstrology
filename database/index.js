@@ -5,9 +5,6 @@ const fakeQuote = require('./fakeData/quotes.json');
 
 const axios = require('axios');
 
-
-// console.log('fake Tarot', fakeTarot.cards[0]);
-
 const Sequelize = require('sequelize');
 const sequelize = new Sequelize(
   'dbstrology',
@@ -41,7 +38,28 @@ const User = sequelize.define('user', {
   }
 });
 
-// <-- May need to include Foreign Key for realtionship with User...
+const Follow = sequelize.define('follow', {
+  follower_id: {
+    type: Sequelize.INTEGER
+  },
+  following_id: {
+    type: Sequelize.INTEGER
+  }
+});
+
+User.belongsToMany(User, {
+  as: 'followers',
+  through: Follow,
+  foreignKey: 'following_id'
+});
+
+User.belongsToMany(User, {
+  as: 'following',
+  through: Follow,
+  foreignKey: 'follower_id'
+});
+
+// <-- May need to include Foreign Key for relationship with User...
 const Tarot = sequelize.define('tarotCard', {
   type: { type: Sequelize.STRING },
   name_short: { type: Sequelize.STRING },
@@ -52,7 +70,9 @@ const Tarot = sequelize.define('tarotCard', {
   meaning_rev: { type: Sequelize.STRING },
   desc: { type: Sequelize.TEXT }
 });
+
 // Tarot.belongsTo(User, {foreignKey: 'user_id'})
+
 const Horoscope = sequelize.define('horoscope', {
   date_range: { type: Sequelize.STRING },
   current_date: {
@@ -82,7 +102,9 @@ const JournalEntry = sequelize.define('journal_entry', {
     },
   }
 });
+
 JournalEntry.belongsTo(User, {foreignKey: 'user_id'});
+
 const Quotes = sequelize.define('quote', {
   _id: { type: Sequelize.STRING },
   content: { type: Sequelize.STRING, unique: true },
@@ -91,10 +113,17 @@ const Quotes = sequelize.define('quote', {
 
 const TimeLine = sequelize.define('timeline', {
   post: { type: Sequelize.STRING },
-  user_id: { type: Sequelize.INTEGER }
+  user_id: {
+    type: Sequelize.INTEGER,
+    references: {
+      model: 'users',
+      key: 'user_id'
+    }
+  }
 });
 
-// TimeLine.belongsTo(User, { foreignKey: 'user_id' });
+TimeLine.belongsTo(User, { foreignKey: 'user_id' });
+User.hasMany(TimeLine);
 
 const fetchTarotCards = () => {
   axios.get('https://tarot-api.onrender.com/api/v1/cards')
@@ -114,7 +143,7 @@ const fetchTarotCards = () => {
 };
 // you can run this to update tables without seeding
 
- sequelize.sync({ alter: true });
+// sequelize.sync({ force: true });
 
 // <-- might not need to be async -->
 const seeder = async () => {
@@ -198,6 +227,7 @@ const seeder = async () => {
 
 module.exports.Tarot = Tarot;
 module.exports.User = User;
+module.exports.Follow = Follow;
 module.exports.Quotes = Quotes;
 module.exports.TimeLine = TimeLine;
 module.exports.sequelize = sequelize;

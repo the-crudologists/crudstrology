@@ -35,7 +35,7 @@ External.post('/horo', (req, res) => {
   }
   const {sign, user} = data;
   //bug fix
-  console.log(user);
+  // console.log(user);
   let lowercaseSign = null;
   lowercaseSign = sign.toLowerCase();
 
@@ -62,15 +62,15 @@ External.post('/horo', (req, res) => {
         intensity: intensity,
         user_id: user
       };
-      
+
       Horoscope.create(newObj2)
         .then(() => {
-          console.log('New horoscope entry created successfully!');
+          // console.log('New horoscope entry created successfully!');
         })
         .catch((error) => {
           console.error('Error creating new horoscope entry:', error);
         });
-      
+
       // result.data.sunsign = user.sign;
       res.status(200).send(newObj);
     })
