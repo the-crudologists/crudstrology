@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useContext, useEffect, } from 'react';
 import fakeHoro from '../database/fakeData/horoscope.json';
 import { UserContext } from './App.jsx';
 import { AstroButton, UserHoro, OtherHoros } from './Styled.jsx';
@@ -10,7 +10,8 @@ const Astrology = () => {
 
   const [reading, setReading] = useState(fakeHoro);
   const [horoscopes, setHoroscopes] = useState([]);
-  const { dob, sign } = useContext(UserContext);
+  const { user ,dob, sign, userId } = useContext(UserContext);
+
   const generateLuckyTime = () => {
     const hours = Math.floor(Math.random() * 12) + 1;
     const minutes = Math.floor(Math.random() * 60);
@@ -24,26 +25,15 @@ const Astrology = () => {
 
   const fetchHoro = (fetchSign) => {
     axios.post('/api/horo', {
-      user: {
+      data: {
+        user: userId,
         sign: fetchSign
       }
     })
       .then(reading => {
         console.log(reading.data);
-        // const horoscopeData = {
-        //   // date_range: reading.data.date_range,
-        //   current_date: reading.data.date,
-        //   description: reading.data.horoscope,
-        //   compatibility: reading.data.compatibility,
-        //   // mood: reading.data.meta.mood,
-        //   // color: reading.data.meta.intensity,
-        //   lucky_number: Math.floor(Math.random() * 100) + 1,
-        //   lucky_time: generateLuckyTime(),
-        //   // userId: userId
-        // };
-        // console.log(horoscopeData)
-
-
+  
+       
         // setReading(reading.data);
       })
       .catch(err => {
@@ -53,6 +43,7 @@ const Astrology = () => {
 
   const fetchOtherSigns = (userSign) => {
     setHoroscopes([]);
+    // iterates through the array and does an api call for every sign that isnt selected
     zodiacSigns.forEach(el => {
       if (el !== userSign) {
         axios.post('/api/horo', {
@@ -75,7 +66,7 @@ const Astrology = () => {
   return (
 
     <div className='horoscope'>
-      <h1 className='horo-title'>Your Daily Horoscope</h1>
+      <h1 className='horo-title'>{user} </h1>
       <div style={{ fontSize: '20px' }}><p><b>Your birthday is {dob}, so your sign is {sign}.</b></p></div>
       <AstroButton onClick={() => fetchOtherSigns(sign)} className='text'>Get Other Horoscopes</AstroButton>
       <UserHoro>

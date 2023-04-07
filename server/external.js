@@ -27,19 +27,17 @@ External.get('/quotes', (req, res) => {
 
 // API
 External.post('/horo', (req, res) => {
-  // console.log('____SERVER____');
-  // console.log('REQ BODY', req.body);
-  const { user } = req.body;
+
+  const { data} = req.body;
   // getting the sign to be in lowercase for new api
-  if (!user || !user.sign) {
+  if (!data || !data.sign) {
     return res.status(400).send('User object or sign is empty');
   }
-  const {sign} = user;
+  const {sign, user} = data;
   //bug fix
+  console.log(user);
   let lowercaseSign = null;
-  // if ((sign && sign.user) || false) {
   lowercaseSign = sign.toLowerCase();
-  // }
 
   // console.log('USER DESTRUCTURED', user);
   // console.log(lowercaseSign);
@@ -62,6 +60,7 @@ External.post('/horo', (req, res) => {
         mood: mood,
         keywords: keywords,
         intensity: intensity,
+        user_id: user
       };
       
       Horoscope.create(newObj2)

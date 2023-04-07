@@ -70,28 +70,42 @@ Internal.delete('/quotes/:id', (req, res) => {
 });
 
 // For Journal entry
-Internal.get('/jEntry', (req, res) => {
-  JournalEntry.findAll({
+Internal.post('/userEntries/', (req, res) => {
+ 
+  const { userId } = req.body;
+    console.log(req.body)
+  JournalEntry.findAll({ 
+    where: { user_id: userId },
     order: [['createdAt', 'DESC']]
-  }).then((entries)=>{
-    console.log(entries);
-    res.status(200).send(entries);
-  });
+  })
+    .then((entries)=>{
+    // console.log(entries);
+      res.status(200).send(entries);
+    })
+    .catch(error => { console.log(error); });
 
 });
 
 Internal.post('/jEntry', (req, res) => {
-  // const { body } = req.body;
-  console.log(req.body);
-  JournalEntry.create(req.body);
+  const { data } = req.body;
+  const { newEntry, userId} = data;
+  console.log(newEntry, userId);
+  const newObj = {
+    body: newEntry,
+    user_id: userId 
+  };
+  JournalEntry.create(newObj);
   console.log('hi');
   res.status(200).send('Journal entry route hit successfully');
 });
 
-Internal.get('/horo', (req, res) => {
+Internal.post('/horo', (req, res) => {
 
+ const {userId} = req.body
+ console.log(userId)
   Horoscope.findOne({
-    order: [['createdAt', 'DESC']]
+    where: { user_Id: userId },
+   
   })
     .then(latestHoroscope => {
       res.status(200).send(latestHoroscope);

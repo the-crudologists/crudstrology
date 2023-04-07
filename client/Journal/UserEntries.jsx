@@ -1,18 +1,24 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+import { UserContext } from '../App.jsx';
 import axios from 'axios';
 
 const UserEntries = () => {
   const [entries, setEntries] = useState([]);
-
+  const { user, dob, sign, userId } = useContext(UserContext);
+  
   useEffect(() => {
-    axios.get('/db/jEntry')
-      .then(response => {
-        setEntries(response.data);
+    if (userId) {
+      axios.post('/db/userEntries/', {
+        userId: userId
       })
-      .catch(error => {
-        console.log(error);
-      });
-  }, []);
+        .then(response => {
+          setEntries(response.data);
+        })
+        .catch(error => {
+          console.log(error);
+        });
+    }
+  }, [userId]);
 
   return (
     <div className='UserEntries'>
