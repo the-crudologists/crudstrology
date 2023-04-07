@@ -71,10 +71,10 @@ Internal.delete('/quotes/:id', (req, res) => {
 
 // For Journal entry
 Internal.post('/userEntries/', (req, res) => {
- 
+
   const { userId } = req.body;
     console.log(req.body)
-  JournalEntry.findAll({ 
+  JournalEntry.findAll({
     where: { user_id: userId },
     order: [['createdAt', 'DESC']]
   })
@@ -92,7 +92,7 @@ Internal.post('/jEntry', (req, res) => {
   console.log(newEntry, userId);
   const newObj = {
     body: newEntry,
-    user_id: userId 
+    user_id: userId
   };
   JournalEntry.create(newObj);
   console.log('hi');
@@ -105,7 +105,7 @@ Internal.post('/horo', (req, res) => {
  console.log(userId)
   Horoscope.findOne({
     where: { user_Id: userId },
-   
+
   })
     .then(latestHoroscope => {
       res.status(200).send(latestHoroscope);
@@ -115,6 +115,23 @@ Internal.post('/horo', (req, res) => {
       res.sendStatus(500);
     });
 });
+
+
+Internal.get('/profile/:id', (req, res) => {
+  const {id} = req.params
+
+  JournalEntry.findAll(
+    {where: { user_id: id}}
+    ).then(journalEntry => {
+      res.status(200).send(journalEntry);
+    })
+    .catch(error => {
+      console.error(error);
+      res.sendStatus(500);
+    });
+})
+
+
 
 
 module.exports = { Internal };
