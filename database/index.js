@@ -71,16 +71,20 @@ const Horoscope = sequelize.define('horoscope', {
 Horoscope.belongsTo(User, {foreignKey: 'user_id'});
 
 const JournalEntry = sequelize.define('journal_entry', {
+  title: {
+    type: Sequelize.STRING,
+    allowNull: false
+  },
   body: {
     type: Sequelize.STRING,
-    allowNull: false,
-    user_id: {
-      type: Sequelize.INTEGER,
-      references: {
-        model: 'users',
-        key: 'user_id'
-      }
-    },
+    allowNull: false
+  },
+  user_id: {
+    type: Sequelize.INTEGER,
+    references: {
+      model: 'users',
+      key: 'user_id'
+    }
   }
 });
 JournalEntry.belongsTo(User, {foreignKey: 'user_id'});
