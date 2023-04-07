@@ -3,19 +3,18 @@ import { useQuill } from 'react-quilljs';
 import 'quill/dist/quill.snow.css';
 import TextBox from './QuillText.jsx';
 import UserEntries from './UserEntries.jsx';
-import UserHoro from './UserHoro.jsx';
+import UserH from './UserHoro.jsx';
 const Journal = () => {
   return (
-    <div className='Journal' style={{ display: 'flex', justifyContent: 'center' }}>
+    <div className='Journal' style={{ display: 'flex', justifyContent: 'left' }}>
+       <h1 className='Journal-title'>Journal </h1>
       <div className='left-column'>
        
         <UserEntries />
       </div>
-      <div className='middle-column'>
-        <TextBox />
-      </div>
+   
       <div className='right-column'>
-        <UserHoro />
+        <UserH />
       </div>
     </div>
   );

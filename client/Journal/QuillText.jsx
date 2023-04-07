@@ -11,6 +11,7 @@ const TextBox = () => {
   const { quill, quillRef } = useQuill();
   const [entries, setEntries] = useState([]);
   const [title, setTitle] = useState('');
+  const [showTextBox, setShowTextBox] = useState(true);
   
   React.useEffect(() => {
     if (quill) {
@@ -40,6 +41,7 @@ const TextBox = () => {
           console.error(error);
         });
       setTitle('');
+      setShowTextBox(false);
     }
   };
 
@@ -47,26 +49,31 @@ const TextBox = () => {
   // console.log(quillRef); // { current: undefined } > { current: Quill Editor Reference }
 
   return (
-    <div className='TextBox'>
-      <h1 className='TextBox-title'>TextBox</h1>
+    <>
+    {showTextBox && (
+      <div className='TextBox'>
+        <h1 className='TextBox-title'>New Entry</h1>
 
-      <label htmlFor='title'>Title:</label>
-      <input id='title' type='text' value={title} onChange={handleTitleChange} />
+        <label htmlFor='title'>Title:</label>
+        <input id='title' type='text' value={title} onChange={handleTitleChange} />
 
-      <div style={{ width: 500, height: 300 }}>
-        <div ref={quillRef} />
-        <button className='text' onClick={handleEntrySubmit}>Submit</button>
+        <div style={{ width: 500, height: 300 }}>
+          <div ref={quillRef} />
+          <button className='text' onClick={
+            handleEntrySubmit}>Submit</button>
+        </div>
+        
+        <ul>
+          {entries.map((entry, index) => (
+            <li key={index}>
+              <h3>{entry.title}</h3>
+              <p>{entry.entry}</p>
+            </li>
+          ))}
+        </ul>
       </div>
-      
-      <ul>
-        {entries.map((entry, index) => (
-          <li key={index}>
-            <h3>{entry.title}</h3>
-            <p>{entry.entry}</p>
-          </li>
-        ))}
-      </ul>
-    </div>
+    )}
+    </>
   );
 };
 

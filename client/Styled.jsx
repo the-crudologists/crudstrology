@@ -107,6 +107,15 @@ const UserHoro = styled.div`
   font-size: 20px;
   padding: 10px;`;
 
+  const JournalEntry = styled.div`
+  object-fit: cover;
+  border: 3px groove azure;
+  background-color: black;
+  margin-top: 20px;
+  margin-left: 5px;
+  font-size: 20px;
+  padding: 10px;`;
+
 const OtherHoros = styled.div`
   object-fit: cover;
   border: 3px double azure;
@@ -211,4 +220,4 @@ const CompNavBarInline = styled.div`
   background-color: white;
 `;
 
-export { NavStyle, NavItem, NavUserInfo, NavImg, AstroButton, UserHoro, OtherHoros, TarotCard, WrapCardText, Reading, QuoteButton, DeleteButton, CompatibilityInput, CompatibilityButton, NavBarInline, CompNavBarInline, PostButton, PostInput, ProfileImg };
+export { JournalEntry, NavStyle, NavItem, NavUserInfo, NavImg, AstroButton, UserHoro, OtherHoros, TarotCard, WrapCardText, Reading, QuoteButton, DeleteButton, CompatibilityInput, CompatibilityButton, NavBarInline, CompNavBarInline, PostButton, PostInput, ProfileImg };
