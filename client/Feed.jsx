@@ -105,7 +105,7 @@ const Feed = () => {
       users.forEach(user => {
         const userId = message.user_id;
         if (userId === user.user_id) {
-          userObj.user = <Link to="/profile" state={user}>{user.name}</Link>;
+          userObj.user = <Link to="/profile" state={{currentUser: user, userId: userId}}>{user.name}</Link>;
           userObj.post = message.post;
           userPostArr.push(userObj);
           userObj = {};
