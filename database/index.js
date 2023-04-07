@@ -139,7 +139,7 @@ const seeder = async () => {
     {
       name: 'Carlos',
       dob: '11/11',
-      sign: 'Scorpius'
+      sign: 'Scorpio'
     }
   ])
     .then(() => { console.log('User Model Create Success'); })

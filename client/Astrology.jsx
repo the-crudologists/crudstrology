@@ -95,7 +95,7 @@ const Astrology = () => {
           })
         }
       </div>
-     
+
     </div>
 
   );
