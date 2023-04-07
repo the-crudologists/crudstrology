@@ -25,8 +25,8 @@ const UserEntries = () => {
       <h1 className='UserEntries-title'>Entries</h1>
       <ul>
         {entries.map(entry => (
-          <li key={entry.entry_id} onClick={() => console.log(entry.body)}>
-            {entry.id}
+          <li key={entry.id} onClick={() => console.log(entry.body)}>
+            {entry.title}
           </li>
         ))}
       </ul>
