@@ -3,7 +3,7 @@ const express = require('express');
 // const session = require('express-session');
 const cookieSession = require('cookie-session');
 const passport = require('passport');
-const { User, TimeLine, seeder } = require('../database/index.js');
+const { User, TimeLine, Follow, seeder } = require('../database/index.js');
 
 require('dotenv').config();
 const { SERVER_SESSION_SECRET } = process.env;
@@ -122,6 +122,7 @@ app.get('/users/feed', (req, res) => {
     });
 });
 
+// Sends users data to the feed
 app.get('/users/username', (req, res) => {
   User.findAll()
     .then((data) => {
@@ -133,6 +134,7 @@ app.get('/users/username', (req, res) => {
     });
 });
 
+// Creates a new user post
 app.post('/user/post', (req, res) => {
   // console.log(req);
   const { post } = req.body;
@@ -156,6 +158,45 @@ app.post('/user/post', (req, res) => {
     })
     .catch((err) => {
       console.error('Request failure:', err);
+      res.sendStatus(500);
+    });
+});
+
+// Creates a follow in the follow schema
+app.post('/follow', async (req, res) => {
+  const { follow } = req.body;
+  const { user_id } = req.user[0];
+
+  const follower = await User.findByPk(user_id);
+  const following = await User.findByPk(follow);
+
+  follower.addFollowing(following)
+    .then(() => {
+      res.sendStatus(201);
+    })
+    .catch((err) => {
+      console.error('Failed to POST:', err);
+      res.sendStatus(500);
+    });
+
+});
+
+app.delete('/follow/:user_id', (req, res) => {
+  console.log(req);
+  const follow = req.params.user_id;
+  const { user_id } = req.user[0];
+
+  Follow.destroy({
+    where: {
+      follower_id: user_id,
+      following_id: follow
+    }
+  })
+    .then(() => {
+      res.sendStatus(204);
+    })
+    .catch((err) => {
+      console.error('Failed to DELETE:', err);
       res.sendStatus(500);
     });
 });

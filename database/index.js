@@ -227,6 +227,7 @@ const seeder = async () => {
 
 module.exports.Tarot = Tarot;
 module.exports.User = User;
+module.exports.Follow = Follow;
 module.exports.Quotes = Quotes;
 module.exports.TimeLine = TimeLine;
 module.exports.sequelize = sequelize;

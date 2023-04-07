@@ -37,10 +37,12 @@ const Feed = () => {
     const post = document.getElementById('post-box');
     const postButton = document.getElementById('post-button');
     const submitButton = document.getElementById('submit-button');
+    const cancelButton = document.getElementById('cancel-button');
 
     chat.style.display = 'none';
     postButton.style.display = 'none';
     submitButton.style.display = '';
+    cancelButton.style.display = '';
     post.style.display = 'block';
   };
 
@@ -62,19 +64,42 @@ const Feed = () => {
     const post = document.getElementById('post-box');
     const postButton = document.getElementById('post-button');
     const submitButton = document.getElementById('submit-button');
+    const cancelButton = document.getElementById('cancel-button');
+    const input = document.getElementById('post-input');
+
 
     if (submitPost !== '') {
       submitNewPost(submitPost);
+      setSubmitPost('');
 
       setTimeout(() => {
+        input.value = '';
         chat.style.display = 'block';
         submitButton.style.display = 'none';
         postButton.style.display = '';
+        cancelButton.style.display = 'none';
         post.style.display = 'none';
       }, 1000);
     } else {
       alert('No message to post');
     }
+  };
+
+  const cancelPost = () => {
+    const chat = document.getElementById('chat-post');
+    const post = document.getElementById('post-box');
+    const postButton = document.getElementById('post-button');
+    const submitButton = document.getElementById('submit-button');
+    const cancelButton = document.getElementById('cancel-button');
+    const input = document.getElementById('post-input');
+
+    setSubmitPost('');
+    input.value = '';
+    chat.style.display = 'block';
+    submitButton.style.display = 'none';
+    postButton.style.display = '';
+    cancelButton.style.display = 'none';
+    post.style.display = 'none';
   };
 
   ///////// This is all for rendering all post in chat /////////
@@ -186,6 +211,13 @@ const Feed = () => {
                 onClick={() => makePostsReappear()}
               >
                 Submit
+              </PostButton>
+              <PostButton
+                id='cancel-button'
+                style={{ display: 'none' }}
+                onClick={() => cancelPost()}
+              >
+                Cancel
               </PostButton>
             </p>
           </b>
