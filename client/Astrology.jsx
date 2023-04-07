@@ -47,7 +47,7 @@ const Astrology = () => {
     zodiacSigns.forEach(el => {
       if (el !== userSign) {
         axios.post('/api/horo', {
-          user: {
+          data: {
             sign: el
           }
         })
