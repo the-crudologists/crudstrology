@@ -2,6 +2,7 @@ import React, { useState, useContext, useEffect } from 'react';
 import { useQuill } from 'react-quilljs';
 import { UserContext } from '../App.jsx';
 import 'quill/dist/quill.snow.css';
+import { CompatibilityButton} from '../Styled.jsx';
 const axios = require('axios');
 
 const TextBox = () => {
@@ -52,15 +53,15 @@ const TextBox = () => {
     <>
       {showTextBox && (
         <div className='TextBox'>
-          <h1 className='TextBox-title'>New Entry</h1>
+          <h1 className='TextBox-title'></h1>
 
           <label htmlFor='title'>Title:</label>
           <input id='title' type='text' value={title} onChange={handleTitleChange} />
 
           <div style={{ width: 500, height: 300 }}>
             <div ref={quillRef} />
-            <button className='text' onClick={
-              handleEntrySubmit}>Submit</button>
+            <CompatibilityButton className='text' onClick={
+              handleEntrySubmit}>Submit</CompatibilityButton>
           </div>
         
           <ul>
