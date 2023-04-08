@@ -43,7 +43,7 @@ const UserEntries = () => {
     setShowTextBox(false);
     fetchEntries(); 
   };
-  
+
   const handleDelete = (entryId) => {
     axios.delete(`/db/userEntries/${entryId}`)
       .then(response => {
@@ -56,7 +56,7 @@ const UserEntries = () => {
 
   return (
     <div style={{ display: 'flex' }}>
-   
+
       <Fieldbox>
         <h1 className='FieldBox-title'>Entries</h1>
         <div className='UserEntries' style={{ overflowY: 'auto', maxHeight: '350px' }}>
@@ -84,7 +84,7 @@ const UserEntries = () => {
             <TextBox onSubmit={handleEntrySubmit} />
           )}
           {!showTextBox && selectedEntry && (
-      <UserHoro dangerouslySetInnerHTML={{ __html: selectedEntry.body }} />
+            <UserHoro dangerouslySetInnerHTML={{ __html: selectedEntry.body }} />
           )}
         </div>
       </Fieldbox>

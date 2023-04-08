@@ -13,7 +13,7 @@ const TextBox = ({onSubmit}) => {
   const [entries, setEntries] = useState([]);
   const [title, setTitle] = useState('');
   const [showTextBox, setShowTextBox] = useState(true);
-  
+
   React.useEffect(() => {
     if (quill) {
       quill.clipboard.dangerouslyPasteHTML('<h1>Thoughts</h1>');
@@ -38,8 +38,8 @@ const TextBox = ({onSubmit}) => {
         .then(response => {
           console.log(response.data);
           onSubmit();
-      // setTitle('');
-      setShowTextBox(false);
+          // setTitle('');
+          setShowTextBox(false);
         })
         .catch(error => {
           console.error(error);
@@ -54,11 +54,11 @@ const TextBox = ({onSubmit}) => {
         <div className='TextBox'>
           <h1 className='TextBox-title'></h1>
           <label htmlFor='title'>Title:</label>
-          <input id='title' type='text' value={title} onChange={handleTitleChange} />
+          <input id='title' type='text' value={title} onChange={handleTitleChange} style={{ color: 'black' }}/>
 
           <div style={{ width: 500, height: 250 }}>
             <div ref={quillRef} />
-          <TextBoxButton className='text' onClick={
+            <TextBoxButton className='text' onClick={
               handleEntrySubmit}>Submit</TextBoxButton>
           </div>
         
