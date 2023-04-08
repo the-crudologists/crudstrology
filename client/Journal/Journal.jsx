@@ -8,12 +8,12 @@ const Journal = () => {
   return (
     <div className='Journal' style={{ display: 'flex', justifyContent: 'left' }}>
       <h1 className='Journal-title'>Journal </h1>
-      <div className='left-column'>
+      <div className='left-column' style={{flex: 1, alignSelf: 'flex-end', marginRight: '20px'}}>
        
         <UserEntries />
       </div>
    
-      <div className='right-column'>
+      <div className='right-column' style={{flex: 2}}>
         <UserH />
       </div>
     </div>
