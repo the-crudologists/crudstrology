@@ -219,7 +219,6 @@ const ProfileImg = styled.img`
   margin-top: 1rem;
   height: 50;
   border: 1px solid azure;
-  background-color: white;
 `;
 const Fieldbox = styled.div`
   object-fit: cover;
