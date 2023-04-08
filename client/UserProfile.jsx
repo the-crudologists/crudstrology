@@ -11,10 +11,21 @@ const UserProfile = () => {
   const [followButton, setFollowButton] = useState('');
   const [journalEntries, setJournalEntries] = useState([]);
   const [friendsList, setFriendsList] = useState([]);
-  const [currentUser, setCurrentUser] = useState([]);
+  const [currentUser, setCurrentUser] = useState('');
+  const [userFollowers, setUserFollowers] = useState([]);
 
-  const getFollowersList = () => {
-    axios.get(`/db/follow/list/${state.userId}`)
+  const getUser = () => {
+    axios.get('/user/user')
+      .then(({ data }) => {
+        setCurrentUser(data.name);
+      })
+      .catch((err) => {
+        console.error('Failed request:', err);
+      });
+  };
+
+  const getFollowersList = (id) => {
+    axios.get(`/db/follow/list/${id}`)
       .then(({ data }) => {
         setFriendsList(data);
       })
@@ -71,12 +82,14 @@ const UserProfile = () => {
 
   // Fetch friends list on render
   useEffect(() => {
+    getUser();
     getFollowersList();
   }, []);
 
   // Disabling follow button if user is on their own profile
   useEffect(() => {
-    if (state.name === user) {
+    console.log(state);
+    if (state.currentUser.name === currentUser) {
       // Sets the state to display that the user is on their own profile
       setFollowButton(
         <AstroButton
@@ -122,7 +135,7 @@ const UserProfile = () => {
     axios.get(`/db/profile/${state.userId}`)
       .then(({data}) => setJournalEntries(data))
       .catch((err) => console.err(err));
-  }, []);
+  }, [currentUser]);
 
   return (
     <div
@@ -195,7 +208,6 @@ const UserProfile = () => {
         <h1 style={{ textAlign: 'center' }}><u>Follow List</u></h1>
         <div style={{ overflowY: 'auto', textAlign: 'center' }}>
           { friendsList.map((friend, i) => {
-            console.log(friend.name);
             return <div className='quote' style={{ display: 'flex' }}>
               <ProfileImg
                 src={`https://robohash.org/${friend.name}?set=set5`}

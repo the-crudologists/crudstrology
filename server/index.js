@@ -202,6 +202,19 @@ app.delete('/follow/:user_id', (req, res) => {
     });
 });
 
+app.get('/user/user', (req, res) => {
+  const user_id = req.user[0].user_id;
+
+  User.findByPk(user_id)
+    .then((user) => {
+      res.status(200).send(user);
+    })
+    .catch((err) => {
+      console.error('Failed to GET:', err);
+      res.sendStatus(500);
+    });
+});
+
 // (async () => {
 //   // <-- build seed script and call seeder() in that file...
 //   await seeder();
