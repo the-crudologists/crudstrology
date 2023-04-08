@@ -66,11 +66,13 @@ const Feed = () => {
     const submitButton = document.getElementById('submit-button');
     const cancelButton = document.getElementById('cancel-button');
     const input = document.getElementById('post-input');
+    const message = document.getElementById('sending');
 
 
     if (submitPost !== '') {
       submitNewPost(submitPost);
       setSubmitPost('');
+      message.style.display = '';
 
       setTimeout(() => {
         input.value = '';
@@ -79,7 +81,8 @@ const Feed = () => {
         postButton.style.display = '';
         cancelButton.style.display = 'none';
         post.style.display = 'none';
-      }, 1000);
+        message.style.display = 'none';
+      }, 4000);
     } else {
       alert('No message to post');
     }
@@ -106,9 +109,6 @@ const Feed = () => {
   // Renders the post to state
   useEffect(() => {
     renderFeed();
-    // const interval = setInterval(() => {
-    //   renderFeed();
-    // }, 10000);
   }, [newPost]);
 
   // Renders the users to state after posts
@@ -220,6 +220,7 @@ const Feed = () => {
         </div>
         <div id='post-box' style={{ display: 'none' }}>
           <PostForm submitPost={submitPost} setSubmitPost={setSubmitPost} />
+          <h3 id='sending' style={{ display: 'none', textAlign: 'center' }}>Sending message ...</h3>
         </div>
         <div id='chat-post'>
           <Chat userPost={userPost} />

@@ -95,7 +95,7 @@ const JournalEntry = sequelize.define('journal_entry', {
     allowNull: false
   },
   body: {
-    type: Sequelize.STRING,
+    type: Sequelize.TEXT,
     allowNull: false
   },
   user_id: {
@@ -150,7 +150,7 @@ const fetchTarotCards = () => {
 // sequelize.sync({ force: true });
 
 // uncomment to update current tables
-//  sequelize.sync({ alter: true });
+// sequelize.sync({ alter: true });
 
 // run to seed the tarotCard database
 // fetchTarotCards();
@@ -203,30 +203,58 @@ const seeder = async () => {
   ])
     .then(() => { console.log('Created Post'); })
     .catch((err) => { console.error('Failed to create Post', err); });
-  await Horoscope.bulkCreate([
+  await Follow.bulkCreate([
     {
-      date_range: 'March 21 - April 19',
-      current_date: new Date().toLocaleDateString(),
-      description: 'Today is a good day for taking action and making decisions. Trust your instincts and go after what you want.',
-      sunsign: 'Aries',
-      keywords: 'Action, Confidence, Decisiveness',
-      intensity: '35%',
-      lucky_number: 9,
-      lucky_time: '3pm'
+      follower_id: 4,
+      following_id: 1
     },
     {
-      date_range: 'April 20 - May 20',
-      current_date: new Date().toLocaleDateString(),
-      description: 'You may find yourself feeling more emotional than usual today. Take some time to process your feelings and communicate your needs to those around you.',
-      sunsign: 'Taurus',
-      keywords: 'Emotions, Communication, Self-Care',
-      intensity: '40%',
-      lucky_number: 6,
-      lucky_time: '7pm'
+      follower_id: 4,
+      following_id: 2
     },
+    {
+      follower_id: 4,
+      following_id: 3
+    },
+    {
+      follower_id: 3,
+      following_id: 1
+    },
+    {
+      follower_id: 3,
+      following_id: 2
+    },
+    {
+      follower_id: 3,
+      following_id: 4
+    },
+    {
+      follower_id: 2,
+      following_id: 1
+    },
+    {
+      follower_id: 2,
+      following_id: 3
+    },
+    {
+      follower_id: 2,
+      following_id: 4
+    },
+    {
+      follower_id: 1,
+      following_id: 2
+    },
+    {
+      follower_id: 1,
+      following_id: 3
+    },
+    {
+      follower_id: 1,
+      following_id: 4
+    }
   ])
-    .then(() => { console.log('Created Post'); })
-    .catch((err) => { console.error('Failed to create Post', err); });
+    .then(() => { console.log('Created follow list'); })
+    .catch((err) => { console.error('Failed to create followers'); });
   fetchTarotCards();
   /*await Quotes.create()
     .then(() => { console.log('Quote Model Create Success'); })
