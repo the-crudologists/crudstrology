@@ -1,21 +1,39 @@
 import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import { Link, useLocation } from 'react-router-dom';
-import { ProfileImg, AstroButton } from './Styled.jsx';
+import { ProfileImg, AstroButton, TarotCard } from './Styled.jsx';
 import { UserContext } from './App.jsx';
+import moment from 'moment';
 
 const UserProfile = () => {
   const { state } = useLocation();
   const { dob, setDob, sign, setSign, user } = useContext(UserContext);
   const [followButton, setFollowButton] = useState('');
+  const [journalEntries, setJournalEntries] = useState([]);
+  const [friendsList, setFriendsList] = useState([]);
+  const [currentUser, setCurrentUser] = useState([]);
+
+  const getFollowersList = () => {
+    axios.get(`/db/follow/list/${state.userId}`)
+      .then(({ data }) => {
+        setFriendsList(data);
+      })
+      .catch((err) => {
+        console.error('Failed request:', err);
+      });
+  };
 
   const followUser = () => {
     const followB = document.getElementById('follow-button');
     const unFollowB = document.getElementById('unFollow-button');
     const message = document.getElementById('follow-status');
 
+    const data = {
+      user: state.currentUser.user_id
+    };
+
     axios
-      .post('/follow', { follow: state.user_id })
+      .post('/follow', data)
       .then(() => {
         followB.style.display = 'none';
         unFollowB.style.display = '';
@@ -36,7 +54,7 @@ const UserProfile = () => {
     const message = document.getElementById('un-follow-status');
 
     axios
-      .delete(`/follow/${state.user_id}`)
+      .delete(`/follow/${state.userId}`)
       .then(() => {
         followB.style.display = '';
         unFollowB.style.display = 'none';
@@ -51,10 +69,13 @@ const UserProfile = () => {
       });
   };
 
+  // Fetch friends list on render
+  useEffect(() => {
+    getFollowersList();
+  }, []);
+
   // Disabling follow button if user is on their own profile
   useEffect(() => {
-    console.log('State', state);
-    console.log('User', user);
     if (state.name === user) {
       // Sets the state to display that the user is on their own profile
       setFollowButton(
@@ -97,6 +118,10 @@ const UserProfile = () => {
         </div>
       );
     }
+
+    axios.get(`/db/profile/${state.userId}`)
+      .then(({data}) => setJournalEntries(data))
+      .catch((err) => console.err(err));
   }, []);
 
   return (
@@ -120,7 +145,7 @@ const UserProfile = () => {
       >
         <ProfileImg
           src={`https://robohash.org/${state.currentUser.name}?set=set5`}
-          style={{ margin: 'auto', padding: '10px' }}
+          style={{ marginLeft: '150px', padding: '10px' }}
         />
         <div name='user-info' style={{ textAlign: 'center' }}>
           <h1 className='comp-title'>{state.currentUser.name}</h1>
@@ -129,13 +154,13 @@ const UserProfile = () => {
             id='follow-status'
             style={{ display: 'none' }}
           >
-            You are following {state.name}
+            You are following {state.currentUser.name}
           </p>
           <p
-            id='follow-status'
+            id='un-follow-status'
             style={{ display: 'none' }}
           >
-            You un-followed {state.name}
+            You un-followed {state.currentUser.name}
           </p>
           <h2 className='comp-sign'>{state.currentUser.sign}</h2>
           <h2 className='comp-sign'>{state.currentUser.dob}</h2>
@@ -167,11 +192,19 @@ const UserProfile = () => {
           maxHeight: '100%',
         }}
       >
-        followers or friends section
-        <ProfileImg
-          src={`https://robohash.org/${state.currentUser.name}?set=set5`}
-          style={{ margin: 'auto', padding: '5px', height: '50px' }}
-        />
+        <h1 style={{ textAlign: 'center' }}><u>Follow List</u></h1>
+        <div style={{ overflowY: 'auto', textAlign: 'center' }}>
+          { friendsList.map((friend, i) => {
+            console.log(friend.name);
+            return <div className='quote' style={{ display: 'flex' }}>
+              <ProfileImg
+                src={`https://robohash.org/${friend.name}?set=set5`}
+                style={{ marginLeft: '125px', marginBottom: '20px', height: '75px' }}
+              />
+              <h2 style={{ marginLeft: '30px', marginTop: '41px' }}>{friend.name}</h2>
+            </div>;
+          })}
+        </div>
       </div>
     </div>
   );

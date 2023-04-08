@@ -164,11 +164,12 @@ app.post('/user/post', (req, res) => {
 
 // Creates a follow in the follow schema
 app.post('/follow', async (req, res) => {
-  const { follow } = req.body;
+  const { user } = req.body;
   const { user_id } = req.user[0];
 
+
   const follower = await User.findByPk(user_id);
-  const following = await User.findByPk(follow);
+  const following = await User.findByPk(user);
 
   follower.addFollowing(following)
     .then(() => {
@@ -181,6 +182,7 @@ app.post('/follow', async (req, res) => {
 
 });
 
+// Deletes follower row
 app.delete('/follow/:user_id', (req, res) => {
   const follow = req.params.user_id;
   const { user_id } = req.user[0];

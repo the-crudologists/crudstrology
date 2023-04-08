@@ -1,6 +1,7 @@
 // router
 const express = require('express');
 const Internal = express.Router();
+const { User, Follow } = require('../database/index.js');
 
 // const { Internal } = Router();
 
@@ -100,8 +101,8 @@ Internal.post('/jEntry', (req, res) => {
   // console.log(data);
   const newObj = {
     body: entry,
-    title: title,
-    user_id: userId
+    user_id: userId,
+    title: title
   };
   JournalEntry.create(newObj);
   // console.log('hi');
@@ -134,6 +135,24 @@ Internal.get('/profile/:id', (req, res) => {
       console.error(error);
       res.sendStatus(500);
     });
+});
+
+Internal.get('/follow/list/:id', async (req, res) => {
+  const { id } = req.params;
+  const userArr = [];
+  const followingList = await Follow.findAll({where: { follower_id: id }});
+  for (let i = 0; i < followingList.length; i++) {
+    const user = await User.findOne({where: { user_id: followingList[i].dataValues.following_id }});
+    userArr.push(user);
+  }
+  if (userArr.length !== 0) {
+    res.status(200).send(userArr);
+  } else if (userArr.length === 0) {
+    res.sendStatus(404);
+  } else {
+    console.error('Failed request');
+    res.sendStatus(500);
+  }
 });
 
 module.exports = { Internal };
