@@ -7,12 +7,6 @@ const { User, Follow } = require('../database/index.js');
 require('./auth.js');
 
 // database
-const {
-  Quotes,
-  Tarot,
-  JournalEntry,
-  Horoscope,
-} = require('../database/index.js');
 const { Quotes, Tarot, JournalEntry, Horoscope} = require('../database/index.js');
 const Sequelize = require('sequelize');
 
@@ -132,7 +126,7 @@ Internal.post('/horo', (req, res) => {
 });
 
 Internal.get('/profile/journal/:id', (req, res) => {
-  const {id} = req.params
+  const {id} = req.params;
 
   JournalEntry.findAll({ where: { user_id: id } })
     .then((journalEntry) => {
@@ -145,18 +139,19 @@ Internal.get('/profile/journal/:id', (req, res) => {
 });
 
 Internal.get('/updatedUser/:id', (req, res) => {
-  const {id} = req.params
+  const {id} = req.params;
 
   User.findAll(
     {where: { user_id: id}}
-    ).then(user => {
-      res.status(200).send(user);
-    })
+  ).then(user => {
+    res.status(200).send(user);
+  })
     .catch(error => {
       console.error(error);
       res.sendStatus(500);
     });
-})
+});
+
 Internal.get('/follow/list/:id', async (req, res) => {
   const { id } = req.params;
   const userArr = [];
@@ -174,4 +169,5 @@ Internal.get('/follow/list/:id', async (req, res) => {
     res.sendStatus(500);
   }
 });
+
 module.exports = { Internal };
