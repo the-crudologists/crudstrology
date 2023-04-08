@@ -265,7 +265,7 @@ useEffect(() => {
           return (
             <TarotCard>
             <div style={{textAlign: "center"}}>
-            <h2>{entry.title}</h2>
+            <h1>{entry.title}</h1>
 
                  <div dangerouslySetInnerHTML={{ __html: entry.body }}/>
                  <br></br>
