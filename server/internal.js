@@ -74,7 +74,7 @@ Internal.delete('/quotes/:id', (req, res) => {
 Internal.post('/userEntries/', (req, res) => {
 
   const { userId } = req.body;
-    console.log(req.body)
+    
   JournalEntry.findAll({
     where: { user_id: userId },
     order: [['createdAt', 'DESC']]
@@ -89,16 +89,21 @@ Internal.post('/userEntries/', (req, res) => {
 
 Internal.post('/jEntry', (req, res) => {
   const { data } = req.body;
-  const { entry, userId, title} = data;
-  // console.log(data);
+  const { entry, userId, title } = data;
+  console.log(entry, userId, title);
   const newObj = {
     body: entry,
     user_id: userId,
     title: title
   };
-  JournalEntry.create(newObj);
-  // console.log('hi');
-  res.status(200).send('Journal entry route hit successfully');
+  JournalEntry.create(newObj)
+    .then(() => {
+      res.status(200).send('Journal entry route hit successfully');
+    })
+    .catch(error => {
+      console.log(error);
+      res.status(500).send('Error creating journal entry');
+    });
 });
 // this is for the horoscope in journal
 Internal.post('/horo', (req, res) => {

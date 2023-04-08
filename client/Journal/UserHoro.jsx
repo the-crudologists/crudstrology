@@ -24,6 +24,7 @@ const UserH = () => {
   }
 
   return (
+    
     <div className='UserHoro' >
       <UserHoro> <h1 className='UserHoro-title'> Horoscope</h1>
 

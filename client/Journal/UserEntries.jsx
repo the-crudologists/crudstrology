@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import { UserContext } from '../App.jsx';
 import TextBox from './QuillText.jsx';
 import axios from 'axios';
-import { JournalEntry, OtherHoros } from '../Styled.jsx';
+import { CompatibilityButton, OtherHoros, UserHoro  } from '../Styled.jsx';
 
 const UserEntries = () => {
   const [entries, setEntries] = useState([]);
@@ -37,29 +37,31 @@ const UserEntries = () => {
   };
 
   return (
-    <>
-      <div className='UserEntries'>
-        <h1 className='UserEntries-title'></h1>
-        <ul>
-          {entries.map(entry => (
-            <li key={entry.id} onClick={() => handleEntryClick(entry)} className="JournalEntry">
-              {entry.title}
-            </li>
-          ))}
-        </ul>
-      </div>
-      <div>
-        {selectedEntry && (
-          <OtherHoros>{selectedEntry.body}</OtherHoros>
-        )}
-        {showTextBox && (
-          <TextBox />
-        )}
-      </div>
-      {!showTextBox && (
-        <button onClick={handleNewPost}>New Entry</button>
+   <>
+  <div style={{ display: 'flex', flexDirection: 'row-reverse' }}>
+    <div>
+      {showTextBox && (
+        <TextBox />
       )}
-    </>
+      {selectedEntry && (
+        <UserHoro>{selectedEntry.body}</UserHoro>
+      )}
+    </div>
+    <div className='UserEntries'>
+      <h1 className='UserEntries-title'></h1>
+      <ul>
+        {entries.map(entry => (
+          <OtherHoros key={entry.id} onClick={() => handleEntryClick(entry)} className="JournalEntry">
+            {entry.title}
+          </OtherHoros>
+        ))}
+      </ul>
+    </div>
+  </div>
+  {!showTextBox && (
+    <CompatibilityButton onClick={handleNewPost}>New Entry</CompatibilityButton>
+  )}
+</>
   );
 };
 
