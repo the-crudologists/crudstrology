@@ -40,17 +40,17 @@ const Astrology = () => {
       }
     })
       .then(reading => {
-      const intensity = reading.data.intensity;
-      const bgcolor = generateBgColor(intensity);
-      setReading(reading.data);
-      setBg(bgcolor);
+        const intensity = reading.data.intensity;
+        const bgcolor = generateBgColor(intensity);
+        setReading(reading.data);
+        setBg(bgcolor);
       })
       .catch(err => {
         console.log('Error AXIOS post to /api/horo from Client', err);
       });
   };
 
-   const fetchOtherSigns = (userSign) => {
+  const fetchOtherSigns = (userSign) => {
     setHoroscopes([]);
     // iterates through the array and does an api call for every sign that isnt selected
     zodiacSigns.forEach(el => {
