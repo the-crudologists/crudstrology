@@ -26,7 +26,7 @@ const TextBox = ({onSubmit}) => {
 
   const handleEntrySubmit = () => {
     if (quillRef.current) {
-      const newEntry = quillRef.current.querySelector('.ql-editor').innerText;
+      const newEntry = quillRef.current.querySelector('.ql-editor').innerHTML;
       setEntries(prevEntries => [...prevEntries, { title, entry: newEntry }]);
       axios.post('/db/jEntry', {
         data: {
@@ -47,9 +47,6 @@ const TextBox = ({onSubmit}) => {
       
     }
   };
-
-  // console.log(quill); // undefined > Quill Object
-  // console.log(quillRef); // { current: undefined } > { current: Quill Editor Reference }
 
   return (
     <>

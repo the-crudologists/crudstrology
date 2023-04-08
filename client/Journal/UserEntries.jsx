@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import { UserContext } from '../App.jsx';
 import TextBox from './QuillText.jsx';
 import axios from 'axios';
-import { JournalButton, OtherHoros, UserHoro, Fieldbox } from '../Styled.jsx';
+import { JournalButton, OtherHoros, UserHoro, Fieldbox, DeleteButton } from '../Styled.jsx';
 
 const UserEntries = () => {
   const [entries, setEntries] = useState([]);
@@ -39,7 +39,7 @@ const UserEntries = () => {
     setShowTextBox(false);
   };
 
-   const handleEntrySubmit = () => {
+  const handleEntrySubmit = () => {
     setShowTextBox(false);
     fetchEntries(); 
   };
@@ -62,9 +62,14 @@ const UserEntries = () => {
         <div className='UserEntries' style={{ overflowY: 'auto', maxHeight: '350px' }}>
           <ul style={{ justifyContent: 'left' }}>
             {entries.map(entry => (
-              <><OtherHoros key={entry.id} onClick={() => handleEntryClick(entry)} className="JournalEntry">
-                {entry.title} <button onClick={() => handleDelete(entry.id)}>Delete</button>
-              </OtherHoros></>
+              <OtherHoros key={entry.id} className="JournalEntry">
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%' }}>
+                  <div onClick={() => handleEntryClick(entry)} style={{ flexGrow: 1 }}>
+                    {entry.title}
+                  </div>
+                  <DeleteButton onClick={() => handleDelete(entry.id)}>Delete</DeleteButton>
+                </div>
+              </OtherHoros>
             ))}
           </ul>
         </div>
@@ -72,14 +77,14 @@ const UserEntries = () => {
           <JournalButton onClick={handleNewPost} style={{ marginLeft: 'auto' }}>New Entry</JournalButton>
         )}
       </Fieldbox>
-         <Fieldbox>
+      <Fieldbox>
         <h1 className='FieldBox-title'> Journal</h1>
         <div>
           {showTextBox && (
             <TextBox onSubmit={handleEntrySubmit} />
           )}
           {!showTextBox && selectedEntry && (
-            <UserHoro>{selectedEntry.body}</UserHoro>
+      <UserHoro dangerouslySetInnerHTML={{ __html: selectedEntry.body }} />
           )}
         </div>
       </Fieldbox>

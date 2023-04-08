@@ -257,6 +257,18 @@ const TextBoxButton = styled.button`
   transition: fill 0.25s;
   cursor: pointer;
 `;
+const DeleteButtonEntires = styled.button`
+  background: black;
+  border-radius: 3px;
+  border: 2px solid;
+  color: white;
+  height: 45px;
+  width: 45px;
+  margin: 0.5em 1em;
+  padding: 0.25em 1em;
+  transition: fill 0.25s;
+  cursor: pointer;
+`;
 
 export {
   JournalEntry, 
@@ -281,5 +293,6 @@ export {
   PostInput,
   ProfileImg,
   TextBoxButton,
-  JournalButton
+  JournalButton,
+  DeleteButtonEntires
 };

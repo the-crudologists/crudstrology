@@ -95,7 +95,7 @@ const JournalEntry = sequelize.define('journal_entry', {
     allowNull: false
   },
   body: {
-    type: Sequelize.STRING,
+    type: Sequelize.TEXT,
     allowNull: false
   },
   user_id: {
@@ -150,8 +150,8 @@ const fetchTarotCards = () => {
 // sequelize.sync({ force: true });
 
 // uncomment to update current tables
- sequelize.sync({ alter: true });
 
+ sequelize.sync({ alter: true });
 // run to seed the tarotCard database
 // fetchTarotCards();
 
