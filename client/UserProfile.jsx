@@ -16,6 +16,7 @@ const UserProfile = () => {
   const [dob, setDOB] = useState('');
   const [friendsList, setFriendsList] = useState([]);
   const [currentUser, setCurrentUser] = useState([]);
+  const [profileUser, setProfileUser] = useState([]);
   const [userFollowers, setUserFollowers] = useState([]);
 
   const getUser = () => {
@@ -102,8 +103,12 @@ const UserProfile = () => {
   // Fetch friends list on render
   useEffect(() => {
     getUser();
-    getFollowersList(state.userId);
+    setProfileUser(state.currentUser);
   }, []);
+
+  useEffect(() => {
+    getFollowersList(profileUser.user_id);
+  }, [profileUser]);
 
   useEffect(() => {
     getUserFollowersList(currentUser.user_id);
@@ -111,21 +116,24 @@ const UserProfile = () => {
 
   // Disabling follow button if user is on their own profile
   useEffect(() => {
+    console.log(currentUser, profileUser);
     const userButton = document.getElementById('userButton');
     const followButton = document.getElementById('follow-button');
     const unFollowButton = document.getElementById('unFollow-button');
 
-    if (state.currentUser.name === currentUser.name) {
+    if (profileUser.name === currentUser.name) {
       userButton.style.display = '';
     } else {
       for (let i = 0; i < userFollowers.length; i++) {
-        if (userFollowers[i].name === state.currentUser.name) {
+        if (userFollowers[i].name === profileUser.name) {
           unFollowButton.style.display = '';
           followButton.style.display = 'none';
+          userButton.style.display = 'none';
           break;
         } else {
           followButton.style.display = '';
           unFollowButton.style.display = 'none';
+          userButton.style.display = 'none';
         }
       }
     }
@@ -146,7 +154,6 @@ const UserProfile = () => {
 
 
   useEffect(() => {
-    console.log(sign);
     //User zodiac sign
     if (sign) {
     //User color background
