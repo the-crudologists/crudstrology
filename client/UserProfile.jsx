@@ -139,37 +139,6 @@ const UserProfile = () => {
        <ProfileImg src={`https://robohash.org/${state.currentUser.name}?set=set5`}  style={{ margin: 'auto', padding: '5px', height: '50px'}} />
       </div>
     </div>
-  return (
-    <div name='parent'>
-      <div
-        style={{
-          display: 'inline-block',
-          'border-style': 'solid',
-          maxHeight: '100%',
-        }}
-      >
-        <ProfileImg src={`https://robohash.org/${state.name}?set=set5`} />
-        <div name='user-info' style={{ textAlign: 'center' }}>
-          <h1 className='comp-title'>{state.name}</h1>
-          {followButton}
-          <p
-            id='follow-status'
-            style={{ display: 'none' }}
-          >
-            You are following {state.name}
-          </p>
-          <p
-            id='un-follow-status'
-            style={{ display: 'none' }}
-          >
-            You un-followed {state.name}
-          </p>
-          <h2 className='comp-sign'>{state.sign}</h2>
-          <h2 className='comp-sign'>{state.dob}</h2>
-        </div>
-      </div>
-      <Link to='/'>Go Back</Link>
-    </div>
   );
 };
 
