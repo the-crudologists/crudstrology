@@ -142,7 +142,7 @@ const UserProfile = () => {
      //Gets updated dob and sign
      axios.get(`db/updatedUser/${state.userId}`)
      .then(({data}) => {setSign(data[0].sign), setDOB(data[0].dob)})
-  }, [])
+  })
 
 
 useEffect(() => {
