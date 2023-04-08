@@ -104,7 +104,7 @@ const UserProfile = () => {
   useEffect(() => {
     getUser();
     setProfileUser(state.currentUser);
-  }, []);
+  }, [journalEntries]);
 
   useEffect(() => {
     getFollowersList(profileUser.user_id);
@@ -116,7 +116,6 @@ const UserProfile = () => {
 
   // Disabling follow button if user is on their own profile
   useEffect(() => {
-    console.log(currentUser, profileUser);
     const userButton = document.getElementById('userButton');
     const followButton = document.getElementById('follow-button');
     const unFollowButton = document.getElementById('unFollow-button');
@@ -137,7 +136,7 @@ const UserProfile = () => {
         }
       }
     }
-  }, [userFollowers]);
+  }, [userFollowers, friendsList]);
 
   useEffect(() => {
     //Gets updated journal entries
