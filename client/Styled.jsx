@@ -106,6 +106,18 @@ const UserHoro = styled.div`
   padding: 10px;
 `;
 
+  const JournalEntry = styled.div`
+  object-fit: cover;
+  border: 3px groove azure;
+  background-color: black;
+  margin-top: 20px;
+  margin-left: 5px;
+  font-size: 20px;
+  padding: 10px;
+`;
+
+
+
 const OtherHoros = styled.div`
   object-fit: cover;
   border: 3px double azure;
@@ -211,7 +223,7 @@ const ProfileImg = styled.img`
 `;
 
 export {
-  NavStyle,
+  JournalEntry, NavStyle,
   NavItem,
   NavUserInfo,
   NavImg,

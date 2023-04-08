@@ -31,10 +31,10 @@ const Astrology = () => {
       }
     })
       .then(reading => {
-        console.log(reading.data);
+        // console.log(reading.data);
   
        
-        // setReading(reading.data);
+        setReading(reading.data);
       })
       .catch(err => {
         console.log('Error AXIOS post to /api/horo from Client', err);
@@ -47,7 +47,7 @@ const Astrology = () => {
     zodiacSigns.forEach(el => {
       if (el !== userSign) {
         axios.post('/api/horo', {
-          user: {
+          data: {
             sign: el
           }
         })
@@ -66,7 +66,7 @@ const Astrology = () => {
   return (
 
     <div className='horoscope'>
-      <h1 className='horo-title'>{user} </h1>
+      <h1 className='horo-title'>Horoscopes </h1>
       <div style={{ fontSize: '20px' }}><p><b>Your birthday is {dob}, so your sign is {sign}.</b></p></div>
       <AstroButton onClick={() => fetchOtherSigns(sign)} className='text'>Get Other Horoscopes</AstroButton>
       <UserHoro>
