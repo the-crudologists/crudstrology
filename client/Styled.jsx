@@ -106,7 +106,7 @@ const UserHoro = styled.div`
   padding: 10px;
 `;
 
-  const JournalEntry = styled.div`
+const JournalEntry = styled.div`
   object-fit: cover;
   border: 3px groove azure;
   background-color: black;
@@ -221,9 +221,47 @@ const ProfileImg = styled.img`
   border: 1px solid azure;
   background-color: white;
 `;
+const Fieldbox = styled.div`
+  object-fit: cover;
+  border: 3px groove azure;
+  background-color: black;
+  margin-top: 20px;
+  margin-left: 5px;
+  font-size: 20px;
+  padding: 10px;
+  height: 500px;
+  width: 500px;
+`;
+
+const JournalButton = styled.button`
+  background: black;
+  border-radius: 3px;
+  border: 2px solid;
+  color: white;
+  height: 45px;
+  width: 100px;
+  margin: 0.5em 1em;
+  padding: 0.25em 1em;
+  transition: fill 0.25s;
+  cursor: pointer;
+`;
+const TextBoxButton = styled.button`
+  background: black;
+  border-radius: 3px;
+  border: 2px solid;
+  color: white;
+  height: 45px;
+  width: 100px;
+  margin: 0.5em 1em;
+  padding: 0.25em 1em;
+  transition: fill 0.25s;
+  cursor: pointer;
+`;
 
 export {
-  JournalEntry, NavStyle,
+  JournalEntry, 
+  NavStyle,
+  Fieldbox,
   NavItem,
   NavUserInfo,
   NavImg,
@@ -242,4 +280,6 @@ export {
   PostButton,
   PostInput,
   ProfileImg,
+  TextBoxButton,
+  JournalButton
 };

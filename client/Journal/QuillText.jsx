@@ -2,10 +2,10 @@ import React, { useState, useContext, useEffect } from 'react';
 import { useQuill } from 'react-quilljs';
 import { UserContext } from '../App.jsx';
 import 'quill/dist/quill.snow.css';
-import { CompatibilityButton} from '../Styled.jsx';
+import { TextBoxButton} from '../Styled.jsx';
 const axios = require('axios');
 
-const TextBox = () => {
+const TextBox = ({onSubmit}) => {
 
   const { user, dob, sign, userId } = useContext(UserContext);
 
@@ -37,12 +37,14 @@ const TextBox = () => {
       })
         .then(response => {
           console.log(response.data);
+          onSubmit();
+      // setTitle('');
+      setShowTextBox(false);
         })
         .catch(error => {
           console.error(error);
         });
-      setTitle('');
-      setShowTextBox(false);
+      
     }
   };
 
@@ -54,14 +56,13 @@ const TextBox = () => {
       {showTextBox && (
         <div className='TextBox'>
           <h1 className='TextBox-title'></h1>
-
           <label htmlFor='title'>Title:</label>
           <input id='title' type='text' value={title} onChange={handleTitleChange} />
 
-          <div style={{ width: 500, height: 300 }}>
+          <div style={{ width: 500, height: 250 }}>
             <div ref={quillRef} />
-            <CompatibilityButton className='text' onClick={
-              handleEntrySubmit}>Submit</CompatibilityButton>
+          <TextBoxButton className='text' onClick={
+              handleEntrySubmit}>Submit</TextBoxButton>
           </div>
         
           <ul>
