@@ -92,8 +92,9 @@ Internal.post('/jEntry', (req, res) => {
   const { entry, userId, title} = data;
   // console.log(data);
   const newObj = {
-    body: newEntry,
-    user_id: userId
+    body: entry,
+    user_id: userId,
+    title: title
   };
   JournalEntry.create(newObj);
   // console.log('hi');

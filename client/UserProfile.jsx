@@ -1,13 +1,15 @@
 import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import { Link, useLocation } from 'react-router-dom';
-import { ProfileImg, AstroButton } from './Styled.jsx';
+import { ProfileImg, AstroButton, TarotCard } from './Styled.jsx';
 import { UserContext } from './App.jsx';
+import moment from 'moment';
 
 const UserProfile = () => {
   const { state } = useLocation();
   const { dob, setDob, sign, setSign, user } = useContext(UserContext);
   const [followButton, setFollowButton] = useState('');
+  const [journalEntries, setJournalEntries] = useState([]);
 
   const followUser = () => {
     const followB = document.getElementById('follow-button');
@@ -51,7 +53,6 @@ const UserProfile = () => {
 
   // Disabling follow button if user is on their own profile
   useEffect(() => {
-    console.log('State', state);
     if (state.name === user) {
       // Sets the state to display that the user is on their own profile
       setFollowButton(
@@ -89,7 +90,11 @@ const UserProfile = () => {
         </div>
       );
     }
-  }, []);
+
+    axios.get(`/db/profile/${state.userId}`)
+      .then(({data}) => setJournalEntries(data))
+      .catch((err) => console.err(err));
+  },[]);
 
   return (
     <div style={{
