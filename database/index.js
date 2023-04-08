@@ -90,16 +90,20 @@ const Horoscope = sequelize.define('horoscope', {
 Horoscope.belongsTo(User, {foreignKey: 'user_id'});
 
 const JournalEntry = sequelize.define('journal_entry', {
+  title: {
+    type: Sequelize.STRING,
+    allowNull: false
+  },
   body: {
     type: Sequelize.STRING,
-    allowNull: false,
-    user_id: {
-      type: Sequelize.INTEGER,
-      references: {
-        model: 'users',
-        key: 'user_id'
-      }
-    },
+    allowNull: false
+  },
+  user_id: {
+    type: Sequelize.INTEGER,
+    references: {
+      model: 'users',
+      key: 'user_id'
+    }
   }
 });
 
@@ -141,9 +145,15 @@ const fetchTarotCards = () => {
       console.log('<-- API --> ERROR FROM TAROT API', err);
     });
 };
-// you can run this to update tables without seeding
 
+// uncomment to reset the database
 // sequelize.sync({ force: true });
+
+// uncomment to update current tables
+//  sequelize.sync({ alter: true });
+
+// run to seed the tarotCard database
+// fetchTarotCards();
 
 // <-- might not need to be async -->
 const seeder = async () => {

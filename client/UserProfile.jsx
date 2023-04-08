@@ -14,7 +14,8 @@ const UserProfile = () => {
     const unFollowB = document.getElementById('unFollow-button');
     const message = document.getElementById('follow-status');
 
-    axios.post('/follow', { follow: state.user_id })
+    axios
+      .post('/follow', { follow: state.user_id })
       .then(() => {
         followB.style.display = 'none';
         unFollowB.style.display = '';
@@ -34,7 +35,8 @@ const UserProfile = () => {
     const unFollowB = document.getElementById('unFollow-button');
     const message = document.getElementById('un-follow-status');
 
-    axios.delete(`/follow/${state.user_id}`)
+    axios
+      .delete(`/follow/${state.user_id}`)
       .then(() => {
         followB.style.display = '';
         unFollowB.style.display = 'none';
@@ -52,6 +54,7 @@ const UserProfile = () => {
   // Disabling follow button if user is on their own profile
   useEffect(() => {
     console.log('State', state);
+    console.log('User', user);
     if (state.name === user) {
       // Sets the state to display that the user is on their own profile
       setFollowButton(
@@ -76,11 +79,16 @@ const UserProfile = () => {
             type='button'
             onClick={() => followUser()}
           >
-          Follow
+            Follow
           </AstroButton>
           <AstroButton
             id='unFollow-button'
-            style={{ color: 'black', margin: 'auto', padding: '10px', display: 'none' }}
+            style={{
+              color: 'black',
+              margin: 'auto',
+              padding: '10px',
+              display: 'none',
+            }}
             type='button'
             onClick={() => unFollowUser()}
           >
@@ -92,7 +100,17 @@ const UserProfile = () => {
   }, []);
 
   return (
-    <div name='parent'>
+    <div
+      style={{
+        display: 'grid',
+        gridTemplateColumns: '1fr 1fr 1fr',
+        gridGap: '20px',
+        border: '1px solid black',
+        width: '100%',
+        height: '600px',
+        maxHeight: '600px',
+      }}
+    >
       <div
         style={{
           display: 'inline-block',
@@ -100,9 +118,12 @@ const UserProfile = () => {
           maxHeight: '100%',
         }}
       >
-        <ProfileImg src={`https://robohash.org/${state.name}?set=set5`} />
+        <ProfileImg
+          src={`https://robohash.org/${state.currentUser.name}?set=set5`}
+          style={{ margin: 'auto', padding: '10px' }}
+        />
         <div name='user-info' style={{ textAlign: 'center' }}>
-          <h1 className='comp-title'>{state.name}</h1>
+          <h1 className='comp-title'>{state.currentUser.name}</h1>
           {followButton}
           <p
             id='follow-status'
@@ -111,16 +132,47 @@ const UserProfile = () => {
             You are following {state.name}
           </p>
           <p
-            id='un-follow-status'
+            id='follow-status'
             style={{ display: 'none' }}
           >
             You un-followed {state.name}
           </p>
-          <h2 className='comp-sign'>{state.sign}</h2>
-          <h2 className='comp-sign'>{state.dob}</h2>
+          <h2 className='comp-sign'>{state.currentUser.sign}</h2>
+          <h2 className='comp-sign'>{state.currentUser.dob}</h2>
         </div>
       </div>
-      <Link to='/'>Go Back</Link>
+      {/* <Link to='/'>Go Back</Link> */}
+      <div
+        style={{
+          display: 'inline-block',
+          borderStyle: 'solid',
+          maxHeight: '100%',
+        }}
+      >
+        {/* {journalEntries.map((entry) => {
+          return (
+            <TarotCard>
+              <div>
+                {entry.body}
+                {moment(entry.createdAt).format('MMMM Do YYYY, h:mm:ss a')}
+              </div>
+            </TarotCard>
+          );
+        })} */}
+      </div>
+      <div
+        style={{
+          display: 'inline-block',
+          'border-style': 'solid',
+          maxHeight: '100%',
+        }}
+      >
+        followers or friends section
+        <ProfileImg
+          src={`https://robohash.org/${state.currentUser.name}?set=set5`}
+          style={{ margin: 'auto', padding: '5px', height: '50px' }}
+        />
+      </div>
     </div>
   );
 };

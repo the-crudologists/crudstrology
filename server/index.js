@@ -182,7 +182,6 @@ app.post('/follow', async (req, res) => {
 });
 
 app.delete('/follow/:user_id', (req, res) => {
-  console.log(req);
   const follow = req.params.user_id;
   const { user_id } = req.user[0];
 

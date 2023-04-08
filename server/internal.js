@@ -80,7 +80,7 @@ Internal.delete('/quotes/:id', (req, res) => {
 // For Journal entry
 Internal.post('/userEntries/', (req, res) => {
   const { userId } = req.body;
-  console.log(req.body);
+
   JournalEntry.findAll({
     where: { user_id: userId },
     order: [['createdAt', 'DESC']],
@@ -96,25 +96,39 @@ Internal.post('/userEntries/', (req, res) => {
 
 Internal.post('/jEntry', (req, res) => {
   const { data } = req.body;
-  const { newEntry, userId } = data;
-  console.log(newEntry, userId);
+  const { entry, userId, title} = data;
+  // console.log(data);
   const newObj = {
-    body: newEntry,
-    user_id: userId,
+    body: entry,
+    title: title,
+    user_id: userId
   };
   JournalEntry.create(newObj);
-  console.log('hi');
+  // console.log('hi');
   res.status(200).send('Journal entry route hit successfully');
 });
-
+// this is for the horoscope in journal
 Internal.post('/horo', (req, res) => {
   const { userId } = req.body;
-  console.log(userId);
+  //  console.log(userId)
   Horoscope.findOne({
     where: { user_Id: userId },
   })
     .then((latestHoroscope) => {
       res.status(200).send(latestHoroscope);
+    })
+    .catch((error) => {
+      console.error(error);
+      res.sendStatus(500);
+    });
+});
+
+Internal.get('/profile/:id', (req, res) => {
+  const { id } = req.params;
+
+  JournalEntry.findAll({ where: { user_id: id } })
+    .then((journalEntry) => {
+      res.status(200).send(journalEntry);
     })
     .catch((error) => {
       console.error(error);
