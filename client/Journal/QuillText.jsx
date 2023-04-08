@@ -61,7 +61,7 @@ const TextBox = ({onSubmit}) => {
             <TextBoxButton className='text' onClick={
               handleEntrySubmit}>Submit</TextBoxButton>
           </div>
-        
+
           <ul>
             {entries.map((entry, index) => (
               <li key={index}>

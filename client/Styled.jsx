@@ -216,7 +216,7 @@ const CompNavBarInline = styled.div`
 `;
 
 const ProfileImg = styled.img`
-  margin-top: 0.3rem;
+  margin-top: 1rem;
   height: 50;
   border: 1px solid azure;
   background-color: white;

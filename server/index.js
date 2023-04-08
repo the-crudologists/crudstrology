@@ -164,11 +164,12 @@ app.post('/user/post', (req, res) => {
 
 // Creates a follow in the follow schema
 app.post('/follow', async (req, res) => {
-  const { follow } = req.body;
+  const { user } = req.body;
   const { user_id } = req.user[0];
 
+
   const follower = await User.findByPk(user_id);
-  const following = await User.findByPk(follow);
+  const following = await User.findByPk(user);
 
   follower.addFollowing(following)
     .then(() => {
@@ -181,8 +182,8 @@ app.post('/follow', async (req, res) => {
 
 });
 
+// Deletes follower row
 app.delete('/follow/:user_id', (req, res) => {
-  console.log(req);
   const follow = req.params.user_id;
   const { user_id } = req.user[0];
 
@@ -197,6 +198,19 @@ app.delete('/follow/:user_id', (req, res) => {
     })
     .catch((err) => {
       console.error('Failed to DELETE:', err);
+      res.sendStatus(500);
+    });
+});
+
+app.get('/user/user', (req, res) => {
+  const user_id = req.user[0].user_id;
+
+  User.findByPk(user_id)
+    .then((user) => {
+      res.status(200).send(user);
+    })
+    .catch((err) => {
+      console.error('Failed to GET:', err);
       res.sendStatus(500);
     });
 });

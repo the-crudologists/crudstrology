@@ -10,7 +10,7 @@ const Journal = () => {
       <div className='left-column' style={{flex: 2, alignSelf: 'flex-end',}}>
         <UserEntries />
       </div>
-  
+
       <div className='right-column' style={{flex: 2}}>
         <UserH />
       </div>
