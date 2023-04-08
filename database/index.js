@@ -95,7 +95,7 @@ const JournalEntry = sequelize.define('journal_entry', {
     allowNull: false
   },
   body: {
-    type: Sequelize.STRING,
+    type: Sequelize.TEXT,
     allowNull: false
   },
   user_id: {

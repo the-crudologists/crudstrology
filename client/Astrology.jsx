@@ -8,18 +8,27 @@ import axios from 'axios';
 const Astrology = () => {
   const zodiacSigns = ['Aries', 'Taurus', 'Gemini', 'Cancer', 'Leo', 'Virgo', 'Libra', 'Scorpio', 'Sagittarius', 'Capricorn', 'Aquarius', 'Pisces'];
 
-  const [reading, setReading] = useState(fakeHoro);
+  const [reading, setReading] = useState([]);
   const [horoscopes, setHoroscopes] = useState([]);
-  const { user ,dob, sign, userId } = useContext(UserContext);
+  const [bg, setBg] = useState('black');
+  const { user, dob, sign, userId } = useContext(UserContext);
 
-  const generateLuckyTime = () => {
-    const hours = Math.floor(Math.random() * 12) + 1;
-    const minutes = Math.floor(Math.random() * 60);
-    const amPm = Math.random() < 0.5 ? 'am' : 'pm';
-    return `${hours}:${minutes < 10 ? '0' + minutes : minutes} ${amPm}`;
-  };
-  const generateLuckyNumber = () => {
-    return Math.floor(Math.random() * 100) + 1;
+
+  const generateBgColor = (intensity) => {
+   
+    let bgcolor = '';
+    const intensityNumber = parseInt(intensity.replace('%', ''));
+  
+    console.log(intensityNumber);
+    if (intensityNumber === 0) {
+      bgcolor = 'purple';
+    } else if (intensityNumber === 100) {
+      bgcolor = 'red';
+    } else {
+      const hue = (intensityNumber * 1.2);
+      bgcolor = `hsl(${hue}, 100%, 50%)`;
+    }
+    return bgcolor;
   };
 
 
@@ -31,17 +40,17 @@ const Astrology = () => {
       }
     })
       .then(reading => {
-        // console.log(reading.data);
-  
-       
-        setReading(reading.data);
+      const intensity = reading.data.intensity;
+      const bgcolor = generateBgColor(intensity);
+      setReading(reading.data);
+      setBg(bgcolor);
       })
       .catch(err => {
         console.log('Error AXIOS post to /api/horo from Client', err);
       });
   };
 
-  const fetchOtherSigns = (userSign) => {
+   const fetchOtherSigns = (userSign) => {
     setHoroscopes([]);
     // iterates through the array and does an api call for every sign that isnt selected
     zodiacSigns.forEach(el => {
@@ -55,6 +64,9 @@ const Astrology = () => {
             setHoroscopes(prevHoro => {
               return [...prevHoro, reading.data];
             });
+            const intensity = reading.data.intensity;
+            const bgcolor = generateBgColor(intensity);
+            setBg(bgcolor);
           })
           .catch(err => console.log('ERROR populating horoscopes != sign array', err));
       }
@@ -64,12 +76,11 @@ const Astrology = () => {
   useEffect(() => fetchHoro(sign), [dob]);
 
   return (
-
     <div className='horoscope'>
       <h1 className='horo-title'>Horoscopes </h1>
       <div style={{ fontSize: '20px' }}><p><b>Your birthday is {dob}, so your sign is {sign}.</b></p></div>
       <AstroButton onClick={() => fetchOtherSigns(sign)} className='text'>Get Other Horoscopes</AstroButton>
-      <UserHoro>
+      <UserHoro style={{ borderColor: bg }}>
         {
           Object.entries(reading).map((el, i) => {
             return <div key={i}><b>{el[0]}</b>: {el[0] === 'description' ? el[1] : <em>{el[1]}</em>}</div>;
@@ -81,8 +92,10 @@ const Astrology = () => {
       <div>
         {
           horoscopes.map((el, i) => {
+            const intensity = el.intensity;
+            const bgcolor = generateBgColor(intensity);
             return (
-              <OtherHoros key={i}>
+              <OtherHoros style={{ borderColor: bgcolor }} key={i}>
                 {Object.entries(el).map((attr, i) => {
                   return (
                     <div key={i}>
@@ -95,9 +108,7 @@ const Astrology = () => {
           })
         }
       </div>
-
     </div>
-
   );
 };
 

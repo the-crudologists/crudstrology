@@ -2,9 +2,10 @@ import React, { useState, useContext, useEffect } from 'react';
 import { useQuill } from 'react-quilljs';
 import { UserContext } from '../App.jsx';
 import 'quill/dist/quill.snow.css';
+import { TextBoxButton} from '../Styled.jsx';
 const axios = require('axios');
 
-const TextBox = () => {
+const TextBox = ({onSubmit}) => {
 
   const { user, dob, sign, userId } = useContext(UserContext);
 
@@ -25,7 +26,7 @@ const TextBox = () => {
 
   const handleEntrySubmit = () => {
     if (quillRef.current) {
-      const newEntry = quillRef.current.querySelector('.ql-editor').innerText;
+      const newEntry = quillRef.current.querySelector('.ql-editor').innerHTML;
       setEntries(prevEntries => [...prevEntries, { title, entry: newEntry }]);
       axios.post('/db/jEntry', {
         data: {
@@ -36,31 +37,29 @@ const TextBox = () => {
       })
         .then(response => {
           console.log(response.data);
+          onSubmit();
+          // setTitle('');
+          setShowTextBox(false);
         })
         .catch(error => {
           console.error(error);
         });
-      setTitle('');
-      setShowTextBox(false);
+      
     }
   };
-
-  // console.log(quill); // undefined > Quill Object
-  // console.log(quillRef); // { current: undefined } > { current: Quill Editor Reference }
 
   return (
     <>
       {showTextBox && (
         <div className='TextBox'>
-          <h1 className='TextBox-title'>New Entry</h1>
-
+          <h1 className='TextBox-title'></h1>
           <label htmlFor='title'>Title:</label>
-          <input id='title' type='text' value={title} onChange={handleTitleChange} />
+          <input id='title' type='text' value={title} onChange={handleTitleChange} style={{ color: 'black' }}/>
 
-          <div style={{ width: 500, height: 300 }}>
+          <div style={{ width: 500, height: 250 }}>
             <div ref={quillRef} />
-            <button className='text' onClick={
-              handleEntrySubmit}>Submit</button>
+            <TextBoxButton className='text' onClick={
+              handleEntrySubmit}>Submit</TextBoxButton>
           </div>
 
           <ul>

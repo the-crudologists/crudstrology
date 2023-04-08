@@ -147,7 +147,8 @@ const UserProfile = () => {
         style={{
           display: 'inline-block',
           'border-style': 'solid',
-          maxHeight: '82%',
+          maxHeight: '100%',
+          overflow: 'hidden'
         }}
       >
         <ProfileImg
@@ -207,10 +208,11 @@ const UserProfile = () => {
         style={{
           display: 'inline-block',
           borderStyle: 'solid',
-          maxHeight: '82%',
+          maxHeight: '100%',
+          overflow: 'hidden'
         }}
       >
-        {/* {journalEntries.map((entry) => {
+        {journalEntries.map((entry) => {
           return (
             <TarotCard>
               <div>
@@ -219,19 +221,20 @@ const UserProfile = () => {
               </div>
             </TarotCard>
           );
-        })} */}
+        })}
       </div>
       <div
         style={{
           display: 'inline-block',
           'border-style': 'solid',
-          maxHeight: '82%',
+          maxHeight: '100%',
+          overflow: 'hidden'
         }}
       >
         <h1 style={{ textAlign: 'center' }}>
           <u>Follow List</u>
         </h1>
-        <div style={{ overflowY: 'scroll', textAlign: 'center', maxHeight: '85%'}}>
+        <div style={{ overflow: 'auto', textAlign: 'center', maxHeight: '85%'}}>
           {friendsList.map((friend, i) => {
             return (
               <div className='quote' style={{ display: 'flex' }}>
