@@ -13,7 +13,6 @@ const {
   JournalEntry,
   Horoscope,
 } = require('../database/index.js');
-const { Quotes, Tarot, JournalEntry, Horoscope} = require('../database/index.js');
 const Sequelize = require('sequelize');
 
 // middleware
