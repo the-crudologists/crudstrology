@@ -216,7 +216,8 @@ const UserProfile = () => {
           return (
             <TarotCard>
               <div>
-                {entry.body}
+               <div dangerouslySetInnerHTML={{ __html: entry.body }}></div>
+                {/* {entry.body} */}
                 {moment(entry.createdAt).format('MMMM Do YYYY, h:mm:ss a')}
               </div>
             </TarotCard>
