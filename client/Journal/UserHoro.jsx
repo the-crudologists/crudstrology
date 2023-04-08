@@ -42,16 +42,16 @@ const UserH = () => {
   }
 
   return (
-    
+
     <div className='UserHoro' >
       <Fieldbox style={{borderColor: bg }}> <h1 className='Fieldbox-title' > Horoscope</h1>
 
         <div><b>description</b>: {horoscope.description}</div>
-      
+
         <div><b>mood</b>: <em>{horoscope.mood}</em></div>
         <div><b>keywords</b>: <em>{horoscope.keywords}</em></div>
         <div><b>intensity</b>: <em>{horoscope.intensity}</em></div>
-      </Fieldbox> 
+      </Fieldbox>
     </div>
   );
 };

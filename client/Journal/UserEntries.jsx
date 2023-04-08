@@ -41,13 +41,13 @@ const UserEntries = () => {
 
   const handleEntrySubmit = () => {
     setShowTextBox(false);
-    fetchEntries(); 
+    fetchEntries();
   };
 
   const handleDelete = (entryId) => {
     axios.delete(`/db/userEntries/${entryId}`)
       .then(response => {
-        fetchEntries(); 
+        fetchEntries();
       })
       .catch(error => {
         console.log(error);
