@@ -8,7 +8,7 @@ const Internal = express.Router();
 require('./auth.js');
 
 // database
-const { Quotes, Tarot, JournalEntry, Horoscope } = require('../database/index.js');
+const { Quotes, Tarot, JournalEntry, Horoscope, User } = require('../database/index.js');
 const Sequelize = require('sequelize');
 
 // middleware
@@ -119,7 +119,7 @@ Internal.post('/horo', (req, res) => {
 });
 
 
-Internal.get('/profile/:id', (req, res) => {
+Internal.get('/profile/journal/:id', (req, res) => {
   const {id} = req.params
 
   JournalEntry.findAll(
@@ -133,6 +133,19 @@ Internal.get('/profile/:id', (req, res) => {
     });
 })
 
+Internal.get('/updatedUser/:id', (req, res) => {
+  const {id} = req.params
+
+  User.findAll(
+    {where: { user_id: id}}
+    ).then(user => {
+      res.status(200).send(user);
+    })
+    .catch(error => {
+      console.error(error);
+      res.sendStatus(500);
+    });
+})
 
 
 
