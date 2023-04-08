@@ -8,16 +8,16 @@ import moment from 'moment';
 const UserProfile = () => {
   const { state } = useLocation();
   const { dob, setDob, sign, setSign, user } = useContext(UserContext);
-  const [followButton, setFollowButton] = useState('');
   const [journalEntries, setJournalEntries] = useState([]);
   const [friendsList, setFriendsList] = useState([]);
-  const [currentUser, setCurrentUser] = useState('');
+  const [currentUser, setCurrentUser] = useState([]);
   const [userFollowers, setUserFollowers] = useState([]);
 
   const getUser = () => {
-    axios.get('/user/user')
+    axios
+      .get('/user/user')
       .then(({ data }) => {
-        setCurrentUser(data.name);
+        setCurrentUser(data);
       })
       .catch((err) => {
         console.error('Failed request:', err);
@@ -25,9 +25,21 @@ const UserProfile = () => {
   };
 
   const getFollowersList = (id) => {
-    axios.get(`/db/follow/list/${id}`)
+    axios
+      .get(`/db/follow/list/${id}`)
       .then(({ data }) => {
         setFriendsList(data);
+      })
+      .catch((err) => {
+        console.error('Failed request:', err);
+      });
+  };
+
+  const getUserFollowersList = (id) => {
+    axios
+      .get(`/db/follow/list/${id}`)
+      .then(({ data }) => {
+        setUserFollowers(data);
       })
       .catch((err) => {
         console.error('Failed request:', err);
@@ -40,7 +52,7 @@ const UserProfile = () => {
     const message = document.getElementById('follow-status');
 
     const data = {
-      user: state.currentUser.user_id
+      user: state.currentUser.user_id,
     };
 
     axios
@@ -49,6 +61,7 @@ const UserProfile = () => {
         followB.style.display = 'none';
         unFollowB.style.display = '';
         message.style.display = '';
+        getUserFollowersList(currentUser.user_id);
 
         setTimeout(() => {
           message.style.display = 'none';
@@ -70,6 +83,7 @@ const UserProfile = () => {
         followB.style.display = '';
         unFollowB.style.display = 'none';
         message.style.display = '';
+        getUserFollowersList(currentUser.user_id);
 
         setTimeout(() => {
           message.style.display = 'none';
@@ -83,59 +97,39 @@ const UserProfile = () => {
   // Fetch friends list on render
   useEffect(() => {
     getUser();
-    getFollowersList();
+    getFollowersList(state.userId);
   }, []);
+
+  useEffect(() => {
+    getUserFollowersList(currentUser.user_id);
+  }, [currentUser]);
 
   // Disabling follow button if user is on their own profile
   useEffect(() => {
-    console.log(state);
-    if (state.currentUser.name === currentUser) {
-      // Sets the state to display that the user is on their own profile
-      setFollowButton(
-        <AstroButton
-          style={{
-            color: 'black',
-            margin: 'auto',
-            padding: '10px',
-            backgroundColor: 'green',
-          }}
-          disabled
-        >
-          You
-        </AstroButton>
-      );
+    const userButton = document.getElementById('userButton');
+    const followButton = document.getElementById('follow-button');
+    const unFollowButton = document.getElementById('unFollow-button');
+
+    if (state.currentUser.name === currentUser.name) {
+      userButton.style.display = '';
     } else {
-      setFollowButton(
-        <div>
-          <AstroButton
-            id='follow-button'
-            style={{ color: 'black', margin: 'auto', padding: '10px' }}
-            type='button'
-            onClick={() => followUser()}
-          >
-            Follow
-          </AstroButton>
-          <AstroButton
-            id='unFollow-button'
-            style={{
-              color: 'black',
-              margin: 'auto',
-              padding: '10px',
-              display: 'none',
-            }}
-            type='button'
-            onClick={() => unFollowUser()}
-          >
-            UnFollow
-          </AstroButton>
-        </div>
-      );
+      for (let i = 0; i < userFollowers.length; i++) {
+        if (userFollowers[i].name === state.currentUser.name) {
+          unFollowButton.style.display = '';
+          followButton.style.display = 'none';
+          break;
+        } else {
+          followButton.style.display = '';
+          unFollowButton.style.display = 'none';
+        }
+      }
     }
 
-    axios.get(`/db/profile/${state.userId}`)
-      .then(({data}) => setJournalEntries(data))
+    axios
+      .get(`/db/profile/${state.userId}`)
+      .then(({ data }) => setJournalEntries(data))
       .catch((err) => console.err(err));
-  }, [currentUser]);
+  }, [userFollowers]);
 
   return (
     <div
@@ -153,7 +147,7 @@ const UserProfile = () => {
         style={{
           display: 'inline-block',
           'border-style': 'solid',
-          maxHeight: '100%',
+          maxHeight: '82%',
         }}
       >
         <ProfileImg
@@ -162,17 +156,46 @@ const UserProfile = () => {
         />
         <div name='user-info' style={{ textAlign: 'center' }}>
           <h1 className='comp-title'>{state.currentUser.name}</h1>
-          {followButton}
-          <p
-            id='follow-status'
-            style={{ display: 'none' }}
+          <AstroButton
+            id='userButton'
+            style={{
+              color: 'black',
+              margin: 'auto',
+              padding: '10px',
+              backgroundColor: 'green',
+              display: 'none'
+            }}
           >
+            You
+          </AstroButton>
+
+          <AstroButton
+            id='follow-button'
+            style={{ color: 'black', margin: 'auto', padding: '10px', display: 'none' }}
+            type='button'
+            onClick={() => followUser()}
+          >
+            Follow
+          </AstroButton>
+
+          <AstroButton
+            id='unFollow-button'
+            style={{
+              color: 'black',
+              margin: 'auto',
+              padding: '10px',
+              display: 'none',
+            }}
+            type='button'
+            onClick={() => unFollowUser()}
+          >
+            UnFollow
+          </AstroButton>
+
+          <p id='follow-status' style={{ display: 'none' }}>
             You are following {state.currentUser.name}
           </p>
-          <p
-            id='un-follow-status'
-            style={{ display: 'none' }}
-          >
+          <p id='un-follow-status' style={{ display: 'none' }}>
             You un-followed {state.currentUser.name}
           </p>
           <h2 className='comp-sign'>{state.currentUser.sign}</h2>
@@ -184,7 +207,7 @@ const UserProfile = () => {
         style={{
           display: 'inline-block',
           borderStyle: 'solid',
-          maxHeight: '100%',
+          maxHeight: '82%',
         }}
       >
         {/* {journalEntries.map((entry) => {
@@ -202,19 +225,29 @@ const UserProfile = () => {
         style={{
           display: 'inline-block',
           'border-style': 'solid',
-          maxHeight: '100%',
+          maxHeight: '82%',
         }}
       >
-        <h1 style={{ textAlign: 'center' }}><u>Follow List</u></h1>
-        <div style={{ overflowY: 'auto', textAlign: 'center' }}>
-          { friendsList.map((friend, i) => {
-            return <div className='quote' style={{ display: 'flex' }}>
-              <ProfileImg
-                src={`https://robohash.org/${friend.name}?set=set5`}
-                style={{ marginLeft: '125px', marginBottom: '20px', height: '75px' }}
-              />
-              <h2 style={{ marginLeft: '30px', marginTop: '41px' }}>{friend.name}</h2>
-            </div>;
+        <h1 style={{ textAlign: 'center' }}>
+          <u>Follow List</u>
+        </h1>
+        <div style={{ overflowY: 'scroll', textAlign: 'center', maxHeight: '85%'}}>
+          {friendsList.map((friend, i) => {
+            return (
+              <div className='quote' style={{ display: 'flex' }}>
+                <ProfileImg
+                  src={`https://robohash.org/${friend.name}?set=set5`}
+                  style={{
+                    marginLeft: '125px',
+                    marginBottom: '20px',
+                    height: '75px',
+                  }}
+                />
+                <h2 style={{ marginLeft: '30px', marginTop: '41px' }}>
+                  {friend.name}
+                </h2>
+              </div>
+            );
           })}
         </div>
       </div>
