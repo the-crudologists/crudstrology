@@ -4,7 +4,6 @@ import { useLocation } from 'react-router-dom';
 import { ProfileImg, AstroButton, TarotCard } from './Styled.jsx';
 import { UserContext } from './App.jsx';
 import moment from 'moment';
-import { newSign } from './NavBar.jsx';
 
 const UserProfile = () => {
   const { state } = useLocation();
