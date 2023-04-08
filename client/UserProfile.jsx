@@ -68,7 +68,6 @@ const UserProfile = () => {
         </div>
       </div>
       {/* <Link to='/'>Go Back</Link> */}
-      {console.log(journalEntries)}
       <div style={{ display: 'inline-block', borderStyle: 'solid', maxHeight: '100%'}}>
         {journalEntries.map((entry) => {
           return (
