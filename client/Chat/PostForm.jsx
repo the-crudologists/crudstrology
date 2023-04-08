@@ -10,7 +10,7 @@ const PostForm = (props) => {
 
   return (
     <div>
-      <PostInput type='text' onChange={(e) => handleChangeInput(e)}/>
+      <PostInput id='post-input' type='text' onChange={(e) => handleChangeInput(e)}/>
     </div>
   );
 };

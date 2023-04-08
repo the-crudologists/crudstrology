@@ -1,19 +1,58 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { Link, useLocation } from 'react-router-dom';
-import { ProfileImg, AstroButton, TarotCard } from './Styled.jsx';
-import { UserContext } from './App.jsx';
 import axios from 'axios';
-import moment from 'moment';
+import { Link, useLocation } from 'react-router-dom';
+import { ProfileImg, AstroButton } from './Styled.jsx';
+import { UserContext } from './App.jsx';
 
 const UserProfile = () => {
   const { state } = useLocation();
-  const { dob, setDob, sign, setSign, user, userId } = useContext(UserContext);
+  const { dob, setDob, sign, setSign, user } = useContext(UserContext);
   const [followButton, setFollowButton] = useState('');
-  const [journalEntries, setJournalEntries] = useState([]);
+
+  const followUser = () => {
+    const followB = document.getElementById('follow-button');
+    const unFollowB = document.getElementById('unFollow-button');
+    const message = document.getElementById('follow-status');
+
+    axios.post('/follow', { follow: state.user_id })
+      .then(() => {
+        followB.style.display = 'none';
+        unFollowB.style.display = '';
+        message.style.display = '';
+
+        setTimeout(() => {
+          message.style.display = 'none';
+        }, 3000);
+      })
+      .catch((err) => {
+        console.error('Failed to send request:', err);
+      });
+  };
+
+  const unFollowUser = () => {
+    const followB = document.getElementById('follow-button');
+    const unFollowB = document.getElementById('unFollow-button');
+    const message = document.getElementById('un-follow-status');
+
+    axios.delete(`/follow/${state.user_id}`)
+      .then(() => {
+        followB.style.display = '';
+        unFollowB.style.display = 'none';
+        message.style.display = '';
+
+        setTimeout(() => {
+          message.style.display = 'none';
+        }, 3000);
+      })
+      .catch((err) => {
+        console.error('Failed to send request:', err);
+      });
+  };
 
   // Disabling follow button if user is on their own profile
   useEffect(() => {
-    if (state.currentUser.name === user) {
+    console.log('State', state);
+    if (state.name === user) {
       // Sets the state to display that the user is on their own profile
       setFollowButton(
         <AstroButton
@@ -30,16 +69,26 @@ const UserProfile = () => {
       );
     } else {
       setFollowButton(
-        <AstroButton
-          style={{ color: 'black', margin: 'auto', padding: '10px' }}
-        >
+        <div>
+          <AstroButton
+            id='follow-button'
+            style={{ color: 'black', margin: 'auto', padding: '10px' }}
+            type='button'
+            onClick={() => followUser()}
+          >
           Follow
-        </AstroButton>
+          </AstroButton>
+          <AstroButton
+            id='unFollow-button'
+            style={{ color: 'black', margin: 'auto', padding: '10px', display: 'none' }}
+            type='button'
+            onClick={() => unFollowUser()}
+          >
+            UnFollow
+          </AstroButton>
+        </div>
       );
     }
-    axios
-      .get(`/db/profile/${state.userId}`)
-      .then(({ data }) => setJournalEntries(data));
   }, []);
 
   return (
@@ -89,6 +138,37 @@ const UserProfile = () => {
       >followers or friends section
        <ProfileImg src={`https://robohash.org/${state.currentUser.name}?set=set5`}  style={{ margin: 'auto', padding: '5px', height: '50px'}} />
       </div>
+    </div>
+  return (
+    <div name='parent'>
+      <div
+        style={{
+          display: 'inline-block',
+          'border-style': 'solid',
+          maxHeight: '100%',
+        }}
+      >
+        <ProfileImg src={`https://robohash.org/${state.name}?set=set5`} />
+        <div name='user-info' style={{ textAlign: 'center' }}>
+          <h1 className='comp-title'>{state.name}</h1>
+          {followButton}
+          <p
+            id='follow-status'
+            style={{ display: 'none' }}
+          >
+            You are following {state.name}
+          </p>
+          <p
+            id='un-follow-status'
+            style={{ display: 'none' }}
+          >
+            You un-followed {state.name}
+          </p>
+          <h2 className='comp-sign'>{state.sign}</h2>
+          <h2 className='comp-sign'>{state.dob}</h2>
+        </div>
+      </div>
+      <Link to='/'>Go Back</Link>
     </div>
   );
 };

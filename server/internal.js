@@ -45,6 +45,7 @@ Internal.get('/all_quotes/', (req, res) => {
 
 // DB
 Internal.get('/tarot', (req, res) => {
+
   Tarot.findAll({ order: Sequelize.literal('RAND()'), limit: 3 })
     .then((cards) =>
       res.status(200).send(cards)
@@ -88,21 +89,21 @@ Internal.post('/userEntries/', (req, res) => {
 
 Internal.post('/jEntry', (req, res) => {
   const { data } = req.body;
-  const { newEntry, userId} = data;
-  console.log(newEntry, userId);
+  const { entry, userId, title} = data;
+  // console.log(data);
   const newObj = {
     body: newEntry,
     user_id: userId
   };
   JournalEntry.create(newObj);
-  console.log('hi');
+  // console.log('hi');
   res.status(200).send('Journal entry route hit successfully');
 });
-
+// this is for the horoscope in journal
 Internal.post('/horo', (req, res) => {
 
  const {userId} = req.body
- console.log(userId)
+//  console.log(userId)
   Horoscope.findOne({
     where: { user_Id: userId },
 
