@@ -50,29 +50,29 @@ const TextBox = () => {
 
   return (
     <>
-    {showTextBox && (
-      <div className='TextBox'>
-        <h1 className='TextBox-title'>New Entry</h1>
+      {showTextBox && (
+        <div className='TextBox'>
+          <h1 className='TextBox-title'>New Entry</h1>
 
-        <label htmlFor='title'>Title:</label>
-        <input id='title' type='text' value={title} onChange={handleTitleChange} />
+          <label htmlFor='title'>Title:</label>
+          <input id='title' type='text' value={title} onChange={handleTitleChange} />
 
-        <div style={{ width: 500, height: 300 }}>
-          <div ref={quillRef} />
-          <button className='text' onClick={
-            handleEntrySubmit}>Submit</button>
-        </div>
+          <div style={{ width: 500, height: 300 }}>
+            <div ref={quillRef} />
+            <button className='text' onClick={
+              handleEntrySubmit}>Submit</button>
+          </div>
         
-        <ul>
-          {entries.map((entry, index) => (
-            <li key={index}>
-              <h3>{entry.title}</h3>
-              <p>{entry.entry}</p>
-            </li>
-          ))}
-        </ul>
-      </div>
-    )}
+          <ul>
+            {entries.map((entry, index) => (
+              <li key={index}>
+                <h3>{entry.title}</h3>
+                <p>{entry.entry}</p>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
     </>
   );
 };

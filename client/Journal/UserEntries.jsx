@@ -56,9 +56,9 @@ const UserEntries = () => {
           <TextBox />
         )}
       </div>
-        {!showTextBox && (
-      <button onClick={handleNewPost}>New Entry</button>
-    )}
+      {!showTextBox && (
+        <button onClick={handleNewPost}>New Entry</button>
+      )}
     </>
   );
 };

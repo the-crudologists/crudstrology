@@ -7,7 +7,7 @@ import UserH from './UserHoro.jsx';
 const Journal = () => {
   return (
     <div className='Journal' style={{ display: 'flex', justifyContent: 'left' }}>
-       <h1 className='Journal-title'>Journal </h1>
+      <h1 className='Journal-title'>Journal </h1>
       <div className='left-column'>
        
         <UserEntries />
