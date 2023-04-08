@@ -41,7 +41,17 @@ const UserEntries = () => {
 
    const handleEntrySubmit = () => {
     setShowTextBox(false);
-    fetchEntries(); // update the entries list after submitting a new entry
+    fetchEntries(); 
+  };
+  
+  const handleDelete = (entryId) => {
+    axios.delete(`/db/userEntries/${entryId}`)
+      .then(response => {
+        fetchEntries(); 
+      })
+      .catch(error => {
+        console.log(error);
+      });
   };
 
   return (
@@ -52,9 +62,9 @@ const UserEntries = () => {
         <div className='UserEntries' style={{ overflowY: 'auto', maxHeight: '350px' }}>
           <ul style={{ justifyContent: 'left' }}>
             {entries.map(entry => (
-              <OtherHoros key={entry.id} onClick={() => handleEntryClick(entry)} className="JournalEntry">
-                {entry.title}
-              </OtherHoros>
+              <><OtherHoros key={entry.id} onClick={() => handleEntryClick(entry)} className="JournalEntry">
+                {entry.title} <button onClick={() => handleDelete(entry.id)}>Delete</button>
+              </OtherHoros></>
             ))}
           </ul>
         </div>

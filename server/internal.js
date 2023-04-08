@@ -86,6 +86,17 @@ Internal.post('/userEntries/', (req, res) => {
     .catch(error => { console.log(error); });
 
 });
+Internal.delete('/userEntries/:id', (req, res) => {
+  const entryId = req.params.id;
+  JournalEntry.destroy({ where: { id: entryId } })
+    .then(() => {
+      res.sendStatus(204);
+    })
+    .catch((error) => {
+      console.log(error);
+      res.sendStatus(500);
+    });
+});
 
 Internal.post('/jEntry', (req, res) => {
   const { data } = req.body;
