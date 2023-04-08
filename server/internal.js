@@ -45,7 +45,7 @@ Internal.get('/all_quotes/', (req, res) => {
 
 // DB
 Internal.get('/tarot', (req, res) => {
-  
+
   Tarot.findAll({ order: Sequelize.literal('RAND()'), limit: 3 })
     .then((cards) =>
       res.status(200).send(cards)
@@ -72,10 +72,10 @@ Internal.delete('/quotes/:id', (req, res) => {
 
 // For Journal entry
 Internal.post('/userEntries/', (req, res) => {
- 
+
   const { userId } = req.body;
-    // console.log(req.body)
-  JournalEntry.findAll({ 
+    console.log(req.body)
+  JournalEntry.findAll({
     where: { user_id: userId },
     order: [['createdAt', 'DESC']]
   })
@@ -92,22 +92,21 @@ Internal.post('/jEntry', (req, res) => {
   const { entry, userId, title} = data;
   // console.log(data);
   const newObj = {
-    body: entry,
-    title:title,
-    user_id: userId 
+    body: newEntry,
+    user_id: userId
   };
   JournalEntry.create(newObj);
   // console.log('hi');
   res.status(200).send('Journal entry route hit successfully');
 });
-// this is for the horoscope in journal 
+// this is for the horoscope in journal
 Internal.post('/horo', (req, res) => {
 
  const {userId} = req.body
 //  console.log(userId)
   Horoscope.findOne({
     where: { user_Id: userId },
-   
+
   })
     .then(latestHoroscope => {
       res.status(200).send(latestHoroscope);
@@ -117,6 +116,23 @@ Internal.post('/horo', (req, res) => {
       res.sendStatus(500);
     });
 });
+
+
+Internal.get('/profile/:id', (req, res) => {
+  const {id} = req.params
+
+  JournalEntry.findAll(
+    {where: { user_id: id}}
+    ).then(journalEntry => {
+      res.status(200).send(journalEntry);
+    })
+    .catch(error => {
+      console.error(error);
+      res.sendStatus(500);
+    });
+})
+
+
 
 
 module.exports = { Internal };

@@ -92,6 +92,54 @@ const UserProfile = () => {
   }, []);
 
   return (
+    <div style={{
+        display: 'grid',
+        gridTemplateColumns: '1fr 1fr 1fr',
+        gridGap: '20px',
+        border: '1px solid black',
+        width: '100%',
+        height: '600px',
+        maxHeight: '600px'
+      }}>
+      <div
+        style={{
+          display: 'inline-block',
+          'border-style': 'solid',
+          maxHeight: '100%',
+        }}
+      >
+        <ProfileImg src={`https://robohash.org/${state.currentUser.name}?set=set5`}  style={{ margin: 'auto', padding: '10px'}} />
+        <div name='user-info' style={{ textAlign: 'center'}}>
+          <h1 className='comp-title'>{state.currentUser.name}</h1>
+          {followButton}
+          <h2 className='comp-sign'>{state.currentUser.sign}</h2>
+          <h2 className='comp-sign'>{state.currentUser.dob}</h2>
+        </div>
+      </div>
+      {/* <Link to='/'>Go Back</Link> */}
+      <div style={{ display: 'inline-block', borderStyle: 'solid', maxHeight: '100%'}}>
+        {journalEntries.map((entry) => {
+          return (
+            <TarotCard>
+            <div>
+                 {entry.body}
+                {moment(entry.createdAt).format('MMMM Do YYYY, h:mm:ss a')}
+            </div>
+            </TarotCard>
+          );
+        })}
+      </div>
+      <div
+        style={{
+          display: 'inline-block',
+          'border-style': 'solid',
+          maxHeight: '100%',
+        }}
+      >followers or friends section
+       <ProfileImg src={`https://robohash.org/${state.currentUser.name}?set=set5`}  style={{ margin: 'auto', padding: '5px', height: '50px'}} />
+      </div>
+    </div>
+  return (
     <div name='parent'>
       <div
         style={{
