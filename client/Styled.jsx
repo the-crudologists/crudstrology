@@ -219,7 +219,6 @@ const ProfileImg = styled.img`
   margin-top: 0.3rem;
   height: 50;
   border: 1px solid azure;
-  background-color: white;
 `;
 
 export {
