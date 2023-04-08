@@ -8,7 +8,12 @@ const Internal = express.Router();
 require('./auth.js');
 
 // database
-const { Quotes, Tarot, JournalEntry, Horoscope } = require('../database/index.js');
+const {
+  Quotes,
+  Tarot,
+  JournalEntry,
+  Horoscope,
+} = require('../database/index.js');
 const Sequelize = require('sequelize');
 
 // middleware
@@ -37,7 +42,8 @@ Internal.get('/all_quotes/', (req, res) => {
   Quotes.findAll()
     .then((quotesArr) => {
       res.status(200).send(quotesArr);
-    }).catch((err) => {
+    })
+    .catch((err) => {
       console.log('GET /api/quotes', err);
       res.sendStatus(500);
     });
@@ -46,11 +52,12 @@ Internal.get('/all_quotes/', (req, res) => {
 // DB
 Internal.get('/tarot', (req, res) => {
   Tarot.findAll({ order: Sequelize.literal('RAND()'), limit: 3 })
-    .then((cards) =>
-      res.status(200).send(cards)
-    )
+    .then((cards) => res.status(200).send(cards))
     .catch((err) => {
-      console.error('Error from Tarot.findall /api/tarot server/index.js: ', err);
+      console.error(
+        'Error from Tarot.findall /api/tarot server/index.js: ',
+        err
+      );
     });
 });
 
@@ -58,12 +65,13 @@ Internal.delete('/quotes/:id', (req, res) => {
   const { id } = req.params;
   Quotes.destroy({
     where: {
-      id: id
-    }
+      id: id,
+    },
   })
     .then(() => {
       res.sendStatus(204);
-    }).catch((err) => {
+    })
+    .catch((err) => {
       console.log(err);
       res.sendStatus(500);
     });
@@ -71,28 +79,28 @@ Internal.delete('/quotes/:id', (req, res) => {
 
 // For Journal entry
 Internal.post('/userEntries/', (req, res) => {
- 
   const { userId } = req.body;
-    console.log(req.body)
-  JournalEntry.findAll({ 
+  console.log(req.body);
+  JournalEntry.findAll({
     where: { user_id: userId },
-    order: [['createdAt', 'DESC']]
+    order: [['createdAt', 'DESC']],
   })
-    .then((entries)=>{
-    // console.log(entries);
+    .then((entries) => {
+      // console.log(entries);
       res.status(200).send(entries);
     })
-    .catch(error => { console.log(error); });
-
+    .catch((error) => {
+      console.log(error);
+    });
 });
 
 Internal.post('/jEntry', (req, res) => {
   const { data } = req.body;
-  const { newEntry, userId} = data;
+  const { newEntry, userId } = data;
   console.log(newEntry, userId);
   const newObj = {
     body: newEntry,
-    user_id: userId 
+    user_id: userId,
   };
   JournalEntry.create(newObj);
   console.log('hi');
@@ -100,21 +108,18 @@ Internal.post('/jEntry', (req, res) => {
 });
 
 Internal.post('/horo', (req, res) => {
-
- const {userId} = req.body
- console.log(userId)
+  const { userId } = req.body;
+  console.log(userId);
   Horoscope.findOne({
     where: { user_Id: userId },
-   
   })
-    .then(latestHoroscope => {
+    .then((latestHoroscope) => {
       res.status(200).send(latestHoroscope);
     })
-    .catch(error => {
+    .catch((error) => {
       console.error(error);
       res.sendStatus(500);
     });
 });
-
 
 module.exports = { Internal };
