@@ -2,9 +2,7 @@
 const express = require('express');
 const Internal = express.Router();
 const { User, Follow } = require('../database/index.js');
-
 // const { Internal } = Router();
-
 // auth
 require('./auth.js');
 
@@ -15,16 +13,15 @@ const {
   JournalEntry,
   Horoscope,
 } = require('../database/index.js');
+const { Quotes, Tarot, JournalEntry, Horoscope} = require('../database/index.js');
 const Sequelize = require('sequelize');
 
 // middleware
 Internal.use(express.json());
 Internal.use(express.urlencoded({ extended: true }));
-
 // *****************************
 // ***** INTERNAL DB HITS ******
 // *****************************
-
 // DB
 Internal.post('/quote', (req, res) => {
   const { quote } = req.body;
@@ -37,7 +34,6 @@ Internal.post('/quote', (req, res) => {
       res.sendStatus(500);
     });
 });
-
 // DB
 Internal.get('/all_quotes/', (req, res) => {
   Quotes.findAll()
@@ -49,7 +45,6 @@ Internal.get('/all_quotes/', (req, res) => {
       res.sendStatus(500);
     });
 });
-
 // DB
 Internal.get('/tarot', (req, res) => {
   Tarot.findAll({ order: Sequelize.literal('RAND()'), limit: 3 })
@@ -61,7 +56,6 @@ Internal.get('/tarot', (req, res) => {
       );
     });
 });
-
 Internal.delete('/quotes/:id', (req, res) => {
   const { id } = req.params;
   Quotes.destroy({
@@ -77,11 +71,9 @@ Internal.delete('/quotes/:id', (req, res) => {
       res.sendStatus(500);
     });
 });
-
 // For Journal entry
 Internal.post('/userEntries/', (req, res) => {
   const { userId } = req.body;
-
   JournalEntry.findAll({
     where: { user_id: userId },
     order: [['createdAt', 'DESC']],
@@ -109,7 +101,6 @@ Internal.delete('/userEntries/:id', (req, res) => {
 Internal.post('/jEntry', (req, res) => {
   const { data } = req.body;
   const { entry, userId, title } = data;
-
   const newObj = {
     body: entry,
     user_id: userId,
@@ -140,8 +131,8 @@ Internal.post('/horo', (req, res) => {
     });
 });
 
-Internal.get('/profile/:id', (req, res) => {
-  const { id } = req.params;
+Internal.get('/profile/journal/:id', (req, res) => {
+  const {id} = req.params
 
   JournalEntry.findAll({ where: { user_id: id } })
     .then((journalEntry) => {
@@ -153,6 +144,19 @@ Internal.get('/profile/:id', (req, res) => {
     });
 });
 
+Internal.get('/updatedUser/:id', (req, res) => {
+  const {id} = req.params
+
+  User.findAll(
+    {where: { user_id: id}}
+    ).then(user => {
+      res.status(200).send(user);
+    })
+    .catch(error => {
+      console.error(error);
+      res.sendStatus(500);
+    });
+})
 Internal.get('/follow/list/:id', async (req, res) => {
   const { id } = req.params;
   const userArr = [];
@@ -170,5 +174,4 @@ Internal.get('/follow/list/:id', async (req, res) => {
     res.sendStatus(500);
   }
 });
-
 module.exports = { Internal };
