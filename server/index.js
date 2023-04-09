@@ -215,6 +215,26 @@ app.get('/user/user', (req, res) => {
     });
 });
 
+app.get('/profile/:googleId', (req, res) => {
+  const { googleId } = req.params;
+  User.findOne({
+    where: {
+      googleId: googleId
+    }
+  })
+    .then(user => {
+      if (user) {
+        res.status(200).send(user);
+      } else {
+        res.sendStatus(404);
+      }
+    })
+    .catch(err => {
+      console.error(err);
+      res.sendStatus(500);
+    });
+});
+
 // (async () => {
 //   // <-- build seed script and call seeder() in that file...
 //   await seeder();
