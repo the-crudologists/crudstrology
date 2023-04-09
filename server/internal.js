@@ -159,19 +159,16 @@ Internal.get('/updatedUser/:id', (req, res) => {
 
 Internal.get('/follow/list/:id', async (req, res) => {
   const { id } = req.params;
-  const userArr = [];
-  const followingList = await Follow.findAll({where: { follower_id: id }});
-  for (let i = 0; i < followingList.length; i++) {
-    const user = await User.findOne({where: { user_id: followingList[i].dataValues.following_id }});
-    userArr.push(user);
-  }
-  if (userArr.length !== 0) {
-    res.status(200).send(userArr);
-  } else if (userArr.length === 0) {
-    res.sendStatus(404);
-  } else {
-    console.error('Failed request');
-    res.sendStatus(500);
+  try {
+    const user = await User.findOne({ where: {user_id: id }});
+    if (!user) {
+      return res.sendStatus(404);
+    } else {
+      const following = await user.getFollowing();
+      res.status(200).send(following);
+    }
+  } catch (err) {
+    return res.sendStatus(500);
   }
 });
 

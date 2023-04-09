@@ -40,10 +40,18 @@ const User = sequelize.define('user', {
 
 const Follow = sequelize.define('follow', {
   follower_id: {
-    type: Sequelize.INTEGER
+    type: Sequelize.INTEGER,
+    references: {
+      model: User,
+      key: 'user_id'
+    }
   },
   following_id: {
-    type: Sequelize.INTEGER
+    type: Sequelize.INTEGER,
+    references: {
+      model: User,
+      key: 'user_id'
+    }
   }
 });
 
@@ -163,22 +171,26 @@ const seeder = async () => {
     {
       name: 'Francis',
       dob: '01/19',
-      sign: 'Aquarius'
+      sign: 'Aquarius',
+      googleId: '103795232001627912412'
     },
     {
       name: 'Jessica',
       dob: '03/20',
-      sign: 'Pisces'
+      sign: 'Pisces',
+      googleId: '103795232001627912409'
     },
     {
       name: 'Nicole',
       dob: '05/30',
-      sign: 'Gemini'
+      sign: 'Gemini',
+      googleId: '103795232001627912407'
     },
     {
       name: 'Carlos',
       dob: '11/11',
-      sign: 'Scorpio'
+      sign: 'Scorpio',
+      googleId: '103795232001627912408'
     }
   ])
     .then(() => { console.log('User Model Create Success'); })
