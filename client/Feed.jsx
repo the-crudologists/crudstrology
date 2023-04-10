@@ -163,7 +163,7 @@ const Feed = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       renderFeed();
-    }, 60000);
+    }, 15000);
   });
 
   return (
