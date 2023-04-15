@@ -17,7 +17,7 @@
   - This includes: Chat feed, User profiles, Followers list
 - Users can test compatibility between signs for relationship purposes
 - Users can write journals based anything they want, along with tying horoscopes to them
-  - These journals can be read on a user's profile
+  - These journals can be read on a user's profile and deleted on the Journal page
 
 ## How to Start (for Devs)
 
